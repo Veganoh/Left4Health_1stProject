@@ -1,6 +1,9 @@
 :- use_module(library(http/thread_httpd)).
 :- use_module(library(http/http_dispatch)).
 
+:- consult('base_conhecimento.pl').
+
+
 
 servidor(Porta)
 :- http_server(http_dispatch, [port(Porta)]).
@@ -13,7 +16,12 @@ handle_request(Request) :-
     format('Hello, World!').
 
 
-% :- http_handler('/api/prolog', obter_questionario, [method(GET)]).
+:- http_handler('/api/prolog', obter_questionario, [method(GET)]).
+obter_questionario(Request) :-
+    format('Content-type: text/plain~n~n'),
+    catch(gerar_questionario(Questionario), _, fail),
+    format('Content-type: application/json~n~n'),
+    format('~q.', [Questionario]).
 
 % :- http_handler('/api/prolog', obter_ansiedade, [method(POST)]).
 
