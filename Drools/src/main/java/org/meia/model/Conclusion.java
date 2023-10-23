@@ -1,4 +1,4 @@
-package org.engcia.model;
+package org.meia.model;
 
 public class Conclusion {
     public static final String OTORRHAGIA = "Otorrhagia";

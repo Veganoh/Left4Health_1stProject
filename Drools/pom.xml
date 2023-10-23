@@ -2,18 +2,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.engcia</groupId>
-  <artifactId>Haemorrhage</artifactId>
+  <groupId>org.meia</groupId>
+  <artifactId>Left4Health</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>kjar</packaging>
 
-  <name>Haemorrhage</name>
+  <name>Left4Health</name>
   <url>http://drools.org</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <drools-version>7.44.0.Final</drools-version>
-    <slf4j-version>1.7.26</slf4j-version>
     <junit-version>4.12</junit-version>
   </properties>
 
@@ -44,21 +43,9 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
-      <version>${slf4j-version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
       <groupId>org.kie</groupId>
       <artifactId>kie-api</artifactId>
       <version>${drools-version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.kie</groupId>
-      <artifactId>kie-api</artifactId>
-      <version>7.44.0.Final</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>

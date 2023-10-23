@@ -1,7 +1,7 @@
-package org.engcia;
+package org.meia;
 
-import org.engcia.model.Evidences;
-import org.engcia.model.Conclusion;
+import org.meia.model.Evidences;
+import org.meia.model.Conclusion;
 
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
@@ -10,11 +10,7 @@ import org.kie.api.runtime.rule.LiveQuery;
 import org.kie.api.runtime.rule.Row;
 import org.kie.api.runtime.rule.ViewChangedEventListener;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public class Haemorrhage {
-    static final Logger LOG = LoggerFactory.getLogger(Haemorrhage.class);
 
     public static final void main(String[] args) {
         Evidences evidences = new Evidences();
@@ -53,8 +49,7 @@ public class Haemorrhage {
                 public void rowInserted(Row row) {
                     Conclusion conclusion = (Conclusion) row.get("$conclusion");
                     //System.out.println(">>>" + conclusion.toString());
-                    LOG.info(">>>" + conclusion.toString());
-
+                    System.out.println(">>>" + conclusion.toString());
                     // stop inference engine after as soon as got a conclusion
                     kSession.halt();
 

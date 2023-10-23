@@ -1,4 +1,4 @@
-package org.engcia.model;
+package org.meia.model;
 
 public class Evidences {
     private java.lang.String bloodEar;

@@ -1,4 +1,4 @@
-package org.engcia.model;
+package org.meia.model;
 
 public class Hypothesis {
     private String description;

@@ -13,7 +13,7 @@
  * limitations under the License.
 */
 
-package org.engcia;
+package org.meia;
 
 public class Measurement {
     private String id;

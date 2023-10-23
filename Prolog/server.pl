@@ -3,8 +3,6 @@
 
 :- consult('base_conhecimento.pl').
 
-
-
 servidor(Porta)
 :- http_server(http_dispatch, [port(Porta)]).
 
