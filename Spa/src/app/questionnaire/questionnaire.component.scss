@@ -1,0 +1,52 @@
+.questionnaire {
+  text-align: center;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.questionnaire h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.questionnaire h1.title {
+  font-size: 30px;
+  color: #007bff;
+  margin: 20px 0;
+  font-weight: bold;
+}
+
+.questionnaire table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.questionnaire tr {
+  border-bottom: 1px solid #ddd;
+}
+
+.questionnaire td {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 10px; /* Adiciona bordas arredondadas para as perguntas */
+}
+
+.questionnaire select {
+  font-family: Arial, sans-serif;
+}
+
+.questionnaire button {
+  margin-top: 20px; /* Move os botões para baixo */
+  padding: 10px 20px;
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-right: 10px; /* Adiciona margem direita para separar os botões */
+}
+
+.questionnaire button:hover {
+  background-color: #0056b3;
+}
