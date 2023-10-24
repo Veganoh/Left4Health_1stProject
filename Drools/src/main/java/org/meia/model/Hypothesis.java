@@ -15,4 +15,5 @@ public class Hypothesis {
     public void setDescription(String description) {
         this.description = description;
     }
+
 }

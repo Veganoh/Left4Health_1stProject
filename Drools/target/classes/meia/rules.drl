@@ -17,9 +17,9 @@ package org.meia;
 // package must be defined in packages from kmodule.xml file
 
 //list any import classes here.
-import org.meia.model.Evidences;
-import org.meia.model.Hypothesis;
 import org.meia.model.Conclusion;
+import org.meia.model.QuizInitial;
+import org.meia.model.Question;
 
 //declare any global variables here
 
@@ -28,109 +28,22 @@ query "Conclusions"
 end
 
 rule "r1"
-	when
-		Evidences(bloodEar == "yes" )
-	then
-		Hypothesis h = new Hypothesis("upper type");
-		insert(h);
+when
+    $q : QuizInitial()
+    exists Question(id == 1, answer == "Sim")
+    exists Question(id == 2, answer == "Sim")
+then
+    Conclusion c = new Conclusion(Conclusion.ANXIETY_AS_NORMAL_FACTOR);
+        		insert(c);
 end
 
-rule "r2"
-	when
-		Evidences(bloodEar == "no" )
-	then
-		Hypothesis h = new Hypothesis("lower type");
-		insert(h);
-end
-
-rule "r3"
-	when
-		Hypothesis( description == "upper type")
-		Evidences(earAche == "yes")
-	then
-		Conclusion c = new Conclusion(Conclusion.OTORRHAGIA);
-		insert(c);
-end
-
-rule "r4"
-	when
-		Hypothesis( description == "upper type")
-		Evidences(deafness == "yes")
-	then
-		Conclusion c = new Conclusion(Conclusion.OTORRHAGIA);
-		insert(c);
-end
-
-rule "r5"
-	when
-		Hypothesis( description == "upper type")
-		Evidences(cerebrospinal == "yes")
-	then
-		Conclusion c = new Conclusion(Conclusion.SKULL_FRACTURE);
-		insert(c);
-end
-
-rule "r6"
-	when
-		Hypothesis( description == "lower type")
-		Evidences(bloodNose == "yes")
-	then
-		Conclusion c = new Conclusion(Conclusion.EPISTAXE);
-		insert(c);
-end
-
-rule "r7"
-	when
-		Hypothesis( description == "lower type")
-		Evidences(bloodMouth == "yes", bloodBrown == "yes", vomiting == "yes")
-	then
-		Conclusion c = new Conclusion(Conclusion.HEMATHESE);
-		insert(c);
-end
-
-rule "r8"
-	when
-		Hypothesis( description == "lower type")
-		Evidences(bloodMouth == "yes", bloodBrown == "no", vomiting == "no")
-	then
-		Conclusion c = new Conclusion(Conclusion.MOUTH_HAEMORRHAGE);
-		insert(c);
-end
-
-rule "r9"
-	when
-		Hypothesis( description == "lower type")
-		Evidences(bloodVagina == "yes")
-	then
-		Conclusion c = new Conclusion(Conclusion.METRORRHAGIA);
-		insert(c);
-end
-
-rule "r10"
-	when
-		Hypothesis( description == "lower type")
-		Evidences(bloodPenis == "yes")
-	then
-		Conclusion c = new Conclusion(Conclusion.HEMATURIA);
-		insert(c);
-end
-
-rule "r11"
-	when
-		Hypothesis( description == "lower type")
-		Evidences(bloodAnus == "yes", bloodCoffee == "yes")
-	then
-		Conclusion c = new Conclusion(Conclusion.MELENA);
-		insert(c);
-end
-
-rule "r12"
-	when
-		Hypothesis( description == "lower type")
-		Evidences(bloodAnus == "yes", bloodCoffee == "no")
-	then
-		Conclusion c = new Conclusion(Conclusion.RECTAL_BLEEDING);
-		insert(c);
+rule "Diagnóstico de  Ansiedade"
+when
+    $q : QuizInitial()
+    exists Question(id == 3, answer == "Não")
+then
+    Conclusion c = new Conclusion(Conclusion.ANXIETY_AS_NORMAL_FACTOR);
+    		insert(c);
 end
 
 rule "unknown"

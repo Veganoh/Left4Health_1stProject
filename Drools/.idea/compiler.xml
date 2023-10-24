@@ -9,6 +9,9 @@
         <module name="Left4Health" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Left4Health" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="GENERATE_NO_WARNINGS" value="true" />

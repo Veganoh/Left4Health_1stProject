@@ -1,15 +1,19 @@
 package org.meia.model;
 
 public class Conclusion {
-    public static final String OTORRHAGIA = "Otorrhagia";
-    public static final String SKULL_FRACTURE = "Skull fracture";
-    public static final String EPISTAXE = "Epistaxe";
-    public static final String HEMATHESE = "Hemathese";
-    public static final String MOUTH_HAEMORRHAGE = "Mouth haemorrhage";
-    public static final String METRORRHAGIA = "Metrorrhagia";
-    public static final String HEMATURIA = "Hematuria";
-    public static final String MELENA = "Melena";
-    public static final String RECTAL_BLEEDING = "Rectal bleeding";
+    public static final String ANXIETY_AS_NORMAL_FACTOR = "Ansiedade como condição do ser humano";
+    public static final String ANXIETY_SECONDARY_FACTOR = "Ansiedade como fator secundário";
+
+
+    //CONCLUSÕES DE ANSIEDADE ESPECIFICA
+    public static final String GENERAL_ANXIETY = "Ansiedade Generalizada";
+    public static final String PANIC_SYNDROME = "Síndrome de Pânico";
+    public static final String PANIC_AGORAPHOBIA_SYNDROME = "Síndrome de Pânico com AgoraFobia";
+    public static final String AGORAPHOBIA_SYNDROME = "AgoraFobia";
+    public static final String SPECIFIC_PHOBIA = "Fobia Especifica";
+    public static final String SELECTIVE_MUTISM = "Mutismo Seletivo";
+    public static final String SEPARATION_ANXIETY = "Ansiedade de Separação";
+    public static final String SOCIAL_PHOBIA = "Fobia Social";
     public static final String UNKNOWN = "Look for the the doctor!";
 
 

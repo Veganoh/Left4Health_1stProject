@@ -1,7 +1,6 @@
 package org.meia;
 
-import org.meia.model.Evidences;
-import org.meia.model.Conclusion;
+import org.meia.model.*;
 
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
@@ -10,28 +9,35 @@ import org.kie.api.runtime.rule.LiveQuery;
 import org.kie.api.runtime.rule.Row;
 import org.kie.api.runtime.rule.ViewChangedEventListener;
 
-public class Haemorrhage {
+
+public class AnxietyDiagnosis {
 
     public static final void main(String[] args) {
-        Evidences evidences = new Evidences();
-        evidences.setBloodAnus("no");
-        evidences.setBloodBrown("no");
-        evidences.setBloodCoffee("no");
-        evidences.setBloodEar("yes");
-        evidences.setBloodMouth("no");
-        evidences.setBloodNose("no");
-        evidences.setBloodPenis("no");
-        evidences.setBloodVagina("no");
-        evidences.setCerebrospinal("no");
-        evidences.setDeafness("no");
-        evidences.setEarAche("yes");
-        evidences.setHeadAche("no");
-        evidences.setVomiting("no");
 
-        runEngine(evidences);
+        JsonReader jsonReader  = new JsonReader();
+        Quiz quizJSON = jsonReader.readJsonFromFile();
+        jsonReader.printJsonFromResource(quizJSON);
+
+        /*QuizInitial quizInitial=jsonReader.readQuizInitial();
+        jsonReader.printJsonFromResource2(quizInitial);*/
+
+
+
+
+       /*Question pergunta1 = new Question("Pergunta 1", "Sim");
+        Question pergunta2 = new Question("Pergunta 2", "Não");
+        Question pergunta3 = new Question("Pergunta 3", "Sim");
+
+        quizJSON.addQuestion(pergunta1);
+        quizInitial.addQuestion(pergunta2);
+        quizInitial.addQuestion(pergunta3);
+
+        runEngine(quizInitial);*/
+
+
     }
 
-    private static void runEngine(Evidences evidences) {
+    private static void runEngine(Quiz quizInitial) {
         try {
             // load up the knowledge base
             KieServices ks = KieServices.Factory.get();
@@ -62,7 +68,7 @@ public class Haemorrhage {
             };
             LiveQuery query = kSession.openLiveQuery("Conclusions", null, listener);
 
-            kSession.insert(evidences);
+            kSession.insert(quizInitial);
 
             kSession.fireAllRules();
             // kSession.fireUntilHalt();

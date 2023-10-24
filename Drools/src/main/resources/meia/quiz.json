@@ -1,0 +1,45 @@
+{
+  "version": "1.0.0",
+  "QuizInitial": [
+    {
+      "id": 1,
+      "question": "Você se sente estressado com frequência?"
+    },
+    {
+      "id": 2,
+      "question": "Você tem dificuldade para dormir à noite?"
+    },
+    {
+      "id": 3,
+      "question": "Você sente estes sintomas a mais de 6 meses?"
+    }
+  ],
+  "Quiz40": [
+    {
+      "category": "sindrome_ansiedade_generalizada",
+      "categoryQuestionList": [
+        {
+          "id": 1,
+          "question": "Nas últimas semanas, com que frequência você se sentiu tenso, nervoso ou ansioso, mesmo quando não havia motivo óbvio para se sentir assim?"
+        },
+        {
+          "id": 2,
+          "question": "Você tem dificuldade em controlar seus pensamentos ansiosos, mesmo quando tenta concentrar-se em outras coisas?"
+        }
+      ]
+    },
+    {
+      "category": "transtorno_panico",
+      "categoryQuestionList": [
+        {
+          "id": 1,
+          "question": "Você já teve ataques de pânico inesperados, nos quais você sentiu um medo intenso ou desconforto súbito, acompanhado por sintomas físicos como batimentos cardíacos acelerados, tremores, falta de ar, tonturas ou sensação de desmaio?"
+        },
+        {
+          "id": 2,
+          "question": "Você já teve um ataque de pânico inesperado que levou a uma sensação de formigamento ou dormência em partes do corpo, como mãos, pés ou rosto, acompanhado por um medo intenso de estar tendo um problema médico grave, como um ataque cardíaco ou um derrame?"
+        }
+      ]
+    }
+  ]
+}

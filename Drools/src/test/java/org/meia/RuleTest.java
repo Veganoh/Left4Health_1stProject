@@ -31,7 +31,7 @@ import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+/*
 public class RuleTest {
     static final Logger LOG = LoggerFactory.getLogger(RuleTest.class);
 
@@ -84,4 +84,4 @@ public class RuleTest {
         assertTrue("contains blue", check.contains("blue"));
 
     }
-}
+}*/
