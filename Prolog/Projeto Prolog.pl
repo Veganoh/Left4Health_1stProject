@@ -55,6 +55,10 @@ pergunta(ansiedade_separacao, 4, "Há pesadelos frequentes envolvendo a ideia da
 pergunta(ansiedade_separacao, 5, "Tem sintomas físicos de ansiedade, como palpitações, sudorese, tremores ou falta de ar, ao pensar na ideia de se separar da pessoa significativa?").
 
 
+resposta(nenhum_transtorno, "Não atinge os valores suficientes para nenhum dos transtornos, consulte um profissional para receber uma solução melhor. Pedimos desculpa que não o consegimos ajudar.").
+
+
+
 % Método para receber todas as perguntas de todos os tipos de transtorno
 todas_perguntas(ListaPerguntas) :-
     findall(Pergunta, pergunta(_, _, Pergunta), ListaPerguntas).
@@ -64,10 +68,45 @@ perguntas_misturadas(ListaPerguntasMisturadas) :-
     todas_perguntas(TodasPerguntas),
     random_permutation(TodasPerguntas, ListaPerguntasMisturadas).
 
+% Predicado para receber uma resposta
+receber_resposta(Pergunta) :-
+    pergunta(Pergunta, _),
+    read(Resposta),
+    asserta(resposta_valor(Pergunta, Resposta)).
+
 % Estrutura de dados para armazenar respostas e valores
 resposta_valor(Pergunta, Valor) :- pergunta_valor(_, Valor, Pergunta).
 
-% Método para calcular a soma dos valores para um tipo de transtorno específico
-calcular_soma_valores(TipoTranstorno, Soma) :-
-    findall(Valor, (member([TipoTranstorno, Valor], Respostas), pergunta_valor(TipoTranstorno, Valor, _)), Valores),
+% Predicado para calcular a soma total das respostas
+soma_total(Soma) :-
+    findall(Valor, resposta_valor(_, Valor), Valores),
     sum_list(Valores, Soma).
+
+% Predicado para verificar a presença da resposta 'A' na base de conhecimento
+nenhum_transtorno :-
+    findall(Valor, resposta_valor(_, Valor), Valores),
+    max_list(Valores, MaiorValor),
+    MaiorValor =< 15.
+
+% Predicado para verificar a presença da resposta 'B' na base de conhecimento
+transtorno_maior_14 :-
+    findall(Valor, resposta_valor(_, Valor), Valores),
+    member(Valor, Valores),
+    Valor >= 15.
+
+% Predicado para calcular a soma dos valores para um tipo de transtorno específico
+processar_respostas(Resposta) :-
+    soma_total(SomaTotal),
+    (nenhum_transtorno -> Resposta = 'A';
+    transtorno_entre_15_e_20 -> findall(TipoTranstorno-Soma, (resposta_valor(TipoTranstorno, Soma), Soma >= 15, Soma =< 20), Resposta);
+    SomaTotal > 160 -> Resposta = 'C').
+
+processar_respostas_teste(Resposta) :-
+    soma_total(SomaTotal),
+    (nenhum_transtorno -> 
+        resposta(nenhum_transtorno, Mensagem),
+        Resposta = (nenhum_transtorno, Mensagem);
+    transtorno_maior_14 -> 
+        findall(TipoTranstorno-Soma, (resposta_valor(TipoTranstorno, Soma), Soma >= 15, Soma =< 20), [TipoTranstorno-_|_]),
+        pergunta(TipoTranstorno, Resposta);
+    SomaTotal > 160 -> Resposta = 'C').
