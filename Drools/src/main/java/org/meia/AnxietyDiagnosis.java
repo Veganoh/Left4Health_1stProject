@@ -43,7 +43,7 @@ public class AnxietyDiagnosis {
         kieSession.dispose();
         //runEngine(quiz);
 
-        // Se nenhuma conclusão foi gerada, atribuir valores ao array
+  /*      // Se nenhuma conclusão foi gerada, atribuir valores ao array
         if (!conclusionGenerated) {
             // Atribuir valores ao QUIZ40
             jsonReader.readQuiz40(quiz);
@@ -62,7 +62,7 @@ public class AnxietyDiagnosis {
             kieSession2.dispose();
         } else {
             System.out.println("Uma conclusão foi gerada, não atribuir valores ao quiz40.");
-        }
+        }*/
 
         // Fechar a sessão do Drools
 
