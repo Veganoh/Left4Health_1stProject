@@ -2,18 +2,39 @@
   "QuizInitial": [
     {
       "id": 1,
-      "question": "Você se sente estressado com frequência?",
+      "question": "Possuí alguma condição clinica do diagnóstico diferencial pode explicar os sintomas?",
       "answer": "Não"
     },
     {
       "id": 2,
-      "question": "Você tem dificuldade para dormir à noite?",
+      "question": "Você sente ansiedade e preocupação excessiva em relação a várias áreas da sua vida na maioria dos dias há pelo menos seis meses?",
       "answer": "Não"
     },
     {
       "id": 3,
-      "question": "Você sente estes sintomas a mais de 6 meses?",
+      "question": "Você sente que sua preocupação é desproporcional em relação à situação ou que você não consegue controlá-la?",
       "answer": "Sim"
+    },
+    {
+      "id": 4,
+      "question": "Nos últimos seis meses, quantos sintomas dos seguintes sentiu na maioria dos dias: inquietação, fadiga, dificuldade de concentração, irritabilidade, tensão muscular ou problemas para dormir?",
+      "answer": "Não"
+    },
+    {
+      "id": 5,
+      "question": "Você já foi diagnosticado ou acredita que sua ansiedade excessiva não pode ser explicada por outro problema de saúde mental, como transtorno de pânico, fobia social, transtorno obsessivo-compulsivo, ou outros transtornos similares?",
+      "answer": "Não"
+    },
+    {
+      "id": 6,
+      "question": "Essa ansiedade, preocupação ou sintomas físicos causam um impacto significativo em sua vida social, profissional ou em outras áreas importantes?",
+      "answer": "Não"
+    },
+    {
+      "id": 7,
+      "question": "Os sintomas podem ser explicados por uso de medicamentos, abuso de substâncias ou síndrome de abstinência?",
+      "answer": "Não"
     }
+    
   ]
 }
