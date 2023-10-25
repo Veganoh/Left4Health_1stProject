@@ -18,8 +18,9 @@ package org.meia;
 
 //list any import classes here.
 import org.meia.model.Conclusion;
-import org.meia.model.QuizInitial;
+import org.meia.model.Quiz;
 import org.meia.model.Question;
+import org.meia.model.QuestionCategory;
 
 //declare any global variables here
 
@@ -29,9 +30,9 @@ end
 
 rule "r1"
 when
-    $q : QuizInitial()
-    exists Question(id == 1, answer == "Sim")
-    exists Question(id == 2, answer == "Sim")
+    $q : Quiz()
+    exists Question(id == 1, answer == "Sim") from $q.getQuizInitial()
+    exists Question(id == 2, answer == "Sim") from $q.getQuizInitial()
 then
     Conclusion c = new Conclusion(Conclusion.ANXIETY_AS_NORMAL_FACTOR);
         		insert(c);
@@ -39,18 +40,31 @@ end
 
 rule "Diagnóstico de  Ansiedade"
 when
-    $q : QuizInitial()
-    exists Question(id == 3, answer == "Não")
+    $q : Quiz()
+    exists Question(id == 3, answer == "Sim") from $q.getQuizInitial()
 then
     Conclusion c = new Conclusion(Conclusion.ANXIETY_AS_NORMAL_FACTOR);
     		insert(c);
+    System.out.println("Conclusão: "+c);
 end
 
-rule "unknown"
+
+rule "Diagnóstico de  Ansiedade 2"
+when
+    $q : Quiz()
+    $qc : QuestionCategory(category == "transtorno_panico")
+    exists Question(id == 1, answer == "Sim") from $q.getQuiz40()
+then
+    Conclusion c = new Conclusion(Conclusion.PANIC_SYNDROME);
+    		insert(c);
+    System.out.println("Conclusão: "+c);
+end
+
+/*rule "unknown"
 	when
 		not Conclusion()
 	then
 		Conclusion c = new Conclusion(Conclusion.UNKNOWN);
 		insert(c);
-end
+end*/
 

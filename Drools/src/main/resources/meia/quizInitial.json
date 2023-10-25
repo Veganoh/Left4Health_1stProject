@@ -1,0 +1,19 @@
+{
+  "QuizInitial": [
+    {
+      "id": 1,
+      "question": "Você se sente estressado com frequência?",
+      "answer": "Não"
+    },
+    {
+      "id": 2,
+      "question": "Você tem dificuldade para dormir à noite?",
+      "answer": "Não"
+    },
+    {
+      "id": 3,
+      "question": "Você sente estes sintomas a mais de 6 meses?",
+      "answer": "Sim"
+    }
+  ]
+}

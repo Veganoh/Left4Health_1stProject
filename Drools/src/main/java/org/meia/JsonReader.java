@@ -1,75 +1,57 @@
 package org.meia;
 
-import org.meia.model.Question;
-import org.meia.model.QuestionCategory;
-import org.meia.model.Quiz;
+import org.meia.model.*;
 
 import com.google.gson.Gson;
-import org.meia.model.QuizInitial;
 
 import java.io.FileReader;
-
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
 
 public class JsonReader {
 
-    private String FILEPATH="C:/Users/mariana/Documents/GitHub/Left4Health_1stProject/Drools/src/main/resources/meia/quiz.json";
+    private static String FILEPATH_INITIAL = "src/main/resources/meia/quizInitial.json";
 
-    public void printJsonFromResource(Quiz quiz) {
-        System.out.println("Versão: " + quiz.getVersion());
+    private static String FILEPATH_40 = "src/main/resources/meia/quiz40.json";
 
-        System.out.println("Perguntas do QuizInitial:");
-        for (Question pergunta : quiz.getQuizInitial()) {
-            System.out.println("ID: " + pergunta.getId());
-            System.out.println("Pergunta: " + pergunta.getQuestion());
-        }
 
-        System.out.println("Categorias e perguntas do Quiz40:");
-        for (QuestionCategory categoria : quiz.getQuiz40()) {
-            System.out.println("Categoria: " + categoria.getCategory());
-            System.out.println("Perguntas:");
-            for (Question pergunta : categoria.getCategoryQuestionList()) {
-                System.out.println("ID: " + pergunta.getId());
-                System.out.println("Pergunta: " + pergunta.getQuestion());
-            }
-        }
+    public static String getFILEPATH_INITIAL() {
+        return FILEPATH_INITIAL;
     }
 
-    public void printJsonFromResource2(QuizInitial quiz) {
-
-        System.out.println("Perguntas do QuizInitial:");
-        for (Question pergunta : quiz.getQuestionList()) {
-            System.out.println("ID: " + pergunta.getId());
-            System.out.println("Pergunta: " + pergunta.getQuestion());
-        }
-
-
+    public static String getFILEPATH_40() {
+        return FILEPATH_40;
     }
 
-    public Quiz readJsonFromFile(){
+    public static Quiz readQuizInitial() {
         try {
+            // Criar um objeto Gson para fazer a desserialização
             Gson gson = new Gson();
-            Quiz quiz = gson.fromJson(new FileReader(this.FILEPATH), Quiz.class);
+
+            // Ler o arquivo JSON em um objeto Quiz
+            Quiz quiz = gson.fromJson(new FileReader(getFILEPATH_INITIAL()), Quiz.class);
+
             return quiz;
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    public QuizInitial readQuizInitial(){
+
+    public void readQuiz40(Quiz previousQuiz) {
         try {
+            // Criar um objeto Gson para fazer a desserialização
             Gson gson = new Gson();
-            QuizInitial quizInitial = gson.fromJson(new FileReader(this.FILEPATH), QuizInitial.class);
-            return quizInitial;
-        } catch (Exception e) {
+
+            // Ler o arquivo JSON em um objeto Quiz
+            Quiz quiz = gson.fromJson(new FileReader(getFILEPATH_40()), Quiz.class);
+
+            previousQuiz.setQuiz40(quiz.getQuiz40());
+
+           // return previousQuiz;
+        } catch (IOException e) {
             e.printStackTrace();
-            return null;
         }
     }
+
 }

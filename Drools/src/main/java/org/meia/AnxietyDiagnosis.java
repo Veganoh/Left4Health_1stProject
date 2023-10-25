@@ -14,25 +14,58 @@ public class AnxietyDiagnosis {
 
     public static final void main(String[] args) {
 
-        JsonReader jsonReader  = new JsonReader();
-        Quiz quizJSON = jsonReader.readJsonFromFile();
-        jsonReader.printJsonFromResource(quizJSON);
+        Quiz quiz;
+        JsonReader jsonReader = new JsonReader();
 
-        /*QuizInitial quizInitial=jsonReader.readQuizInitial();
-        jsonReader.printJsonFromResource2(quizInitial);*/
+        quiz=jsonReader.readQuizInitial();
+
+        if (quiz == null) {
+            System.out.println("Falha ao ler o arquivo JSON.");
+        } else {
+            // Acessar e imprimir as perguntas em QuizInitial
+            //System.out.println(quiz.toStringInitial());
+        }
 
 
+        KieServices kieServices = KieServices.Factory.get();
+        KieContainer kieContainer = kieServices.getKieClasspathContainer();
+        KieSession kieSession = kieContainer.newKieSession("ksession-rules");
 
+        // Inserir o objeto Quiz na sessão do Drools
+        kieSession.insert(quiz);
 
-       /*Question pergunta1 = new Question("Pergunta 1", "Sim");
-        Question pergunta2 = new Question("Pergunta 2", "Não");
-        Question pergunta3 = new Question("Pergunta 3", "Sim");
+        // Executar as regras do Drools
+        int rulesFired = kieSession.fireAllRules();
 
-        quizJSON.addQuestion(pergunta1);
-        quizInitial.addQuestion(pergunta2);
-        quizInitial.addQuestion(pergunta3);
+        // Verificar se a conclusão foi gerada
+        boolean conclusionGenerated = rulesFired > 0;
 
-        runEngine(quizInitial);*/
+        kieSession.dispose();
+        //runEngine(quiz);
+
+        // Se nenhuma conclusão foi gerada, atribuir valores ao array
+        if (!conclusionGenerated) {
+            // Atribuir valores ao QUIZ40
+            jsonReader.readQuiz40(quiz);
+            //System.out.println(quiz.toString40());
+
+            KieServices kieServices2 = KieServices.Factory.get();
+            KieContainer kieContainer2 = kieServices2.getKieClasspathContainer();
+            KieSession kieSession2 = kieContainer2.newKieSession("ksession-rules");
+
+            // Inserir o objeto Quiz na sessão do Drools
+            kieSession2.insert(quiz);
+
+            // Executar as regras do Drools
+             kieSession2.fireAllRules();
+
+            kieSession2.dispose();
+        } else {
+            System.out.println("Uma conclusão foi gerada, não atribuir valores ao quiz40.");
+        }
+
+        // Fechar a sessão do Drools
+
 
 
     }
