@@ -1,31 +1,31 @@
 {
   "Quiz40": [
     {
-      "category": "Agoraphobia",
+      "category": "Sindrome de Ansiedade Generalizada",
       "categoryQuestionList": [
         {
           "id": 1,
-          "question": "Você evita lugares públicos ou situações onde poderia se sentir constrangido(a) ou onde seria difícil escapar ou obter ajuda em caso de emergência?",
+          "question": "Nas últimas semanas, com que frequência você se sentiu tenso, nervoso ou ansioso, mesmo quando não havia motivo óbvio para se sentir assim?",
           "answer": "3"
         },
         {
           "id": 2,
-          "question": "Você tem medo de estar em espaços abertos, como parques ou praças, ou em espaços fechados, como lojas ou cinemas?",
+          "question": "Você tem dificuldade em controlar seus pensamentos ansiosos, mesmo quando tenta concentrar-se em outras coisas?",
           "answer": "3"
         },
         {
           "id": 3,
-          "question": "Você evita viajar em transportes públicos, como ônibus ou metrô, devido ao medo de ter um ataque de pânico ou outra situação desconfortável?",
+          "question": "Você sentiu-se agitado ou incapaz de se acalmar nos últimos dias?",
           "answer": "5"
         },
         {
           "id": 4,
-          "question": "Você sente ansiedade intensa ao pensar em estar em uma fila, em um local lotado ou em meio a multidões?",
+          "question": "Você tem experimentado sensações físicas de ansiedade, como batimentos cardíacos acelerados, sudorese ou tremores, mesmo quando não há uma razão física para esses sintomas?",
           "answer": "5"
         },
         {
           "id": 5,
-          "question": "Você tem medo de sair de casa sozinho(a) e, portanto, raramente o faz, mesmo para atividades simples como ir à mercearia ou ao correio?",
+          "question": "Você evita situações ou atividades porque se sente excessivamente ansioso ou teme ter uma crise de ansiedade?",
           "answer": "5"
         }
       ]
@@ -61,36 +61,6 @@
       ]
     },
     {
-      "category": "Sindrome de Ansiedade Generalizada",
-      "categoryQuestionList": [
-        {
-          "id": 1,
-          "question": "Nas últimas semanas, com que frequência você se sentiu tenso, nervoso ou ansioso, mesmo quando não havia motivo óbvio para se sentir assim?",
-          "answer": "3"
-        },
-        {
-          "id": 2,
-          "question": "Você tem dificuldade em controlar seus pensamentos ansiosos, mesmo quando tenta concentrar-se em outras coisas?",
-          "answer": "3"
-        },
-        {
-          "id": 3,
-          "question": "Você sentiu-se agitado ou incapaz de se acalmar nos últimos dias?",
-          "answer": "5"
-        },
-        {
-          "id": 4,
-          "question": "Você tem experimentado sensações físicas de ansiedade, como batimentos cardíacos acelerados, sudorese ou tremores, mesmo quando não há uma razão física para esses sintomas?",
-          "answer": "5"
-        },
-        {
-          "id": 5,
-          "question": "Você evita situações ou atividades porque se sente excessivamente ansioso ou teme ter uma crise de ansiedade?",
-          "answer": "5"
-        }
-      ]
-    },
-    {
       "category": "Transtorno de Pânico com Agorafobia",
       "categoryQuestionList": [
         {
@@ -105,17 +75,47 @@
         },
         {
           "id": 3,
-          "question": "Você sentiu-se agitado ou incapaz de se acalmar nos últimos dias?",
+          "question": "Você experimenta um medo intenso ou ansiedade ao pensar em entrar em situações específicas ou lugares, mesmo que você não tenha tido um ataque de pânico nesses lugares antes?",
           "answer": "5"
         },
         {
           "id": 4,
-          "question": "Você tem experimentado sensações físicas de ansiedade, como batimentos cardíacos acelerados, sudorese ou tremores, mesmo quando não há uma razão física para esses sintomas?",
+          "question": "Você precisa ter um companheiro(a) de confiança presente para se sentir confortável ao enfrentar situações temidas ou sair de casa?",
           "answer": "5"
         },
         {
           "id": 5,
-          "question": "Você evita situações ou atividades porque se sente excessivamente ansioso ou teme ter uma crise de ansiedade?",
+          "question": "Você tem evitado ou teve dificuldade em enfrentar situações sociais ou públicas, mesmo que você queira superar esse medo?",
+          "answer": "5"
+        }
+      ]
+    }, 
+    {
+      "category": "Agoraphobia",
+      "categoryQuestionList": [
+        {
+          "id": 1,
+          "question": "Você evita lugares públicos ou situações onde poderia se sentir constrangido(a) ou onde seria difícil escapar ou obter ajuda em caso de emergência?",
+          "answer": "3"
+        },
+        {
+          "id": 2,
+          "question": "Você tem medo de estar em espaços abertos, como parques ou praças, ou em espaços fechados, como lojas ou cinemas?",
+          "answer": "3"
+        },
+        {
+          "id": 3,
+          "question": "Você evita viajar em transportes públicos, como ônibus ou metrô, devido ao medo de ter um ataque de pânico ou outra situação desconfortável?",
+          "answer": "5"
+        },
+        {
+          "id": 4,
+          "question": "Você sente ansiedade intensa ao pensar em estar em uma fila, em um local lotado ou em meio a multidões?",
+          "answer": "5"
+        },
+        {
+          "id": 5,
+          "question": "Você tem medo de sair de casa sozinho(a) e, portanto, raramente o faz, mesmo para atividades simples como ir à mercearia ou ao correio?",
           "answer": "5"
         }
       ]
