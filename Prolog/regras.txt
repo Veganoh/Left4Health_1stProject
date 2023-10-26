@@ -1,0 +1,70 @@
+
+% Regras
+% 1) Questionario inicial
+% 2) Questionario 40
+% 3) Ansiedade crónica
+% 4) Porquê das percentagens
+% 5) Porquê de ter batido o máximo
+% 6) Porquê de estar abaixo
+% 7) Porquê de ter focado nesta e não   
+
+
+% Regras do quiz inicial
+% rule "r1_Initial"
+conclusao(ANXIETY_SECONDARY_FACTOR) :-
+    hipotese(descricao, "Initial"),
+    pergunta(1, "Sim", QInicial),
+    concluir(ANXIETY_SECONDARY_FACTOR),
+    write('Conclusão: '), write(ANXIETY_SECONDARY_FACTOR).
+
+% Regra para concluir ANXIETY_AS_NORMAL_FACTOR se a descrição for "Initial", a resposta for "Não" na pergunta especificada e a variável NumeroPergunta for igual ao número da pergunta
+% TODO: Mesma regra para as +erguntas 2, 3 ou 6? Funciona assim ou deixar parecido ao drools?
+conclusao(ANXIETY_AS_NORMAL_FACTOR, NumeroPergunta) :-
+    hipotese(descricao, "Initial"),
+    pergunta(NumeroPergunta, "Não", QInicial),
+    concluir(ANXIETY_AS_NORMAL_FACTOR),
+    write('Conclusão para pergunta '), write(NumeroPergunta), write(': '), write(ANXIETY_AS_NORMAL_FACTOR).
+
+
+% rule "r2_Initial"
+conclusao(ANXIETY_AS_NORMAL_FACTOR) :-
+    hipotese(descricao, "Initial"),
+    pergunta(2, "Não", QInicial),
+    concluir(ANXIETY_AS_NORMAL_FACTOR),
+    write('Conclusão: '), write(ANXIETY_AS_NORMAL_FACTOR).
+
+% rule "r3_Initial"
+conclusao(ANXIETY_AS_NORMAL_FACTOR) :-
+    hipotese(descricao, "Initial"),
+    pergunta(3, "Não", QInicial),
+    concluir(ANXIETY_AS_NORMAL_FACTOR),
+    write('Conclusão: '), write(ANXIETY_AS_NORMAL_FACTOR).
+
+%rule "r4_Initial"
+conclusao(UNKNOWN) :-
+    hipotese(descricao, "Initial"),
+    pergunta(4, Resposta, QInicial),
+    Resposta < "3",
+    concluir(UNKNOWN),
+    write('Conclusão: '), write(UNKNOWN).
+
+%rule "r5_Initial"
+conclusao(ANXIETY_SECONDARY_FACTOR) :-
+    hipotese(descricao, "Initial"),
+    pergunta(5, "Não", QInicial),
+    concluir(ANXIETY_SECONDARY_FACTOR),
+    write('Conclusão: '), write(ANXIETY_SECONDARY_FACTOR).
+
+%rule "r6_Initial"
+conclusao(ANXIETY_AS_NORMAL_FACTOR) :-
+    hipotese(descricao, "Initial"),
+    pergunta(5, "Não", QInicial),
+    concluir(ANXIETY_AS_NORMAL_FACTOR),
+    write('Conclusão: '), write(ANXIETY_AS_NORMAL_FACTOR).
+
+%rule "r7_Initial"
+conclusao(ANXIETY_MEDS_FACTOR) :-
+    hipotese(descricao, "Initial"),
+    pergunta(7, "Não", QInicial),
+    concluir(ANXIETY_SECONDARY_FACTOR),
+    write('Conclusão: '), write(ANXIETY_MEDS_FACTOR).

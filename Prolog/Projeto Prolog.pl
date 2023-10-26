@@ -68,6 +68,10 @@ perguntas_misturadas(ListaPerguntasMisturadas) :-
     todas_perguntas(TodasPerguntas),
     random_permutation(TodasPerguntas, ListaPerguntasMisturadas).
 
+% Predicado para armazenar todas as respostas
+armazenar_todas_respostas(ListaRespostas) :-
+    findall(resposta_valor(Pergunta, Valor), resposta_valor(Pergunta, Valor), ListaRespostas).
+
 % Predicado para receber uma resposta
 receber_resposta(Pergunta) :-
     pergunta(Pergunta, _),
