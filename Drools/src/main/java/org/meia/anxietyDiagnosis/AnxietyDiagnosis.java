@@ -27,7 +27,7 @@ public class AnxietyDiagnosis {
 
         quiz=jsonReader.readQuizInitial();
 
-        //runEngine(quiz);
+        runEngine(quiz);
         jsonReader.readQuiz40(quiz);
         runEngine40(quiz);
     }
@@ -102,9 +102,9 @@ public class AnxietyDiagnosis {
 
                 @Override
                 public void rowInserted(Row row) {
-                    Conclusion conclusion = (Conclusion) row.get("$conclusion");
+                    InitialConclusion initialConclusion = (InitialConclusion) row.get("$initialConclusion");
                     //System.out.println(">>>" + conclusion.toString());
-                    System.out.println(">>>" + conclusion.toString());
+                    System.out.println(">>>" + initialConclusion.toString());
                     // stop inference engine after as soon as got a conclusion
                     kSession.halt();
 
@@ -115,7 +115,7 @@ public class AnxietyDiagnosis {
                 }
 
             };
-            LiveQuery query = kSession.openLiveQuery("Conclusions", null, listener);
+            LiveQuery query = kSession.openLiveQuery("InitialConclusions", null, listener);
 
             kSession.insert(quizInitial);
 

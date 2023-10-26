@@ -8,8 +8,6 @@ public class QuestionCategory {
 
     private List<Question> categoryQuestionList;
 
-
-
     public QuestionCategory(String category, List<Question> categoryQuestionList) {
         this.category=category;
         this.categoryQuestionList = categoryQuestionList;
