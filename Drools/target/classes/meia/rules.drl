@@ -108,6 +108,28 @@ rule "r5_Initial"
         System.out.println("Conclusion:"+c);
 end
 
+/*rule "r6_Initial"
+     when
+        Hypothesis(description == "Initial")
+        $q: Quiz()
+        exists Question(id == 5, answer == "Sim") from $q.getQuizInitial()
+     then
+        Conclusion c = new Conclusion(Conclusion.ANXIETY_SECONDARY_FACTOR);
+        insert(c);
+        System.out.println("Conclusion:"+c);
+end*/
+
+rule "r7_Initial"
+     when
+        Hypothesis(description == "Initial")
+        $q: Quiz()
+        exists Question(id == 5, answer == "Sim") from $q.getQuizInitial()
+     then
+        Conclusion c = new Conclusion(Conclusion.ANXIETY_MEDS_FACTOR);
+        insert(c);
+        System.out.println("Conclusion:"+c);
+end
+
 
 
 /*

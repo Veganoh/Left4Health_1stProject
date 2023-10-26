@@ -1,4 +1,4 @@
-package org.meia;
+package org.meia.anxietyDiagnosis;
 
 import org.meia.model.*;
 
