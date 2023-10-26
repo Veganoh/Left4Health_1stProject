@@ -2,8 +2,8 @@ package org.meia.model;
 
 public class Conclusion {
     public static final String ANXIETY_AS_NORMAL_FACTOR = "Ansiedade como condição do ser humano";
-    public static final String ANXIETY_SECONDARY_FACTOR = "Ansiedade como fator secundário";
-
+    public static final String ANXIETY_SECONDARY_FACTOR = "Tratar condição clínica e reavaliar persistência ou não dos sintomas de ansiedade após tratamento";
+    public static final String ANXIETY_MEDS_FACTOR = "Reavaliar necessidade dos medicamentos, tratar abuso de substância ou síndrome de abstinência e após reavaliar persistência ou não dos sintomas ansiosos.";
 
     //CONCLUSÕES DE ANSIEDADE ESPECIFICA
     public static final String GENERAL_ANXIETY = "Ansiedade Generalizada";
