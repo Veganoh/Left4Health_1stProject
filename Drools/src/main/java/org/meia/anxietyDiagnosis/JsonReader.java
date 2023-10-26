@@ -9,49 +9,28 @@ import java.io.IOException;
 
 public class JsonReader {
 
-    private static String FILEPATH_INITIAL = "src/main/resources/meia/quizInitial.json";
+    private static final String FILEPATH_INITIAL = "src/main/resources/meia/quizInitial.json";
+    private static final String FILEPATH_40 = "src/main/resources/meia/quiz40.json";
 
-    private static String FILEPATH_40 = "src/main/resources/meia/quiz40.json";
-
-
-    public static String getFILEPATH_INITIAL() {
-        return FILEPATH_INITIAL;
-    }
-
-    public static String getFILEPATH_40() {
-        return FILEPATH_40;
-    }
-
-    public static Quiz readQuizInitial() {
+    public Quiz readQuiz(String filePath) {
         try {
-            // Criar um objeto Gson para fazer a desserialização
             Gson gson = new Gson();
 
-            // Ler o arquivo JSON em um objeto Quiz
-            Quiz quiz = gson.fromJson(new FileReader(getFILEPATH_INITIAL()), Quiz.class);
-
-            return quiz;
+            return gson.fromJson(new FileReader(filePath), Quiz.class);
         } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
     }
 
-
-    public void readQuiz40(Quiz previousQuiz) {
-        try {
-            // Criar um objeto Gson para fazer a desserialização
-            Gson gson = new Gson();
-
-            // Ler o arquivo JSON em um objeto Quiz
-            Quiz quiz = gson.fromJson(new FileReader(getFILEPATH_40()), Quiz.class);
-
-            previousQuiz.setQuiz40(quiz.getQuiz40());
-
-           // return previousQuiz;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public Quiz readQuizInitial() {
+        return readQuiz(FILEPATH_INITIAL);
     }
 
+    public void readQuiz40(Quiz previousQuiz) {
+        Quiz quiz40 = readQuiz(FILEPATH_40);
+        if (quiz40 != null) {
+            previousQuiz.setQuiz40(quiz40.getQuiz40());
+        }
+    }
 }

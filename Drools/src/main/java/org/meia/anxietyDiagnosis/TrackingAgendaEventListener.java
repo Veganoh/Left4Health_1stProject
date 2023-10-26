@@ -14,16 +14,11 @@ import org.meia.model.Justification;
 
 @SuppressWarnings("restriction")
 public class TrackingAgendaEventListener extends DefaultAgendaEventListener{
-    private List<Match> matchList = new ArrayList<Match>();
     private List<Fact> lhs = new ArrayList<Fact>();
     private List<Fact> rhs = new ArrayList<Fact>();
 
     public void resetLhs() {
         lhs.clear();
-    }
-
-    public void addLhs(Fact f) {
-        lhs.add(f);
     }
 
     public void resetRhs() {
@@ -54,7 +49,6 @@ public class TrackingAgendaEventListener extends DefaultAgendaEventListener{
         Rule rule = event.getMatch().getRule();
         String ruleName = rule.getName();
 
-        //System.out.println("LHS:");
         List <Object> list = event.getMatch().getObjects();
         for (Object e : list) {
             if (e instanceof Fact) {
@@ -62,15 +56,7 @@ public class TrackingAgendaEventListener extends DefaultAgendaEventListener{
             }
         }
 
-        /*
-        for (Fact f : lhs) {
-            //System.out.println(f.getId() + ":" + f);
-        }
-        */
-
-        //System.out.println("RHS:");
         for (Fact f: rhs) {
-            //System.out.println(f.getId() + ":" + f);
             Justification j = new Justification(ruleName, lhs, f);
             AnxietyDiagnosis.justifications.put(f.getId(), j);
         }
@@ -78,18 +64,5 @@ public class TrackingAgendaEventListener extends DefaultAgendaEventListener{
         resetLhs();
         resetRhs();
 
-        /*
-        matchList.add(event.getMatch());
-        StringBuilder sb = new StringBuilder();
-        sb.append("Rule fired: " + ruleName);
-
-        if (ruleMetaDataMap.size() > 0) {
-            sb.append("\n  With [" + ruleMetaDataMap.size() + "] meta-data:");
-            for (String key : ruleMetaDataMap.keySet()) {
-                sb.append("\n    key=" + key + ", value=" + ruleMetaDataMap.get(key));
-            }
-        }
-        */
-        //System.out.println(sb.toString());
     }
 }
