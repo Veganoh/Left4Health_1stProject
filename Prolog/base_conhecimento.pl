@@ -1,3 +1,6 @@
+% NAO ESTA A SER USADO
+%---------------------------------------------------------------------
+
 % Base de Conhecimento em Prolog sobre transtornos de ansiedade e fobias
 
 transtorno("sindrome_de_panico").
