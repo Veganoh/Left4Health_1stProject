@@ -90,28 +90,27 @@ receber_resposta(Pergunta) :-
     read(Resposta),
     asserta(resposta_valor(Pergunta, Resposta)).
     
-% pergunta_valor(IdPergunta, Resposta, Valor).
-
-pergunta_valor(1, "Sim", 3).
-pergunta_valor(1, "Não", 5).
-pergunta_valor(2, "Sim", 1).
-pergunta_valor(2, "Não", 3).
+pergunta_valor(1, 1).  
+pergunta_valor(2, 2).  
+pergunta_valor(3, 3).  
+pergunta_valor(4, 4).  
+pergunta_valor(5, 5).
 
 % Estrutura de dados para armazenar respostas e valores
-resposta_valor(Pergunta, Valor) :- pergunta_valor(_, Valor, Pergunta).
+resposta_valor(Pergunta, Valor) :- pergunta_valor(Pergunta, Valor).
 
 % Predicado para calcular a soma total das respostas
 soma_total(Soma) :-
     findall(Valor, resposta_valor(_, Valor), Valores),
     sum_list(Valores, Soma).
 
-% Predicado para verificar a presença da resposta 'A' na base de conhecimento
+% Predicado para verificar a presença da resposta quando nenhum transtorno passou do minimo
 nenhum_transtorno :-
     findall(Valor, resposta_valor(_, Valor), Valores),
     max_list(Valores, MaiorValor),
     MaiorValor =< 15.
 
-% Predicado para verificar a presença da resposta 'B' na base de conhecimento
+% Predicado para verificar a presença da resposta que devolve os tipos e os valores de transtorno que ultrapassaram o 14
 transtorno_maior_14 :-
     findall(Valor, resposta_valor(_, Valor), Valores),
     member(Valor, Valores),
