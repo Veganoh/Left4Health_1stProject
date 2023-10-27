@@ -77,6 +77,13 @@ receber_resposta(Pergunta) :-
     pergunta(Pergunta, _),
     read(Resposta),
     asserta(resposta_valor(Pergunta, Resposta)).
+    
+% pergunta_valor(IdPergunta, Resposta, Valor).
+
+pergunta_valor(1, "Sim", 3).
+pergunta_valor(1, "Não", 5).
+pergunta_valor(2, "Sim", 1).
+pergunta_valor(2, "Não", 3).
 
 % Estrutura de dados para armazenar respostas e valores
 resposta_valor(Pergunta, Valor) :- pergunta_valor(_, Valor, Pergunta).
