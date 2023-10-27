@@ -1,54 +1,60 @@
 package org.meia.model;
 
+import org.meia.anxietyDiagnosis.Reader;
+
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 
+
 public class Quiz {
-    private List<Question> QuizInitial;
-    private List<QuestionCategory> Quiz40;
+    private final List<Question> QuizInitial = new ArrayList<>();
+    private final List<Question> Quiz40 = new ArrayList<>();
+
 
     public List<Question> getQuizInitial() {
         return QuizInitial;
     }
 
-    public void setQuizInitial(List<Question> quizInitial) {
-        QuizInitial = quizInitial;
-    }
-
-    public List<QuestionCategory> getQuiz40() {
+    public List<Question> getQuiz40() {
         return Quiz40;
     }
 
-    public void setQuiz40(List<QuestionCategory> quiz40) {
-        Quiz40 = quiz40;
+    public Quiz(){
     }
 
-    public String toStringInitial() {
-        StringBuilder texto = new StringBuilder("Quiz Initial: \n");
-        for (Question question : QuizInitial) {
-            texto.append("-ID: ").append(question.getId());
-            texto.append("   -Pergunta: ").append(question.getQuestion()).append("\n");
-        }
-
-        return texto.toString();
+    public void fillQuestions() throws FileNotFoundException {
+        Reader.readQuestionsFromFile(this);
     }
 
-    public String toString40() {
-        StringBuilder texto = new StringBuilder("Quiz 40: \n");
-        for (QuestionCategory questionCategory : Quiz40) {
-            texto.append("Category: ").append(questionCategory.getCategory()).append("\n");
-            for (Question question : questionCategory.getCategoryQuestionList()) {
-                texto.append("-ID: ").append(question.getId());
-                texto.append("   -Pergunta: ").append(question.getQuestion()).append("\n");
+    public void addQuestionInitial(Question q){
+        this.QuizInitial.add(q);
+    }
+
+    public void addQuestion40(Question q){
+        this.Quiz40.add(q);
+    }
+
+    public void addAnswerToQuestion(int id, String answer){
+        if (id >= 1 && id <= 40) {
+            for (Question question : Quiz40) {
+                if (question.getId() == id) {
+                    question.setAnswer(answer);
+                }
+            }
+        } else {
+            for (Question question : QuizInitial) {
+                if (question.getId() == id) {
+                     question.setAnswer(answer);
+                }
             }
         }
-
-        return texto.toString();
     }
 
     @Override
     public String toString() {
         return "Quiz{\n" +
-                " --QuizInitial=\n" + QuizInitial +
+                " --QuizInitial=" + QuizInitial +
                 "\n --Quiz40=" + Quiz40 +
                 "\n}";
     }

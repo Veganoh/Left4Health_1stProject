@@ -20,7 +20,6 @@ package org.meia;
 import org.meia.model.InitialConclusion;
 import org.meia.model.Quiz;
 import org.meia.model.Question;
-import org.meia.model.QuestionCategory
 import org.meia.model.Hypothesis;
 
 //declare any global variables here
@@ -33,33 +32,24 @@ end
 //Criação de hipoteses para identificar se estamos no quizInitial ou no quiz40
 rule "Verificar existencia quiz inicial"
 when
-    Quiz(Quiz40==null)
+    Quiz(QuizInitial !=null)
 then
     Hypothesis h = new Hypothesis("Initial");
+    System.out.println("hey");
     insert(h);
 end
 
-rule "Verificar existência do quiz 40"
-when
-    Quiz(Quiz40!=null)
-then
-    Hypothesis h = new Hypothesis("quiz40");
-    insert(h);
-end
 
 //Criação de regras para o quizInitial
-
-
 
 rule "r1_Initial"
     when
         Hypothesis(description == "Initial")
         $q: Quiz()
-        exists Question(id == 1, answer == "Sim") from $q.getQuizInitial()
+        exists Question(id == 41, answer == "Sim") from $q.getQuizInitial()
     then
         InitialConclusion c = new InitialConclusion(InitialConclusion.ANXIETY_SECONDARY_FACTOR);
         insert(c);
-        System.out.println("Conclusion:"+c);
 
 end
 
@@ -67,11 +57,10 @@ rule "r2_Initial"
      when
         Hypothesis(description == "Initial")
         $q: Quiz()
-        exists Question(id == 2, answer == "Não") from $q.getQuizInitial()
+        exists Question(id == 42, answer == "Não") from $q.getQuizInitial()
      then
         InitialConclusion c = new InitialConclusion(InitialConclusion.ANXIETY_AS_NORMAL_FACTOR);
         insert(c);
-        System.out.println("Conclusion:"+c);
  end
 
 rule "r3_Initial"
@@ -89,22 +78,20 @@ rule "r4_Initial"
      when
         Hypothesis(description == "Initial")
         $q: Quiz()
-        exists Question(id == 4, answer < "3") from $q.getQuizInitial()
+        exists Question(id == 44, answer < "3") from $q.getQuizInitial()
      then
         InitialConclusion c = new InitialConclusion(InitialConclusion.CHECK_THE_DOCTOR);
         insert(c);
-        System.out.println("Conclusion:"+c);
 end
 
 rule "r5_Initial"
      when
         Hypothesis(description == "Initial")
         $q: Quiz()
-        exists Question(id == 5, answer == "Sim") from $q.getQuizInitial()
+        exists Question(id == 45, answer == "Sim") from $q.getQuizInitial()
      then
         InitialConclusion c = new InitialConclusion(InitialConclusion.ANXIETY_SECONDARY_FACTOR);
         insert(c);
-        System.out.println("Conclusion:"+c);
 end
 
 rule "r6_Initial"
@@ -122,11 +109,10 @@ rule "r7_Initial"
      when
         Hypothesis(description == "Initial")
         $q: Quiz()
-        exists Question(id == 5, answer == "Sim") from $q.getQuizInitial()
+        exists Question(id ==45, answer == "Sim") from $q.getQuizInitial()
      then
         InitialConclusion c = new InitialConclusion(InitialConclusion.ANXIETY_MEDS_FACTOR);
         insert(c);
-        System.out.println("Conclusion:"+c);
 end
 
 rule "Inicio do quiz40"

@@ -3,46 +3,20 @@ package org.meia;
 import org.meia.model.CategoryValue;
 import org.meia.model.Conclusion;
 import org.meia.model.Fact;
-import org.meia.model.QuestionCategory;
 import org.meia.model.Question;
 import org.meia.model.Quiz;
 import org.meia.model.Answer;
+import org.meia.model.QuestionType;
 
 query "Conclusions"
 	$conclusion : Conclusion()
 end
 
-
 rule "Verifica as respostas de Agoraphobia e guarda os factos das respostas para manipulação"
     when
         $q : Quiz()
-        $qc : QuestionCategory(category == "Agoraphobia") from $q.getQuiz40()
-        $question : Question() from $qc.categoryQuestionList
+        $question : Question(questionType == QuestionType.AGORAPHOBIA_SYNDROME.getValue()) from $q.getQuiz40()
     then
-        Answer a = new Answer($question.getId(),$question.getQuestion(),$question.getAnswer(), "Agoraphobia");
-        insert(a);
+        System.out.println("hey");
+
 end
-
-rule "Verificar as respostas da Agoraphobia e gerar a soma das respostas"
-    when
-        Answer(id == 1, category == "Agoraphobia",$score1 : answer)
-        Answer(id == 2, category == "Agoraphobia",$score2 : answer)
-        Answer(id == 3, category == "Agoraphobia",$score3 : answer)
-        Answer(id == 4, category == "Agoraphobia",$score4 : answer)
-        Answer(id == 5, category == "Agoraphobia",$score5 : answer)
-    then
-        int value = $score1 + $score2 + $score3 + $score4 + $score5;
-        CategoryValue h = new CategoryValue("Valor_Agoraphobia",(String.valueOf(value)));
-        insert(h);
-end
-
-rule "Verificar a pontuação da Agoraphobia é superior a 15"
-    when
-        CategoryValue (category == "Valor_Agoraphobia", Integer.parseInt(value) >= 22)
-    then
-        Conclusion c = new Conclusion(Conclusion.AGORAPHOBIA_SYNDROME);
-        insert(c);
-end
-
-
-

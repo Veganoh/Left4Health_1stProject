@@ -6,13 +6,13 @@ public class Answer extends Fact {
 
     private String question;
 
-    private Integer answer;
+    private int answer;
 
     private String category;
 
-    private Integer questionId;
+    private int questionId;
 
-    public Answer(Integer questionId, String question, String answer, String category){
+    public Answer(int questionId, String question, String answer, String category){
         this.questionId = questionId;
         this.question = question;
         this.answer = Integer.parseInt(answer);
@@ -20,11 +20,12 @@ public class Answer extends Fact {
         AnxietyDiagnosis.agendaEventListener.addRhs(this);
     }
 
-    public Integer getQuestionId() {
+
+    public int getQuestionId() {
         return questionId;
     }
 
-    public Integer getAnswer() {
+    public int getAnswer() {
         return answer;
     }
 
@@ -38,6 +39,7 @@ public class Answer extends Fact {
     @Override
     public String toString() {
         return "Answer{" +
+                "id="+ questionId + '\'' +
                 "question='" + question + '\'' +
                 ", answer=" + answer +
                 '}';

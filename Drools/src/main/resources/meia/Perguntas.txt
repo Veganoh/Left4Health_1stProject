@@ -1,0 +1,141 @@
+1
+Síndrome de Ansiedade Generalizada
+Nas últimas semanas, com que frequência você se sentiu tenso, nervoso ou ansioso, mesmo quando não havia motivo óbvio para se sentir assim?
+2
+Síndrome de Ansiedade Generalizada
+Você tem dificuldade em controlar seus pensamentos ansiosos, mesmo quando tenta concentrar-se em outras coisas?
+3
+Síndrome de Ansiedade Generalizada
+Você sentiu-se agitado ou incapaz de se acalmar nos últimos dias?
+4
+Síndrome de Ansiedade Generalizada
+Você tem experimentado sensações físicas de ansiedade, como batimentos cardíacos acelerados, sudorese ou tremores, mesmo quando não há uma razão física para esses sintomas?
+5
+Síndrome de Ansiedade Generalizada
+Você evita situações ou atividades porque se sente excessivamente ansioso ou teme ter uma crise de ansiedade?
+6
+Transtorno de Pânico
+Você já teve ataques de pânico inesperados, nos quais você sentiu um medo intenso ou desconforto súbito, acompanhado por sintomas físicos como batimentos cardíacos acelerados, tremores, falta de ar, tonturas ou sensação de desmaio?
+7
+Transtorno de Pânico
+Você já teve um ataque de pânico inesperado que levou a uma sensação de formigamento ou dormência em partes do corpo, como mãos, pés ou rosto, acompanhado por um medo intenso de estar tendo um problema médico grave, como um ataque cardíaco ou um derrame?
+8
+Transtorno de Pânico
+Você já teve pensamentos recorrentes de que algo terrível poderia acontecer, mesmo quando não há uma razão óbvia para sentir medo?
+9
+Transtorno de Pânico
+Durante um ataque de pânico, você tem uma sensação de desrealização ou de estar fora de controle da situação?
+10
+Transtorno de Pânico
+Você experimenta ansiedade constante ou antecipatória sobre a possibilidade de ter outro ataque de pânico?
+11
+Transtorno de Pânico com Agorafobia
+Você tem ataques de pânico inesperados e, como resultado, evita lugares públicos, multidões ou situações em que se sente preso, como filas ou transportes públicos?
+12
+Transtorno de Pânico com Agorafobia
+Você evita situações em que pode se sentir envergonhado ou incapaz de escapar facilmente, como ir a eventos sociais, fazer compras ou viajar sozinho(a)?
+13
+Transtorno de Pânico com Agorafobia
+Você experimenta um medo intenso ou ansiedade ao pensar em entrar em situações específicas ou lugares, mesmo que você não tenha tido um ataque de pânico nesses lugares antes?
+14
+Transtorno de Pânico com Agorafobia
+Você precisa ter um companheiro(a) de confiança presente para se sentir confortável ao enfrentar situações temidas ou sair de casa?
+15
+Transtorno de Pânico com Agorafobia
+Você tem evitado ou teve dificuldade em enfrentar situações sociais ou públicas, mesmo que você queira superar esse medo?
+16
+Agorafobia
+Você evita lugares públicos ou situações onde poderia se sentir constrangido(a) ou onde seria difícil escapar ou obter ajuda em caso de emergência?
+17
+Agorafobia
+Você tem medo de estar em espaços abertos, como parques ou praças, ou em espaços fechados, como lojas ou cinemas?
+18
+Agorafobia
+Você evita viajar em transportes públicos, como ônibus ou metrô, devido ao medo de ter um ataque de pânico ou outra situação desconfortável?
+19
+Agorafobia
+Você sente ansiedade intensa ao pensar em estar em uma fila, em um local lotado ou em meio a multidões?
+20
+Agorafobia
+Você tem medo de sair de casa sozinho(a) e, portanto, raramente o faz, mesmo para atividades simples como ir à mercearia ou ao correio?
+21
+Ansiedade Social
+Você sente um medo intenso e persistente de situações sociais ou de performance, onde você poderia ser avaliado por outras pessoas, como falar em público, participar de reuniões ou mesmo interagir em pequenos grupos?
+22
+Ansiedade Social
+Você evita ou sente uma grande ansiedade ao enfrentar situações sociais, muitas vezes antecipando-as com medo dias ou semanas antes?
+23
+Ansiedade Social
+Você tem um medo excessivo de ser humilhado, criticado ou rejeitado em situações sociais, levando a evitar essas situações sempre que possível?
+24
+Ansiedade Social
+Você evita fazer atividades do dia a dia, como comer em público, usar banheiros públicos ou falar ao telefone em presença de outras pessoas, devido ao medo do julgamento alheio?
+25
+Ansiedade Social
+A ansiedade social interfere significativamente na sua vida diária, trabalho ou relacionamentos, levando a uma diminuição da qualidade de vida?
+26
+Fobia Específica
+Você tem um medo intenso e persistente de um objeto, animal, situação ou atividade específica, como voar, altura, aranhas ou agulhas?
+27
+Fobia Específica
+Você evita consistentemente o objeto ou a situação temida, ou a enfrenta com intensa ansiedade ou medo?
+28
+Fobia Específica
+O seu medo é irracional ou desproporcional em relação ao perigo real representado pelo objeto ou situação específica?
+29
+Fobia Específica
+Você sente ansiedade ou pânico apenas ao pensar na presença ou na possibilidade de encontrar o objeto ou situação temidos?
+30
+Fobia Específica
+Se confrontado com o objeto ou situação temidos, você experimenta sintomas físicos como palpitações, sudorese, tremores ou falta de ar?
+31
+Mutismo Seletivo
+A pessoa recusa-se a falar em situações sociais específicas, mesmo quando se espera que fale?
+32
+Mutismo Seletivo
+A pessoa evita interações sociais que envolvem fala, mesmo quando necessárias para o trabalho ou relacionamentos pessoais?
+33
+Mutismo Seletivo
+A pessoa sente intensa ansiedade ou pânico ao enfrentar situações em que é esperado que fale? Isso leva à evitação dessas situações sempre que possível?
+34
+Mutismo Seletivo
+A incapacidade de falar em certas situações sociais tem um impacto significativo na vida diária, profissional ou pessoal da pessoa, causando prejuízos em sua vida?
+35
+Mutismo Seletivo
+A pessoa está ciente da dificuldade de falar em determinadas situações e sente angústia associada a essa incapacidade, mas ainda assim não consegue superar essa barreira?
+36
+Ansiedade de Separação
+Tem um sentimento excessivo de ansiedade quando se aproxima o momento de se separar de pessoas significativas, como parceiro(a), familiares ou amigos próximos?
+37
+Ansiedade de Separação
+Tem uma preocupação constante com o bem-estar da pessoa de quem estão se separando, mesmo que esteja apenas temporariamente ausente?
+38
+Ansiedade de Separação
+Evita atividades ou situações que envolvem separação, mesmo quando são necessárias para o trabalho, socialização ou outras atividades diárias?
+39
+Ansiedade de Separação
+Há pesadelos frequentes envolvendo a ideia da separação ou da perda de uma pessoa significativa?
+40
+Ansiedade de Separação
+Tem sintomas físicos de ansiedade, como palpitações, sudorese, tremores ou falta de ar, ao pensar na ideia de se separar da pessoa significativa?
+41
+Initial
+Possui alguma condição clínica do diagnóstico diferencial que pode explicar os sintomas?
+42
+Initial
+Você sente ansiedade e preocupação excessiva em relação a várias áreas da sua vida na maioria dos dias há pelo menos seis meses?
+43
+Initial
+Você sente que sua preocupação é desproporcional em relação à situação ou que você não consegue controlá-la?
+44
+Initial
+Nos últimos seis meses, quantos sintomas dos seguintes sentiu na maioria dos dias: inquietação, fadiga, dificuldade de concentração, irritabilidade, tensão muscular ou problemas para dormir?
+45
+Initial
+Você já foi diagnosticado ou acredita que sua ansiedade excessiva não pode ser explicada por outro problema de saúde mental, como transtorno de pânico, fobia social, transtorno obsessivo-compulsivo, ou outros transtornos similares?
+46
+Initial
+Essa ansiedade, preocupação ou sintomas físicos causam um impacto significativo em sua vida social, profissional ou em outras áreas importantes?
+47
+Initial
+Os sintomas podem ser explicados por uso de medicamentos, abuso de substâncias ou síndrome de abstinência?
