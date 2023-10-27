@@ -4,15 +4,20 @@ public class Question {
     private int id;
     private String question;
     private String answer;
+    private QuestionType questionType;
 
-    public Question(int id, String question, String answer) {
+    public Question(int id, String question, String questionType) {
         this.id = id;
         this.question = question;
-        this.answer = answer;
+        this.questionType = QuestionType.fromValue(questionType);
     }
 
     public Question() {
         // Deixa os atributos não inicializados
+    }
+
+    public String getQuestionType() {
+        return questionType.getValue();
     }
 
     public int getId() {
@@ -27,12 +32,12 @@ public class Question {
         return answer;
     }
 
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+
     @Override
     public String toString() {
-        return "Question{" +
-                "id=" + id +
-                ", question='" + question + '\'' +
-                ", answer='" + answer + '\'' +
-                '}';
+        return answer;
     }
 }

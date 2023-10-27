@@ -9,6 +9,7 @@ import org.kie.api.runtime.rule.LiveQuery;
 import org.kie.api.runtime.rule.Row;
 import org.kie.api.runtime.rule.ViewChangedEventListener;
 
+import java.io.FileNotFoundException;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -17,13 +18,65 @@ public class AnxietyDiagnosis {
     public static TrackingAgendaEventListener agendaEventListener;
     public static Map<Integer, Justification> justifications;
 
-    public static final void main(String[] args) {
-        Quiz quiz;
-        JsonReader jsonReader = new JsonReader();
-        quiz = jsonReader.readQuizInitial();
+    public static InitialConclusion initialConclusion;
+
+    public static Quiz quiz = new Quiz();
+
+
+
+    public static  void main(String[] args) throws FileNotFoundException {
+        System.out.println(quiz);
+        quiz.fillQuestions();
+        Reader.assignAnswersToQuizInitial(quiz);
         runEngine(quiz);
-        jsonReader.readQuiz40(quiz);
-        runEngine40(quiz);
+        System.out.println(initialConclusion);
+
+        if(initialConclusion.equals(InitialConclusion.START_QUIZ40)){
+            Reader.assignAnswersToQuiz40(quiz);
+            System.out.println(quiz.getQuizInitial());
+
+        }
+
+
+    }
+
+    private static void runEngine(Quiz quiz) {
+        try {
+            // load up the knowledge base
+            KieServices ks = KieServices.Factory.get();
+            KieContainer kContainer = ks.getKieClasspathContainer();
+            final KieSession kSession = kContainer.newKieSession("ksession-rules");
+
+            // Query listener
+            ViewChangedEventListener listener = new ViewChangedEventListener() {
+                @Override
+                public void rowDeleted(Row row) {
+                }
+
+                @Override
+                public void rowInserted(Row row) {
+                    initialConclusion = (InitialConclusion) row.get("$initialConclusion");
+                    System.out.println(">>>" + initialConclusion.toString());
+
+                    // stop inference engine as soon as an initial conclusion is obtained
+                    kSession.halt();
+                }
+
+                @Override
+                public void rowUpdated(Row row) {
+                }
+            };
+
+            LiveQuery query = kSession.openLiveQuery("InitialConclusions", null, listener);
+
+            kSession.insert(quiz);
+
+            kSession.fireAllRules();
+
+            query.close();
+        } catch (Throwable t) {
+            t.printStackTrace();
+        }
     }
 
     private static void runEngine40(Quiz quiz) {
@@ -73,42 +126,4 @@ public class AnxietyDiagnosis {
         }
     }
 
-    private static void runEngine(Quiz quiz) {
-        try {
-            // load up the knowledge base
-            KieServices ks = KieServices.Factory.get();
-            KieContainer kContainer = ks.getKieClasspathContainer();
-            final KieSession kSession = kContainer.newKieSession("ksession-rules");
-
-            // Query listener
-            ViewChangedEventListener listener = new ViewChangedEventListener() {
-                @Override
-                public void rowDeleted(Row row) {
-                }
-
-                @Override
-                public void rowInserted(Row row) {
-                    InitialConclusion initialConclusion = (InitialConclusion) row.get("$initialConclusion");
-                    System.out.println(">>>" + initialConclusion.toString());
-
-                    // stop inference engine as soon as an initial conclusion is obtained
-                    kSession.halt();
-                }
-
-                @Override
-                public void rowUpdated(Row row) {
-                }
-            };
-
-            LiveQuery query = kSession.openLiveQuery("InitialConclusions", null, listener);
-
-            kSession.insert(quiz);
-
-            kSession.fireAllRules();
-
-            query.close();
-        } catch (Throwable t) {
-            t.printStackTrace();
-        }
-    }
 }

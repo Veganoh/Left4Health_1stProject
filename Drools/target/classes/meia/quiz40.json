@@ -1,243 +1,164 @@
 {
   "Quiz40": [
     {
-      "category": "Sindrome de Ansiedade Generalizada",
-      "categoryQuestionList": [
-        {
-          "id": 1,
-          "question": "Nas últimas semanas, com que frequência você se sentiu tenso, nervoso ou ansioso, mesmo quando não havia motivo óbvio para se sentir assim?",
-          "answer": "3"
-        },
-        {
-          "id": 2,
-          "question": "Você tem dificuldade em controlar seus pensamentos ansiosos, mesmo quando tenta concentrar-se em outras coisas?",
-          "answer": "3"
-        },
-        {
-          "id": 3,
-          "question": "Você sentiu-se agitado ou incapaz de se acalmar nos últimos dias?",
-          "answer": "5"
-        },
-        {
-          "id": 4,
-          "question": "Você tem experimentado sensações físicas de ansiedade, como batimentos cardíacos acelerados, sudorese ou tremores, mesmo quando não há uma razão física para esses sintomas?",
-          "answer": "5"
-        },
-        {
-          "id": 5,
-          "question": "Você evita situações ou atividades porque se sente excessivamente ansioso ou teme ter uma crise de ansiedade?",
-          "answer": "5"
-        }
-      ]
+      "id": 1,
+      "answer": "3"
     },
     {
-      "category": "Transtorno de Pânico",
-      "categoryQuestionList": [
-        {
-          "id": 1,
-          "question": "Você já teve ataques de pânico inesperados, nos quais você sentiu um medo intenso ou desconforto súbito, acompanhado por sintomas físicos como batimentos cardíacos acelerados, tremores, falta de ar, tonturas ou sensação de desmaio?",
-          "answer": "3"
-        },
-        {
-          "id": 2,
-          "question": "Você já teve um ataque de pânico inesperado que levou a uma sensação de formigamento ou dormência em partes do corpo, como mãos, pés ou rosto, acompanhado por um medo intenso de estar tendo um problema médico grave, como um ataque cardíaco ou um derrame?",
-          "answer": "2"
-        },
-        {
-          "id": 3,
-          "question": "Você já teve pensamentos recorrentes de que algo terrível poderia acontecer, mesmo quando não há uma razão óbvia para sentir medo?",
-          "answer": "2"
-        },
-        {
-          "id": 4,
-          "question": "Durante um ataque de pânico, você tem uma sensação de desrealização ou de estar fora de controle da situação?",
-          "answer": "2"
-        },
-        {
-          "id": 5,
-          "question": "Você experimenta ansiedade constante ou antecipatória sobre a possibilidade de ter outro ataque de pânico?",
-          "answer": "2"
-        }
-      ]
+      "id": 2,
+      "answer": "3"
     },
     {
-      "category": "Transtorno de Pânico com Agorafobia",
-      "categoryQuestionList": [
-        {
-          "id": 1,
-          "question": "Você tem ataques de pânico inesperados e, como resultado, evita lugares públicos, multidões ou situações em que se sente preso, como filas ou transportes públicos?",
-          "answer": "3"
-        },
-        {
-          "id": 2,
-          "question": "Você evita situações em que pode se sentir envergonhado ou incapaz de escapar facilmente, como ir a eventos sociais, fazer compras ou viajar sozinho(a)?",
-          "answer": "3"
-        },
-        {
-          "id": 3,
-          "question": "Você experimenta um medo intenso ou ansiedade ao pensar em entrar em situações específicas ou lugares, mesmo que você não tenha tido um ataque de pânico nesses lugares antes?",
-          "answer": "5"
-        },
-        {
-          "id": 4,
-          "question": "Você precisa ter um companheiro(a) de confiança presente para se sentir confortável ao enfrentar situações temidas ou sair de casa?",
-          "answer": "5"
-        },
-        {
-          "id": 5,
-          "question": "Você tem evitado ou teve dificuldade em enfrentar situações sociais ou públicas, mesmo que você queira superar esse medo?",
-          "answer": "5"
-        }
-      ]
-    }, 
-    {
-      "category": "Agoraphobia",
-      "categoryQuestionList": [
-        {
-          "id": 1,
-          "question": "Você evita lugares públicos ou situações onde poderia se sentir constrangido(a) ou onde seria difícil escapar ou obter ajuda em caso de emergência?",
-          "answer": "3"
-        },
-        {
-          "id": 2,
-          "question": "Você tem medo de estar em espaços abertos, como parques ou praças, ou em espaços fechados, como lojas ou cinemas?",
-          "answer": "3"
-        },
-        {
-          "id": 3,
-          "question": "Você evita viajar em transportes públicos, como ônibus ou metrô, devido ao medo de ter um ataque de pânico ou outra situação desconfortável?",
-          "answer": "5"
-        },
-        {
-          "id": 4,
-          "question": "Você sente ansiedade intensa ao pensar em estar em uma fila, em um local lotado ou em meio a multidões?",
-          "answer": "5"
-        },
-        {
-          "id": 5,
-          "question": "Você tem medo de sair de casa sozinho(a) e, portanto, raramente o faz, mesmo para atividades simples como ir à mercearia ou ao correio?",
-          "answer": "5"
-        }
-      ]
+      "id": 3,
+      "answer": "5"
     },
     {
-      "category": "Ansiedade Social",
-      "categoryQuestionList": [
-        {
-          "id": 1,
-          "question": "Você sente um medo intenso e persistente de situações sociais ou de performance, onde você poderia ser avaliado por outras pessoas, como falar em público, participar de reuniões ou mesmo interagir em pequenos grupos?",
-          "answer": "3"
-        },
-        {
-          "id": 2,
-          "question": "Você evita ou sente uma grande ansiedade ao enfrentar situações sociais, muitas vezes antecipando-as com medo dias ou semanas antes?",
-          "answer": "3"
-        },
-        {
-          "id": 3,
-          "question": "Você tem um medo excessivo de ser humilhado, criticado ou rejeitado em situações sociais, levando a evitar essas situações sempre que possível?",
-          "answer": "5"
-        },
-        {
-          "id": 4,
-          "question": "Você evita fazer atividades do dia a dia, como comer em público, usar banheiros públicos ou falar ao telefone em presença de outras pessoas, devido ao medo do julgamento alheio?",
-          "answer": "5"
-        },
-        {
-          "id": 5,
-          "question": "A ansiedade social interfere significativamente na sua vida diária, trabalho ou relacionamentos, levando a uma diminuição da qualidade de vida?",
-          "answer": "5"
-        }
-      ]
+      "id": 4,
+      "answer": "5"
     },
     {
-      "category": "Fobia Específica",
-      "categoryQuestionList": [
-        {
-          "id": 1,
-          "question": "Você tem um medo intenso e persistente de um objeto, animal, situação ou atividade específica, como voar, altura, aranhas ou agulhas?",
-          "answer": "3"
-        },
-        {
-          "id": 2,
-          "question": "Você evita consistentemente o objeto ou a situação temida, ou a enfrenta com intensa ansiedade ou medo?",
-          "answer": "3"
-        },
-        {
-          "id": 3,
-          "question": "O seu medo é irracional ou desproporcional em relação ao perigo real representado pelo objeto ou situação específica?",
-          "answer": "5"
-        },
-        {
-          "id": 4,
-          "question": "Você sente ansiedade ou pânico apenas ao pensar na presença ou na possibilidade de encontrar o objeto ou situação temidos?",
-          "answer": "5"
-        },
-        {
-          "id": 5,
-          "question": "Se confrontado com o objeto ou situação temidos, você experimenta sintomas físicos como palpitações, sudorese, tremores ou falta de ar?",
-          "answer": "5"
-        }
-      ]
+      "id": 5,
+      "answer": "5"
     },
     {
-      "category": "Mutivismo Seletivo",
-      "categoryQuestionList": [
-        {
-          "id": 1,
-          "question": "A pessoa é capaz de falar em algumas situações, mas recusa falar em situações sociais específicas, mesmo que a necessidade de falar seja esperada ou esperada socialmente?",
-          "answer": "3"
-        },
-        {
-          "id": 2,
-          "question": "Evitação persistente de interações sociais que envolvem a necessidade de falar, mesmo que seja necessário para o trabalho ou relacionamentos pessoais?",
-          "answer": "3"
-        },
-        {
-          "id": 3,
-          "question": "Intensa ansiedade ou pânico ao deparar-se com situações em que é esperado que fale, levando à evitação dessas situações sempre que possível?",
-          "answer": "5"
-        },
-        {
-          "id": 4,
-          "question": "A incapacidade de falar em determinadas situações sociais interfere significativamente na vida diária, profissional ou pessoal da pessoa, causando prejuízos em sua vida?",
-          "answer": "5"
-        },
-        {
-          "id": 5,
-          "question": "Consciência da dificuldade de falar em determinadas situações e angústia associada a essa incapacidade, mas ainda assim, não consegue superar essa barreira?",
-          "answer": "5"
-        }
-      ]
+      "id": 6,
+      "answer": "3"
     },
     {
-      "category": "Ansiedade de Separação",
-      "categoryQuestionList": [
-        {
-          "id": 1,
-          "question": "Tem um sentimento excessivo de ansiedade quando se aproxima o momento de se separar de pessoas significativas, como parceiro(a), familiares ou amigos próximos?\n",
-          "answer": "3"
-        },
-        {
-          "id": 2,
-          "question": "Tem uma preocupação constante com o bem-estar da pessoa de quem estão se separando, mesmo que esteja apenas temporariamente ausente?",
-          "answer": "3"
-        },
-        {
-          "id": 3,
-          "question": "Evita atividades ou situações que envolvem separação, mesmo quando são necessárias para o trabalho, socialização ou outras atividades diárias?",
-          "answer": "5"
-        },
-        {
-          "id": 4,
-          "question": "Há pesadelos frequentes envolvendo a ideia da separação ou da perda de uma pessoa significativa?",
-          "answer": "5"
-        },
-        {
-          "id": 5,
-          "question": "Tem sintomas físicos de ansiedade, como palpitações, sudorese, tremores ou falta de ar, ao pensar na ideia de se separar da pessoa significativa?",
-          "answer": "5"
-        }
-      ]
+      "id": 7,
+      "answer": "2"
+    },
+    {
+      "id": 8,
+      "answer": "2"
+    },
+    {
+      "id": 9,
+      "answer": "2"
+    },
+    {
+      "id": 10,
+      "answer": "2"
+    },
+    {
+      "id": 11,
+      "answer": "3"
+    },
+    {
+      "id": 12,
+      "answer": "3"
+    },
+    {
+      "id": 13,
+      "answer": "5"
+    },
+    {
+      "id": 14,
+      "answer": "5"
+    },
+    {
+      "id": 15,
+      "answer": "5"
+    },
+    {
+      "id": 16,
+      "answer": "3"
+    },
+    {
+      "id": 17,
+      "answer": "3"
+    },
+    {
+      "id": 18,
+      "answer": "5"
+    },
+    {
+      "id": 19,
+      "answer": "5"
+    },
+    {
+      "id": 20,
+      "answer": "5"
+    },
+    {
+      "id": 21,
+      "answer": "3"
+    },
+    {
+      "id": 22,
+      "answer": "3"
+    },
+    {
+      "id": 23,
+      "answer": "5"
+    },
+    {
+      "id": 24,
+      "answer": "5"
+    },
+    {
+      "id": 25,
+      "answer": "5"
+    },
+    {
+      "id": 26,
+      "answer": "3"
+    },
+    {
+      "id": 27,
+      "answer": "3"
+    },
+    {
+      "id": 28,
+      "answer": "5"
+    },
+    {
+      "id": 29,
+      "answer": "5"
+    },
+    {
+      "id": 30,
+      "answer": "5"
+    },
+    {
+      "id": 31,
+      "answer": "3"
+    },
+    {
+      "id": 32,
+      "answer": "3"
+    },
+    {
+      "id": 33,
+      "answer": "5"
+    },
+    {
+      "id": 34,
+      "answer": "5"
+    },
+    {
+      "id": 35,
+      "answer": "5"
+    },
+    {
+      "id": 36,
+      "answer": "3"
+    },
+    {
+      "id": 37,
+      "answer": "3"
+    },
+    {
+      "id": 38,
+      "answer": "5"
+    },
+    {
+      "id": 39,
+      "answer": "5"
+    },
+    {
+      "id": 40,
+      "answer": "5"
     }
-  ]}
+  ]
+}
