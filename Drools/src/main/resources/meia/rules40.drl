@@ -6,17 +6,74 @@ import org.meia.model.Fact;
 import org.meia.model.Question;
 import org.meia.model.Quiz;
 import org.meia.model.Answer;
-import org.meia.model.QuestionType;
+import org.meia.model.QuestionType
+import org.meia.model.Hypothesis;
 
 query "Conclusions"
 	$conclusion : Conclusion()
 end
 
+//Criação de hipoteses para identificar se no quiz40
+
+
 rule "Verifica as respostas de Agoraphobia e guarda os factos das respostas para manipulação"
     when
         $q : Quiz()
-        $question : Question(questionType == QuestionType.AGORAPHOBIA_SYNDROME.getValue()) from $q.getQuiz40()
+        $question : Question(questionType == QuestionType.AGORAPHOBIA_SYNDROME, answer != null) from $q.getQuiz40()
     then
-        System.out.println("hey");
-
+        Answer a = new Answer($question.getId(),$question.getQuestion(),$question.getAnswer(), QuestionType.AGORAPHOBIA_SYNDROME);
+        System.out.println(a);
+        insert(a);
 end
+
+rule "Verificar as respostas da Agoraphobia e gerar a soma das respostas"
+    when
+        Answer(id == 1, category == QuestionType.AGORAPHOBIA_SYNDROME,$score1 : answer)
+        Answer(id == 2, category == QuestionType.AGORAPHOBIA_SYNDROME,$score2 : answer)
+        Answer(id == 3, category == QuestionType.AGORAPHOBIA_SYNDROME,$score3 : answer)
+        Answer(id == 4, category == QuestionType.AGORAPHOBIA_SYNDROME,$score4 : answer)
+        Answer(id == 5, category == QuestionType.AGORAPHOBIA_SYNDROME,$score5 : answer)
+    then
+        int value = $score1 + $score2 + $score3 + $score4 + $score5;
+        CategoryValue cv = new CategoryValue("Valor_Agoraphobia",(String.valueOf(value)));
+        insert(cv);
+end
+
+rule "Verificar a pontuação da Agoraphobia é superior a 15"
+    when
+        CategoryValue (category == "Valor_Agoraphobia", Integer.parseInt(value) >= 15)
+    then
+        Conclusion c = new Conclusion(Conclusion.AGORAPHOBIA_SYNDROME);
+        insert(c);
+end
+
+rule "Verifica as respostas de Ansiedade Generalizada e guarda os factos das respostas para manipulação"
+    when
+        $q : Quiz()
+        $question : Question(questionType == QuestionType.GENERAL_ANXIETY, answer != null) from $q.getQuiz40()
+    then
+        Answer a = new Answer($question.getId(),$question.getQuestion(),$question.getAnswer(), QuestionType.GENERAL_ANXIETY);
+        insert(a);
+end
+
+rule "Verificar as respostas da Ansiedade Generalizada e gerar a soma das respostas"
+    when
+        Answer(id == 1, category == QuestionType.GENERAL_ANXIETY,$score1 : answer)
+        Answer(id == 2, category == QuestionType.GENERAL_ANXIETY,$score2 : answer)
+        Answer(id == 3, category == QuestionType.GENERAL_ANXIETY,$score3 : answer)
+        Answer(id == 4, category == QuestionType.GENERAL_ANXIETY,$score4 : answer)
+        Answer(id == 5, category == QuestionType.GENERAL_ANXIETY,$score5 : answer)
+    then
+        int value = $score1 + $score2 + $score3 + $score4 + $score5;
+        CategoryValue cv = new CategoryValue("Valor_Ansiedade_Generalizada",(String.valueOf(value)));
+        insert(cv);
+end
+
+rule "Verificar a pontuação da Ansiedade Generalizada é superior a 15"
+    when
+        CategoryValue (category == "Valor_Ansiedade_Generalizada", Integer.parseInt(value) >= 15)
+    then
+        Conclusion c = new Conclusion(Conclusion.AGORAPHOBIA_SYNDROME);
+        insert(c);
+end
+

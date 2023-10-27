@@ -14,6 +14,8 @@ import org.meia.model.Justification;
 
 @SuppressWarnings("restriction")
 public class TrackingAgendaEventListener extends DefaultAgendaEventListener{
+
+    private List<Match> matchList = new ArrayList<Match>();
     private List<Fact> lhs = new ArrayList<Fact>();
     private List<Fact> rhs = new ArrayList<Fact>();
 

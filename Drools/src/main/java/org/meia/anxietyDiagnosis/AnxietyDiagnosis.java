@@ -9,12 +9,16 @@ import org.kie.api.runtime.rule.LiveQuery;
 import org.kie.api.runtime.rule.Row;
 import org.kie.api.runtime.rule.ViewChangedEventListener;
 
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.sql.SQLOutput;
 import java.util.Map;
 import java.util.TreeMap;
 
 public class AnxietyDiagnosis {
     public static KieSession KS;
+    public static BufferedReader BR;
+
     public static TrackingAgendaEventListener agendaEventListener;
     public static Map<Integer, Justification> justifications;
 
@@ -25,16 +29,13 @@ public class AnxietyDiagnosis {
 
 
     public static  void main(String[] args) throws FileNotFoundException {
-        System.out.println(quiz);
         quiz.fillQuestions();
         Reader.assignAnswersToQuizInitial(quiz);
         runEngine(quiz);
-        System.out.println(initialConclusion);
 
-        if(initialConclusion.equals(InitialConclusion.START_QUIZ40)){
+        if(initialConclusion.toString() == InitialConclusion.START_QUIZ40){
             Reader.assignAnswersToQuiz40(quiz);
-            System.out.println(quiz.getQuizInitial());
-
+            runEngine40(quiz);
         }
 
 
@@ -45,7 +46,7 @@ public class AnxietyDiagnosis {
             // load up the knowledge base
             KieServices ks = KieServices.Factory.get();
             KieContainer kContainer = ks.getKieClasspathContainer();
-            final KieSession kSession = kContainer.newKieSession("ksession-rules");
+             KieSession kSession = kContainer.newKieSession("ksession-rules");
 
             // Query listener
             ViewChangedEventListener listener = new ViewChangedEventListener() {

@@ -2,15 +2,15 @@
   "QuizInitial": [
     {
       "id": 41,
-      "answer": "Sim"
-    },
-    {
-      "id": 42,
       "answer": "Não"
     },
     {
-      "id": 43,
+      "id": 42,
       "answer": "Sim"
+    },
+    {
+      "id": 43,
+      "answer": "Não"
     },
     {
       "id": 44,
@@ -22,7 +22,7 @@
     },
     {
       "id": 46,
-      "answer": "Não"
+      "answer": "Sim"
     },
     {
       "id": 47,

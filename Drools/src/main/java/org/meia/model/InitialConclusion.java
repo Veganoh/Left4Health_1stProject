@@ -20,6 +20,6 @@ public class InitialConclusion {
     }
 
     public String toString() {
-        return ("Diagnosis: " + description);
+        return description;
     }
     }

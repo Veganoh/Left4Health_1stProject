@@ -1,19 +1,17 @@
 package org.meia.model;
 
-public class Hypothesis {
+import org.meia.anxietyDiagnosis.AnxietyDiagnosis;
+
+public class Hypothesis extends Fact {
     private String description;
 
     public Hypothesis(String description) {
-        super();
         this.description = description;
+        AnxietyDiagnosis.agendaEventListener.addRhs(this);
     }
 
     public String getDescription() {
         return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
 }

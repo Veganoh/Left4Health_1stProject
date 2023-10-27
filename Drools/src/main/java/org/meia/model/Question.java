@@ -4,12 +4,12 @@ public class Question {
     private int id;
     private String question;
     private String answer;
-    private QuestionType questionType;
+    private String questionType;
 
-    public Question(int id, String question, String questionType) {
+    public Question(int id, String question, String  questionType) {
         this.id = id;
         this.question = question;
-        this.questionType = QuestionType.fromValue(questionType);
+        this.questionType = questionType;
     }
 
     public Question() {
@@ -17,7 +17,7 @@ public class Question {
     }
 
     public String getQuestionType() {
-        return questionType.getValue();
+        return questionType;
     }
 
     public int getId() {
@@ -40,4 +40,6 @@ public class Question {
     public String toString() {
         return answer;
     }
+
+
 }

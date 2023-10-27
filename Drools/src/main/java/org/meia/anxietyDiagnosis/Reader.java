@@ -16,6 +16,11 @@ public class Reader {
 
     private static final String FILEPATH_QUESTIONS = "src/main/resources/meia/Perguntas.txt";
 
+    /**
+     * Guarda as perguntas do questionário dentro do objeto quiz
+     * @param quiz, o objeto onde vão ser guardadas as perguntas
+     * @throws FileNotFoundException, a exceção lançada caso não se encontre file
+     */
     public static void readQuestionsFromFile(Quiz quiz) throws FileNotFoundException {
 
         Scanner in = new Scanner(new File(FILEPATH_QUESTIONS));
@@ -35,6 +40,10 @@ public class Reader {
         }
     }
 
+    /**
+     *
+     * @param quiz
+     */
     public static void assignAnswersToQuiz40(Quiz quiz) {
         Gson gson = new Gson();
 
