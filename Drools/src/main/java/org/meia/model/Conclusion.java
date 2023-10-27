@@ -1,9 +1,8 @@
 package org.meia.model;
 
-public class Conclusion {
-    public static final String ANXIETY_AS_NORMAL_FACTOR = "Ansiedade como condição do ser humano";
-    public static final String ANXIETY_SECONDARY_FACTOR = "Tratar condição clínica e reavaliar persistência ou não dos sintomas de ansiedade após tratamento";
-    public static final String ANXIETY_MEDS_FACTOR = "Reavaliar necessidade dos medicamentos, tratar abuso de substância ou síndrome de abstinência e após reavaliar persistência ou não dos sintomas ansiosos.";
+import org.meia.anxietyDiagnosis.AnxietyDiagnosis;
+
+public class Conclusion extends Fact {
 
     //CONCLUSÕES DE ANSIEDADE ESPECIFICA
     public static final String GENERAL_ANXIETY = "Ansiedade Generalizada";
@@ -14,25 +13,22 @@ public class Conclusion {
     public static final String SELECTIVE_MUTISM = "Mutismo Seletivo";
     public static final String SEPARATION_ANXIETY = "Ansiedade de Separação";
     public static final String SOCIAL_PHOBIA = "Fobia Social";
-    public static final String UNKNOWN = "Look for the the doctor!";
+    public static final String CHECK_THE_DOCTOR = "Contactar um Especialista";
 
 
     private String description;
 
     public Conclusion(String description) {
-        super();
         this.description = description;
+        AnxietyDiagnosis.agendaEventListener.addRhs(this);
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public String toString() {
+        return ("Diagnosis: " + description);
     }
 
-    public String toString() {
-        return "Diagnosis: " + description;
-    }
 }

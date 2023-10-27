@@ -5,4 +5,8 @@
     <ksession name="ksession-rules"/>
   </kbase>
 
+  <kbase name="rules40" packages="org.meia">
+    <ksession name="ksession-rules40"/>
+  </kbase>
+
 </kmodule>

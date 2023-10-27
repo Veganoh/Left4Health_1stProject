@@ -22,29 +22,27 @@ public class Quiz {
         Quiz40 = quiz40;
     }
 
-    public String toStringInitial(){
-        String texto = "Quiz Initial: \n";
+    public String toStringInitial() {
+        StringBuilder texto = new StringBuilder("Quiz Initial: \n");
         for (Question question : QuizInitial) {
-            texto+="-ID: " + question.getId();
-            texto+="   -Pergunta: " + question.getQuestion();
-            texto+="\n";
+            texto.append("-ID: ").append(question.getId());
+            texto.append("   -Pergunta: ").append(question.getQuestion()).append("\n");
         }
 
-        return texto;
+        return texto.toString();
     }
 
-    public String toString40(){
-        String texto = "Quiz 40: \n";
+    public String toString40() {
+        StringBuilder texto = new StringBuilder("Quiz 40: \n");
         for (QuestionCategory questionCategory : Quiz40) {
-            texto+="Category: "+questionCategory.getCategory()+"\n";
-            for (Question question: questionCategory.getCategoryQuestionList()) {
-                texto += "-ID: " + question.getId();
-                texto += "   -Pergunta: " + question.getQuestion();
-                texto += "\n";
+            texto.append("Category: ").append(questionCategory.getCategory()).append("\n");
+            for (Question question : questionCategory.getCategoryQuestionList()) {
+                texto.append("-ID: ").append(question.getId());
+                texto.append("   -Pergunta: ").append(question.getQuestion()).append("\n");
             }
         }
 
-        return texto;
+        return texto.toString();
     }
 
     @Override
