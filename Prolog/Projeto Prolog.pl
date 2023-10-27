@@ -1,3 +1,5 @@
+:- set_prolog_flag(encoding, utf8).
+
 % Perguntas relacionas com o quiz Initial
 pergunta(quizInitial, 41, "Possuí alguma condição clinica do diagnóstico diferencial pode explicar os sintomas?").
 pergunta(quizInitial, 42, "Você sente ansiedade e preocupação excessiva em relação a várias áreas da sua vida na maioria dos dias há pelo menos seis meses?").
@@ -96,6 +98,8 @@ pergunta_valor(3, 3).
 pergunta_valor(4, 4).  
 pergunta_valor(5, 5).
 
+% pergunta_valor(IdPergunta, Resposta, Valor).
+
 % Estrutura de dados para armazenar respostas e valores
 resposta_valor(Pergunta, Valor) :- pergunta_valor(Pergunta, Valor).
 
@@ -125,10 +129,10 @@ processar_respostas(Resposta) :-
 
 processar_respostas_teste(Resposta) :-
     soma_total(SomaTotal),
-    (nenhum_transtorno -> 
+    (nenhum_transtorno ->
         resposta(nenhum_transtorno, Mensagem),
         Resposta = (nenhum_transtorno, Mensagem);
-    transtorno_maior_14 -> 
+    transtorno_maior_14 ->
         findall(TipoTranstorno-Soma, (resposta_valor(TipoTranstorno, Soma), Soma >= 15, Soma =< 20), [TipoTranstorno-_|_]),
         pergunta(TipoTranstorno, Resposta);
     SomaTotal > 160 -> Resposta = 'C').

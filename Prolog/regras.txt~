@@ -7,11 +7,11 @@ ultima_regra(2).
 
 regra 1
     se [pergunta(1, sim)]
-    entao [cria_facto(conclusao(ansiedade_como_fator_secundario))].
+    entao [cria_facto(conclusao(Ansiedade_como_fator_secundario))].
 
 regra 2
     se [pergunta(2, nao)]
-    entao [cria_facto(conclusao(ansiedade_normal))].
+    entao [cria_facto(conclusao(Ansiedade_normal))].
 
 facto(1,resposta(1, sim)).
 facto(2,resposta(2, sim )).
