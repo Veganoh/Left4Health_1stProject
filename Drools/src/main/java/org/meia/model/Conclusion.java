@@ -13,7 +13,7 @@ public class Conclusion extends Fact {
     public static final String SELECTIVE_MUTISM = "Mutismo Seletivo";
     public static final String SEPARATION_ANXIETY = "Ansiedade de Separação";
     public static final String SOCIAL_PHOBIA = "Fobia Social";
-    public static final String UNKNOWN = "Look for the the doctor!";
+    public static final String CHECK_THE_DOCTOR = "Contactar um Especialista";
 
 
     private String description;

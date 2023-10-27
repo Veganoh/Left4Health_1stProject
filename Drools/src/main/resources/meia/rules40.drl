@@ -12,7 +12,6 @@ query "Conclusions"
 	$conclusion : Conclusion()
 end
 
-
 rule "Verifica as respostas de Agoraphobia e guarda os factos das respostas para manipulação"
     when
         $q : Quiz()
@@ -38,10 +37,11 @@ end
 
 rule "Verificar a pontuação da Agoraphobia é superior a 15"
     when
-        CategoryValue (category == "Valor_Agoraphobia", Integer.parseInt(value) >= 15)
+        CategoryValue (category == "Valor_Agoraphobia", Integer.parseInt(value) >= 22)
     then
         Conclusion c = new Conclusion(Conclusion.AGORAPHOBIA_SYNDROME);
         insert(c);
 end
+
 
 
