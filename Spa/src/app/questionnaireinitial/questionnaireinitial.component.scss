@@ -1,0 +1,61 @@
+.questionnaireinitial {
+  text-align: center;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.questionnaireinitial h2 {
+  font-size: 24px;
+  color: #007bff; /* Cor do título */
+  margin-bottom: 20px;
+}
+
+.questionnaireinitial p {
+  font-size: 16px;
+  color: #333;
+  margin: 20px 0;
+}
+
+.questionnaireinitial ul {
+  list-style: none;
+  padding: 0;
+}
+
+.questionnaireinitial li {
+  font-size: 16px;
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.questionnaireinitial .buttons {
+  margin-top: 20px; /* Move os botões para baixo */
+}
+
+.questionnaireinitial button {
+  margin-right: 10px; /* Adiciona margem direita para separar os botões */
+  padding: 10px 20px;
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.questionnaireinitial button:hover {
+  background-color: #0056b3;
+}
+
+.questionnaireinitial .radio-option {
+  display: inline-block;
+  margin-right: 10px; /* Adiciona margem direita para separar os botões de opção */
+}
+
+/* Estilo para o aviso */
+.questionnaireinitial .warning {
+  background-color: #ffc107; /* Cor de fundo do aviso */
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 20px;
+}

@@ -271,6 +271,7 @@ then
 end
 
 // Regra para pontuação maior que 60
+// Não sei se esta regra está 100% correta mas o objetivo seria quando um paciente tem uma pontuação excessiva no quiz40 deve contactar o médico (não sei se faz sentido)
 rule "Verificar se deve Contactar um Especialista"
 when
     $totalValue : Number(intValue >= 60) from accumulate(

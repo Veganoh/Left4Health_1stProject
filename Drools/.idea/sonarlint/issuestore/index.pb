@@ -19,3 +19,9 @@ V
 &src/main/java/org/meia/model/Quiz.java,c\9\c968a8568091f088b8637b1437d8553eefda82c8
 _
 /src/main/java/org/meia/model/CategoryValue.java,b\6\b6ce094f4dce6c82411391b500ade886b4c0ef8d
+m
+=src/main/java/org/meia/anxietyDiagnosis/AnxietyDiagnosis.java,8\7\87f48f441f663b9398f9357507497e9f55de4775
+c
+3src/main/java/org/meia/model/InitialConclusion.java,1\7\17f0976371e8f92b9b4fd2ead2a18b34c3a57ca7
+\
+,src/main/java/org/meia/model/Conclusion.java,d\b\db84461290cccc7e210a7e1fbc70514724bfdadf

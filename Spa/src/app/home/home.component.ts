@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router'; // Importe o serviço Router
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,16 +7,15 @@ import { Router } from '@angular/router'; // Importe o serviço Router
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  selectedTool: string = ''; // Para rastrear a escolha do paciente
+  selectedTool: string = '';
 
-  constructor(private router: Router) {} // Injete o serviço Router no construtor
+  constructor(private router: Router) {}
 
   selectTool(tool: string) {
     this.selectedTool = tool;
   }
 
-  redirectToQuestionnaire() {
-    // Redirecione o usuário para a página do questionário usando o serviço Router
-    this.router.navigate(['/questionnaire']); // Certifique-se de configurar a rota corretamente no arquivo de roteamento
+  redirectToQuestionnaireinitial() {
+    this.router.navigate(['/questionnaireinitial']); // Redirecionar para a página "questionnaireinitial"
   }
 }

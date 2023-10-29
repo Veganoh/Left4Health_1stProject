@@ -1,10 +1,25 @@
-<div class="diagnosis-result">
-  <h2>Resultado do Diagnóstico</h2>
-  <p>Com base nas suas respostas ao questionário, identificamos os seguintes tipos de ansiedade:</p>
-  <ul>
-    <li>Tipo 1: Ansiedade de Exemplo 1</li>
-    <li>Tipo 2: Ansiedade de Exemplo 2</li>
-    <!-- Adicione mais itens para cada tipo de ansiedade -->
-  </ul>
-  <button class="btn btn-primary" (click)="goBackToHome()">Voltar à Página Inicial</button>
+<div class="diagnosis">
+  <h1 class="title">Resultados do Diagnóstico</h1>
+
+  <ng-container *ngFor="let diagnosisItem of diagnoses" class="diagnosis-item">
+    <div class="diagnosis-item">
+      <h2 class="diagnosis-type">{{ diagnosisItem.type }}</h2>
+
+      <div class="diagnosis-answers">
+        <h3>Respostas:</h3>
+        <ul>
+          <li *ngFor="let answer of diagnosisItem.answers">
+            {{ answer.question }}: {{ answer.answer }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </ng-container>
+  
+  <button class="back-button" (click)="returnToHome()">Voltar à Página Inicial</button>
 </div>
+
+
+
+
+
