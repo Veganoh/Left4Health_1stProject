@@ -11,17 +11,25 @@ public class Quiz {
     private final List<Question> QuizInitial = new ArrayList<>();
     private final List<Question> Quiz40 = new ArrayList<>();
 
+    public  int GENERAL_ANXIETY_SCORE = 0;
+    public  int PANIC_SYNDROME_SCORE = 0;
+    public  int PANIC_AGORAPHOBIA_SYNDROME_SCORE = 0;
+    public  int AGORAPHOBIA_SYNDROME_SCORE = 0;
+    public  int SPECIFIC_PHOBIA_SCORE = 0;
+    public  int SELECTIVE_MUTISM_SCORE = 0;
+    public  int SEPARATION_ANXIETY_SCORE = 0;
+    public  int SOCIAL_PHOBIA_SCORE = 0;
+
+
 
     public List<Question> getQuizInitial() {
         return QuizInitial;
     }
-
     public List<Question> getQuiz40() {
         return Quiz40;
     }
 
-    public Quiz(){
-    }
+    public Quiz(){}
 
     public void fillQuestions() throws FileNotFoundException {
         Reader.readQuestionsFromFile(this);
@@ -40,6 +48,7 @@ public class Quiz {
             for (Question question : Quiz40) {
                 if (question.getId() == id) {
                     question.setAnswer(answer);
+                    updateCategoryScores(question.getQuestionType(),answer);
                 }
             }
         } else {
@@ -57,5 +66,38 @@ public class Quiz {
                 " --QuizInitial=" + QuizInitial +
                 "\n --Quiz40=" + Quiz40 +
                 "\n}";
+    }
+
+    private void updateCategoryScores(String  questionType, String answer) {
+        switch (questionType) {
+            case QuestionType.GENERAL_ANXIETY:
+                GENERAL_ANXIETY_SCORE += calculateScore(answer);
+                break;
+            case  QuestionType.PANIC_SYNDROME:
+                PANIC_SYNDROME_SCORE += calculateScore(answer);
+                break;
+            case QuestionType.PANIC_AGORAPHOBIA_SYNDROME:
+                PANIC_AGORAPHOBIA_SYNDROME_SCORE += calculateScore(answer);
+                break;
+            case QuestionType.AGORAPHOBIA_SYNDROME:
+                AGORAPHOBIA_SYNDROME_SCORE += calculateScore(answer);
+                break;
+            case QuestionType.SPECIFIC_PHOBIA:
+                SPECIFIC_PHOBIA_SCORE += calculateScore(answer);
+                break;
+            case QuestionType.SELECTIVE_MUTISM:
+                SELECTIVE_MUTISM_SCORE += calculateScore(answer);
+                break;
+            case QuestionType.SEPARATION_ANXIETY:
+                SEPARATION_ANXIETY_SCORE += calculateScore(answer);
+                break;
+            case QuestionType.SOCIAL_PHOBIA:
+                SOCIAL_PHOBIA_SCORE += calculateScore(answer);
+                break;
+            default:
+        }
+    }
+    private int calculateScore(String answer) {
+        return Integer.parseInt(answer);
     }
 }

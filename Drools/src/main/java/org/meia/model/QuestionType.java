@@ -1,31 +1,15 @@
 package org.meia.model;
 
-public enum QuestionType {
-    INITIAL("Initial"),
-    GENERAL_ANXIETY("Síndrome de Ansiedade Generalizada"),
-    PANIC_SYNDROME("Transtorno de Pânico"),
-    PANIC_AGORAPHOBIA_SYNDROME("Transtorno de Pânico com Agorafobia"),
-    AGORAPHOBIA_SYNDROME("Agorafobia"),
-    SPECIFIC_PHOBIA("Fobia Específica"),
-    SELECTIVE_MUTISM("Mutismo Seletivo"),
-    SEPARATION_ANXIETY("Ansiedade de Separação"),
-    SOCIAL_PHOBIA("Ansiedade Social");
+public class QuestionType {
+    public static final String INITIAL = "Initial";
+    public static final String GENERAL_ANXIETY = "Síndrome de Ansiedade Generalizada";
+    public static final String PANIC_SYNDROME = "Transtorno de Pânico";
+    public static final String PANIC_AGORAPHOBIA_SYNDROME = "Transtorno de Pânico com Agorafobia";
+    public static final String AGORAPHOBIA_SYNDROME = "Agorafobia";
+    public static final String SPECIFIC_PHOBIA = "Fobia Específica";
+    public static final String SELECTIVE_MUTISM = "Mutismo Seletivo";
+    public static final String SEPARATION_ANXIETY = "Ansiedade de Separação";
+    public static final String SOCIAL_PHOBIA = "Ansiedade Social";
 
-    private String value;
 
-    QuestionType(String value){
-        this.value = value;
-    }
-
-    public String getValue() {
-        return value;
-    }
-    public static QuestionType fromValue(String value) {
-        for (QuestionType type : values()) {
-            if (type.getValue().equalsIgnoreCase(value)) {
-                return type;
-            }
-        }
-        return null;
-    }
 }
