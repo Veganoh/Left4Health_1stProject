@@ -5,46 +5,45 @@ ultimo_facto(6).
 ultima_regra(8).
 
 regra 1
-	se [tipo(Veículo,passageiros) e classe(Veículo,ligeiro)]
-	entao [cria_facto(ligeiro(Veículo,carro))].
+	se [tipo(VeÃ­culo,passageiros) e classe(VeÃ­culo,ligeiro)]
+	entao [cria_facto(ligeiro(VeÃ­culo,carro))].
 
 regra 2
-	se [tipo(Veículo,mercadorias) e classe(Veículo,pesado)]
-	entao [cria_facto(pesado(Veículo,camião))].
+	se [tipo(VeÃ­culo,mercadorias) e classe(VeÃ­culo,pesado)]
+	entao [cria_facto(pesado(VeÃ­culo,camiÃ£o))].
 
 regra 3
-	se [tipo(Veículo,passageiros) e classe(Veículo,pesado)]
-	entao [cria_facto(pesado(Veículo,autocarro))].
+	se [tipo(VeÃ­culo,passageiros) e classe(VeÃ­culo,pesado)]
+	entao [cria_facto(pesado(VeÃ­culo,autocarro))].
 
 regra 4
-	se [tipo(Veículo,misto) e classe(Veículo,pesado)]
-	entao [cria_facto(pesado(Veículo,camioneta))].
+	se [tipo(VeÃ­culo,misto) e classe(VeÃ­culo,pesado)]
+	entao [cria_facto(pesado(VeÃ­culo,camioneta))].
 
 regra 5
-	se [avalia(lotação(Veículo,>,9))]
-	entao [cria_facto(classe(Veículo,pesado))].
+	se [avalia(lotaÃ§Ã£o(VeÃ­culo,>,9))]
+	entao [cria_facto(classe(VeÃ­culo,pesado))]. 
 
 regra 6
-	se [avalia(peso(Veículo,>,3500))]
-	entao [cria_facto(classe(Veículo,pesado))].
+	se [avalia(peso(VeÃ­culo,>,3500))]
+	entao [cria_facto(classe(VeÃ­culo,pesado))].
 
 regra 7
-	se [avalia(lotação(Veículo,=<,9)) e avalia(peso(Veículo,=<,3500))]
-	entao [cria_facto(classe(Veículo,ligeiro))].
+	se [avalia(lotaÃ§Ã£o(VeÃ­culo,=<,9)) e avalia(peso(VeÃ­culo,=<,3500))]
+	entao [cria_facto(classe(VeÃ­culo,ligeiro))].
 
 regra 8
-	se [tipo(Veículo,mercadorias) e tipo(Veículo,passageiros)]
-	entao [cria_facto(tipo(Veículo,misto))].
+	se [tipo(VeÃ­culo,mercadorias) e tipo(VeÃ­culo,passageiros)]
+	entao [cria_facto(tipo(VeÃ­culo,misto))].
 
 
 
-
-facto(1,lotação(meu_veículo,3)).
-facto(2,peso(meu_veículo,4500)).
-facto(3,tipo(meu_veículo,mercadorias)).
-facto(4, lotação(teu_veículo, 5)).
-facto(5, peso(teu_veículo, 2500)).
-facto(6, tipo(teu_veículo, passageiros)).
+facto(1,lotaÃ§Ã£o(meu_veÃ­culo,3)).
+facto(2,peso(meu_veÃ­culo,4500)).
+facto(3,tipo(meu_veÃ­culo,mercadorias)).
+facto(4, lotaÃ§Ã£o(teu_veÃ­culo, 5)).
+facto(5, peso(teu_veÃ­culo, 2500)).
+facto(6, tipo(teu_veÃ­culo, passageiros)).
 
 
 

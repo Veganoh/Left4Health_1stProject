@@ -1,17 +1,38 @@
 :- set_prolog_flag(encoding, utf8).
+:-dynamic facto/2,ultimo_facto/1.
 
-% :-dynamic (facto/2, ultimo_facto/1).
+ultimo_facto(7).
+ultima_regra(5).
 
-ultimo_facto(2).
-ultima_regra(2).
-
+% Regras Quiz DSM-5
 regra 1
     se [pergunta(1, sim)]
-    entao [cria_facto(conclusao(ansiedade_como_fator_secundario))].
+    entao [cria_facto(conclusao(ansiedadecomofatorsecundario))].
 
 regra 2
     se [pergunta(2, nao)]
-    entao [cria_facto(conclusao(ansiedade_normal))].
+    entao [cria_facto(conclusao(ansiedadenormal))].
 
+% QUiz40
+regra 3
+    se [tipo(Transtorno,sindrome_ansiedade_generalizada) e avalia(valor(Transtorno,>=,15))]
+    entao [cria_facto(probabilidade(Transtorno,provavel))].
+
+regra 4
+    se [tipo(Transtorno,sindrome_ansiedade_generalizada) e avalia(valor(Transtorno,<,15))]
+    entao [cria_facto(probabilidade(Transtorno,naoprovavel))].
+
+regra 5
+    se [avalia(valor(Transtorno,>,20))]
+    entao [cria_facto(probabilidade(Transtorno,maisprovavel))].
+
+%Quiz Inicial
 facto(1,resposta(1, sim)).
 facto(2,resposta(2, sim )).
+
+%Quiz40
+facto(3,transtorno(sindrome_ansiedade_generalizada,17)).
+facto(4,valor(transtorno_1,17)).
+facto(5,tipo(transtorno_1,ansiedade)).
+facto(6,valor(transtorno_2,12)).
+facto(7,tipo(transtorno_2,ansiedade)).
