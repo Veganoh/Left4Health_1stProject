@@ -24,21 +24,18 @@ public class AnxietyDiagnosis {
 
     public static InitialConclusion initialConclusion;
 
-
-
-
     public static  void main(String[] args) throws FileNotFoundException {
         Quiz quiz = new Quiz();
+        System.out.println(quiz.generateQuizString());
+
+        /**
         Reader.assignAnswersToQuizInitial(quiz);
         runEngine(quiz);
 
         if(initialConclusion.toString() == InitialConclusion.START_QUIZ40){
             Reader.assignAnswersToQuiz40(quiz);
-
-            System.out.println(quiz.AGORAPHOBIA_SYNDROME_SCORE);
-            System.out.println(quiz.GENERAL_ANXIETY_SCORE);
             runEngine40(quiz);
-        }
+        }*/
 
 
     }

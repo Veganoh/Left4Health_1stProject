@@ -21,10 +21,10 @@ public class Server {
     private static Quiz quiz;
 
     public static void main(String[] args) throws IOException {
+        quiz = new Quiz();
         HttpServer server = HttpServer.create(new InetSocketAddress(serverPort), 0);
         server.createContext("/api/drools", new HelloHandler());
-        server.createContext("/api/quizInitial", new ObtainQuiz());
-
+        server.createContext("/api/quiz", new ObtainQuiz());
         server.setExecutor(null);
         server.start();
         System.out.println("Servidor Drools a rodar na porta " + serverPort);
@@ -33,29 +33,11 @@ public class Server {
     static class ObtainQuiz implements HttpHandler {
         @Override
         public void handle(HttpExchange t) throws IOException {
-            System.out.println("hey");
-            List<Question> questions = quiz.getQuizInitial();
-            StringBuilder responseBuilder = new StringBuilder();
-            System.out.println("hey");
-
-            for(Question question : questions){
-                responseBuilder.append(question.getId())
-                        .append("\n")
-                        .append(question.getQuestionType())
-                        .append("\n")
-                        .append(question.getQuestion())
-                        .append("\n");
-            }
-            System.out.println("hey");
-
-            String response = responseBuilder.toString();
+            String response = quiz.generateQuizString();
             t.sendResponseHeaders(200, response.length());
             OutputStream os = t.getResponseBody();
-            System.out.println("hey");
-
             os.write(response.getBytes());
-            os.close();
-        }
+            os.close();        }
     }
 
     static class HelloHandler implements HttpHandler {

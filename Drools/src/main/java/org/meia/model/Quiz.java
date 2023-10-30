@@ -4,6 +4,8 @@ import org.meia.anxietyDiagnosis.Reader;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -119,5 +121,26 @@ public class Quiz {
 
     public void setTeste2(String teste2) {
         this.teste2 = teste2;
+    }
+
+    public String generateQuizString(){
+        List<Question> quiz40 = getRandomizedQuiz40();
+
+        StringBuilder sb = new StringBuilder();
+        for(Question q : quiz40){
+            sb.append(q.getId()).append("\n");
+            sb.append(q.getQuestion()).append("\n");
+        }
+        for(Question q : this.QuizInitial){
+            sb.append(q.getId()).append("\n");
+            sb.append(q.getQuestion()).append("\n");
+        }
+        return sb.toString();
+    }
+    private List<Question> getRandomizedQuiz40(){
+        List<Question> res = new ArrayList<>(Quiz40);
+        Collections.shuffle(res);
+
+        return res;
     }
 }
