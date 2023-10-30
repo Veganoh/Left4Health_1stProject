@@ -109,6 +109,12 @@ escreve_factos([I|R]):-facto(I,F),
 	escreve_factos(R).
 escreve_factos([]).
 
-
+% Predicate to calculate and store total Valor for sindrome_de_panico
+calculate_total_valor_sindrome_de_panico :-
+    findall(Valor, (between(1, 5, Id), facto(Id, pergunta(Id, Valor))), Valores),
+    sum_list(Valores, Total),
+    assertz(transtorno(sindrome_de_panico, total(Total))).
+	write('Total Valor for sindrome_de_panico: '), 
+    write(Total).
 
 
