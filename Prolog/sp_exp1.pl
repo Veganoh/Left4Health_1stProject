@@ -1,4 +1,4 @@
-
+:- set_prolog_flag(encoding, utf8).
 
 :-op(220,xfx,entao).
 :-op(35,xfy,se).
@@ -15,7 +15,7 @@ carrega_bc:-
 		read(NBC),
 		consult(NBC).
 
-% Arranque do Motor de Inferência
+% Arranque do Motor de Inferï¿½ncia
 
 arranca_motor:-facto(N,Facto),
 		regra ID se LHS entao RHS,
@@ -94,18 +94,18 @@ cria_facto(F,ID,LFactos):-
 	asserta(ultimo_facto(N)),
 	assertz(justifica(N,ID,LFactos)),
 	assertz(facto(N,F)),
-	write('Foi concluído o facto nº '),write(N),write(' -> '),write(F),get0(_),!.
+	write('Foi concluï¿½do o facto nï¿½ '),write(N),write(' -> '),write(F),get0(_),!.
 
 
 
-% Visualização da base de factos
+% Visualizaï¿½ï¿½o da base de factos
 
 mostra_factos:-
 	findall(N, facto(N, _), LFactos),
 	escreve_factos(LFactos).
 
 escreve_factos([I|R]):-facto(I,F),
-	write('O facto nº '),write(I),write(' -> '),write(F),nl,
+	write('O facto nï¿½ '),write(I),write(' -> '),write(F),nl,
 	escreve_factos(R).
 escreve_factos([]).
 
