@@ -11,6 +11,8 @@ public class Quiz {
     private final List<Question> QuizInitial = new ArrayList<>();
     private final List<Question> Quiz40 = new ArrayList<>();
 
+    private String teste;
+    private String teste2;
     public  int GENERAL_ANXIETY_SCORE = 0;
     public  int PANIC_SYNDROME_SCORE = 0;
     public  int PANIC_AGORAPHOBIA_SYNDROME_SCORE = 0;
@@ -101,5 +103,21 @@ public class Quiz {
     }
     private int calculateScore(String answer) {
         return Integer.parseInt(answer);
+    }
+
+    public String getTeste() {
+        return teste;
+    }
+
+    public void setTeste(String teste) {
+        this.teste = teste;
+    }
+
+    public String getTeste2() {
+        return teste2;
+    }
+
+    public void setTeste2(String teste2) {
+        this.teste2 = teste2;
     }
 }

@@ -9,10 +9,11 @@ public class Question {
     public Question(int id, String question, String  questionType) {
         this.id = id;
         this.question = question;
-        this.questionType = questionType;
+        this.setQuestionType(questionType);
     }
 
     public Question() {
+        answer =null;
         // Deixa os atributos não inicializados
     }
 
@@ -42,4 +43,7 @@ public class Question {
     }
 
 
+    public void setQuestionType(String questionType) {
+        this.questionType = questionType;
+    }
 }

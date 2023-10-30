@@ -62,7 +62,7 @@ public class AnxietyDiagnosis {
                     System.out.println(">>>" + initialConclusion.toString());
 
                     // stop inference engine as soon as an initial conclusion is obtained
-                    kSession.halt();
+                 //   kSession.halt();
                 }
 
                 @Override
@@ -71,6 +71,7 @@ public class AnxietyDiagnosis {
             };
 
             LiveQuery query = kSession.openLiveQuery("InitialConclusions", null, listener);
+
 
             kSession.insert(quiz);
 
@@ -109,7 +110,7 @@ public class AnxietyDiagnosis {
                     System.out.println(how.getHowExplanation(conclusion.getId()));
 
                     // stop inference engine as soon as a conclusion is obtained
-                    kSession.halt();
+                  //kSession.halt();
                 }
 
                 @Override
@@ -119,6 +120,8 @@ public class AnxietyDiagnosis {
 
             LiveQuery query = kSession.openLiveQuery("Conclusions", null, listener);
 
+            quiz.setTeste("ok");
+            quiz.setTeste2("fixe");
             kSession.insert(quiz);
 
             kSession.fireAllRules();
