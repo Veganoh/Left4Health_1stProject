@@ -17,13 +17,8 @@ regra 3
     se [pergunta(43, nao)]
     entao [cria_facto(conclusao(ansiedadenormal))].
 
-%regra 4
- % se [pergunta(44, Comparar)]
-  %entao [cria_facto(conclusao(verificarDoutor))]:-
-  %Comparar < 3.
-
 regra 4
- se [pergunta(44,>,3)]
+ se [avalia(pergunta(44,<,3))]
  entao [cria_facto(conclusao(verificarDoutor))].
 
 
