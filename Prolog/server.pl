@@ -21,7 +21,22 @@ obter_questionario(Request) :-
     format('Content-type: application/json~n~n'),
     format('~q.', [Questionario]).
 
-% :- http_handler('/api/prolog', obter_ansiedade, [method(POST)]).
+%:- http_handler('/api/prolog', obter_ansiedade, [method(POST)]).
+readfacts:-
+    open('C:/Users/mariana/Documents/GitHub/Left4Health_1stProject/Prolog/response.txt', read, Str),
+    read_file(Str,Lines),
+    close(Str),
+    write(Lines), nl.
+
+read_file(Stream,[]) :-
+    at_end_of_stream(Stream).
+
+read_file(Stream,[X|L]) :-
+    \+ at_end_of_stream(Stream),
+    read(Stream,X),
+    read_file(Stream,L).
+
+
 
 
 :- servidor(7000).
