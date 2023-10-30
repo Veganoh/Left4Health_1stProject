@@ -29,7 +29,9 @@ public class Quiz {
         return Quiz40;
     }
 
-    public Quiz(){}
+    public Quiz() throws FileNotFoundException {
+        this.fillQuestions();
+    }
 
     public void fillQuestions() throws FileNotFoundException {
         Reader.readQuestionsFromFile(this);
