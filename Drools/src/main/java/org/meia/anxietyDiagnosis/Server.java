@@ -1,6 +1,8 @@
 package org.meia.anxietyDiagnosis;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 
 import com.sun.net.httpserver.HttpServer;
@@ -8,9 +10,7 @@ import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpExchange;
 import java.net.InetSocketAddress;
 
-import java.util.List;
 
-import org.meia.model.Question;
 import org.meia.model.Quiz;
 
 
@@ -23,31 +23,88 @@ public class Server {
     public static void main(String[] args) throws IOException {
         quiz = new Quiz();
         HttpServer server = HttpServer.create(new InetSocketAddress(serverPort), 0);
-        server.createContext("/api/drools", new HelloHandler());
-        server.createContext("/api/quiz", new ObtainQuiz());
+        server.createContext("/api/obtainInitialQuestions", new ObtainInitialQuiz());
+        server.createContext("/api/obtain40Questions", new ObtainQuiz40());
+
+        server.createContext("/api/answerQuizInitial", new ObtainInitialQuizResponse());
+        server.createContext("/api/answerQuiz40", new ObtainQuiz40Response());
         server.setExecutor(null);
         server.start();
         System.out.println("Servidor Drools a rodar na porta " + serverPort);
     }
 
-    static class ObtainQuiz implements HttpHandler {
+    static class ObtainInitialQuiz implements HttpHandler {
         @Override
         public void handle(HttpExchange t) throws IOException {
-            String response = quiz.generateQuizString();
-            t.sendResponseHeaders(200, response.length());
+            String response = quiz.generateInitialQuizString();
+            t.sendResponseHeaders(200,response.getBytes().length);
             OutputStream os = t.getResponseBody();
             os.write(response.getBytes());
-            os.close();        }
+            os.close();
+        }
     }
 
-    static class HelloHandler implements HttpHandler {
+    static class ObtainQuiz40 implements HttpHandler {
         @Override
         public void handle(HttpExchange t) throws IOException {
-            String response = "This is the response";
-            long threadId = Thread.currentThread().getId();
-            System.out.println("I am thread " + threadId );
-            response = response + "Thread Id = "+threadId;
-            t.sendResponseHeaders(200, response.length());
+            String response = quiz.generateQuiz40String();
+            t.sendResponseHeaders(200,response.getBytes().length);
+            OutputStream os = t.getResponseBody();
+            os.write(response.getBytes());
+            os.close();
+        }
+    }
+
+
+    static class ObtainInitialQuizResponse implements HttpHandler {
+        @Override
+        public void handle(HttpExchange t) throws IOException {
+            InputStreamReader isr = new InputStreamReader(t.getRequestBody(), "utf-8");
+            BufferedReader br = new BufferedReader(isr);
+            StringBuilder buf = new StringBuilder();
+            String line;
+            while ((line = br.readLine()) != null) {
+                buf.append(line);
+                buf.append("\n");
+            }
+            br.close();
+            isr.close();
+
+            String answers = buf.toString();
+            Reader.assignAnswersToQuiz(quiz,answers);
+
+            AnxietyDiagnosis.runEngine(quiz);
+
+            String response = AnxietyDiagnosis.initialConclusion.toString();
+            t.sendResponseHeaders(200,response.getBytes().length);
+            OutputStream os = t.getResponseBody();
+            os.write(response.getBytes());
+            os.close();
+        }
+    }
+
+    static class ObtainQuiz40Response implements HttpHandler {
+        @Override
+        public void handle(HttpExchange t) throws IOException {
+            InputStreamReader isr = new InputStreamReader(t.getRequestBody(), "utf-8");
+            BufferedReader br = new BufferedReader(isr);
+            StringBuilder buf = new StringBuilder();
+            String line;
+            while ((line = br.readLine()) != null) {
+                buf.append(line);
+                buf.append("\n");
+            }
+            br.close();
+            isr.close();
+
+            String answers = buf.toString();
+            Reader.assignAnswersToQuiz(quiz,answers);
+            AnxietyDiagnosis.runEngine40(quiz);
+
+
+            // mudar isto
+            String response = AnxietyDiagnosis.initialConclusion.toString();
+            t.sendResponseHeaders(200,response.getBytes().length);
             OutputStream os = t.getResponseBody();
             os.write(response.getBytes());
             os.close();

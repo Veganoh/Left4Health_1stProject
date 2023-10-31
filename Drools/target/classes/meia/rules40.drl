@@ -206,7 +206,7 @@ rule "Verifica as respostas de Ansiedade de Separação e guarda os factos das r
 when
  $question : Question(questionType == QuestionType.SEPARATION_ANXIETY, answer != null) from quiz.getQuiz40()
     then
-           Answer a = new Answer($question.getId(), $question.getQuestion(), $question.getAnswer(), QuestionType.SEPARATION_ANXIETY);
+    Answer a = new Answer($question.getId(), $question.getQuestion(), $question.getAnswer(), QuestionType.SEPARATION_ANXIETY);
     insert(a);
 end
 

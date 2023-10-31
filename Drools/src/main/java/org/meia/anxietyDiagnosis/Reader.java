@@ -61,6 +61,16 @@ public class Reader {
         }
     }
 
+    public static void assignAnswersToQuiz(Quiz quiz, String string){
+        Scanner in = new Scanner(string);
+        while(in.hasNextLine()){
+            int id = Integer.parseInt(in.nextLine());
+            String answer = in.nextLine();
+            quiz.addAnswerToQuestion(id,answer);
+        }
+        in.close();
+    }
+
     public static void assignAnswersToQuizInitial(Quiz quiz) {
         Gson gson = new Gson();
 

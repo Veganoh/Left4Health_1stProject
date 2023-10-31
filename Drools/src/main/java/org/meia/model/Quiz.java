@@ -13,19 +13,6 @@ public class Quiz {
     private final List<Question> QuizInitial = new ArrayList<>();
     private final List<Question> Quiz40 = new ArrayList<>();
 
-    private String teste;
-    private String teste2;
-    public  int GENERAL_ANXIETY_SCORE = 0;
-    public  int PANIC_SYNDROME_SCORE = 0;
-    public  int PANIC_AGORAPHOBIA_SYNDROME_SCORE = 0;
-    public  int AGORAPHOBIA_SYNDROME_SCORE = 0;
-    public  int SPECIFIC_PHOBIA_SCORE = 0;
-    public  int SELECTIVE_MUTISM_SCORE = 0;
-    public  int SEPARATION_ANXIETY_SCORE = 0;
-    public  int SOCIAL_PHOBIA_SCORE = 0;
-
-
-
     public List<Question> getQuizInitial() {
         return QuizInitial;
     }
@@ -54,7 +41,6 @@ public class Quiz {
             for (Question question : Quiz40) {
                 if (question.getId() == id) {
                     question.setAnswer(answer);
-                    updateCategoryScores(question.getQuestionType(),answer);
                 }
             }
         } else {
@@ -65,7 +51,6 @@ public class Quiz {
             }
         }
     }
-
     @Override
     public String toString() {
         return "Quiz{\n" +
@@ -74,65 +59,20 @@ public class Quiz {
                 "\n}";
     }
 
-    private void updateCategoryScores(String  questionType, String answer) {
-        switch (questionType) {
-            case QuestionType.GENERAL_ANXIETY:
-                GENERAL_ANXIETY_SCORE += calculateScore(answer);
-                break;
-            case  QuestionType.PANIC_SYNDROME:
-                PANIC_SYNDROME_SCORE += calculateScore(answer);
-                break;
-            case QuestionType.PANIC_AGORAPHOBIA_SYNDROME:
-                PANIC_AGORAPHOBIA_SYNDROME_SCORE += calculateScore(answer);
-                break;
-            case QuestionType.AGORAPHOBIA_SYNDROME:
-                AGORAPHOBIA_SYNDROME_SCORE += calculateScore(answer);
-                break;
-            case QuestionType.SPECIFIC_PHOBIA:
-                SPECIFIC_PHOBIA_SCORE += calculateScore(answer);
-                break;
-            case QuestionType.SELECTIVE_MUTISM:
-                SELECTIVE_MUTISM_SCORE += calculateScore(answer);
-                break;
-            case QuestionType.SEPARATION_ANXIETY:
-                SEPARATION_ANXIETY_SCORE += calculateScore(answer);
-                break;
-            case QuestionType.SOCIAL_PHOBIA:
-                SOCIAL_PHOBIA_SCORE += calculateScore(answer);
-                break;
-            default:
+    public String generateInitialQuizString(){
+        StringBuilder sb = new StringBuilder();
+        for(Question q : this.QuizInitial){
+            sb.append(q.getId()).append("\n");
+            sb.append(q.getQuestion()).append("\n");
         }
-    }
-    private int calculateScore(String answer) {
-        return Integer.parseInt(answer);
+        return sb.toString();
     }
 
-    public String getTeste() {
-        return teste;
-    }
-
-    public void setTeste(String teste) {
-        this.teste = teste;
-    }
-
-    public String getTeste2() {
-        return teste2;
-    }
-
-    public void setTeste2(String teste2) {
-        this.teste2 = teste2;
-    }
-
-<<<<<<< Updated upstream
-    public String generateQuizString(){
+    public String generateQuiz40String(){
         List<Question> quiz40 = getRandomizedQuiz40();
 
         StringBuilder sb = new StringBuilder();
         for(Question q : quiz40){
-            sb.append(q.getId()).append("\n");
-            sb.append(q.getQuestion()).append("\n");
-        }
-        for(Question q : this.QuizInitial){
             sb.append(q.getId()).append("\n");
             sb.append(q.getQuestion()).append("\n");
         }
@@ -144,6 +84,4 @@ public class Quiz {
 
         return res;
     }
-=======
->>>>>>> Stashed changes
 }

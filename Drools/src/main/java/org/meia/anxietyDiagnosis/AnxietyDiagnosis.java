@@ -26,26 +26,26 @@ public class AnxietyDiagnosis {
 
     public static  void main(String[] args) throws FileNotFoundException {
         Quiz quiz = new Quiz();
-        System.out.println(quiz.generateQuizString());
 
-        /**
         Reader.assignAnswersToQuizInitial(quiz);
+        System.out.println(quiz.getQuizInitial());
         runEngine(quiz);
+
 
         if(initialConclusion.toString() == InitialConclusion.START_QUIZ40){
             Reader.assignAnswersToQuiz40(quiz);
             runEngine40(quiz);
-        }*/
+        }
 
 
     }
 
-    private static void runEngine(Quiz quiz) {
+    public static void runEngine(Quiz quiz) {
         try {
             // load up the knowledge base
             KieServices ks = KieServices.Factory.get();
             KieContainer kContainer = ks.getKieClasspathContainer();
-             KieSession kSession = kContainer.newKieSession("ksession-rules");
+            KieSession kSession = kContainer.newKieSession("ksession-rules");
 
             // Query listener
             ViewChangedEventListener listener = new ViewChangedEventListener() {
@@ -59,7 +59,7 @@ public class AnxietyDiagnosis {
                     System.out.println(">>>" + initialConclusion.toString());
 
                     // stop inference engine as soon as an initial conclusion is obtained
-                 //   kSession.halt();
+                    kSession.halt();
                 }
 
                 @Override
@@ -68,12 +68,8 @@ public class AnxietyDiagnosis {
             };
 
             LiveQuery query = kSession.openLiveQuery("InitialConclusions", null, listener);
+            kSession.insert(quiz);
 
-            quiz.setTeste("ok");
-            quiz.setTeste2("fixe");
-
-
-            kSession.setGlobal("quiz",quiz);
             kSession.fireAllRules();
 
             query.close();
@@ -82,7 +78,7 @@ public class AnxietyDiagnosis {
         }
     }
 
-    private static void runEngine40(Quiz quiz) {
+    public static void runEngine40(Quiz quiz) {
         try {
             AnxietyDiagnosis.justifications = new TreeMap<Integer, Justification>();
 
@@ -119,8 +115,6 @@ public class AnxietyDiagnosis {
 
             LiveQuery query = kSession.openLiveQuery("Conclusions", null, listener);
 
-            quiz.setTeste("ok");
-            quiz.setTeste2("fixe");
             kSession.setGlobal("quiz",quiz);
 
             kSession.fireAllRules();
