@@ -5,13 +5,13 @@
   <!-- Lista de perguntas -->
   <ul>
     <li *ngFor="let question of questions; let i = index">
-      Pergunta {{ i + 1 }}: {{ question.text }}
+      {{ question.question }}
       <label class="radio-option">
-        <input type="radio" [(ngModel)]="question.answer" [value]="true" [name]="'answer' + i">
+        <input type="radio" [(ngModel)]="question.answer" [value]="'Sim'" [name]="'answer' + i">
         Sim
       </label>
       <label class="radio-option">
-        <input type="radio" [(ngModel)]="question.answer" [value]="false" [name]="'answer' + i">
+        <input type="radio" [(ngModel)]="question.answer" [value]="'Não'" [name]="'answer' + i">
         Não
       </label>
     </li>
@@ -25,7 +25,7 @@
 
   <!-- Aviso -->
   <div class="warning" *ngIf="showWarning">
-    <p>Ansiedade considerada condição normal do ser humano.</p>
+    <p>{{ conclusion }}</p>
   </div>
 </div>
 

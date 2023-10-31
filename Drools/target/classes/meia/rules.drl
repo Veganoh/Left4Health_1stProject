@@ -78,7 +78,7 @@ rule "r4_Initial"
      when
         InitialHypothesis(description == "Initial")
         $q: Quiz()
-        exists Question(id == 44, answer < "3") from $q.getQuizInitial()
+        exists Question(id == 44, answer == "Não") from $q.getQuizInitial()
      then
         InitialConclusion c = new InitialConclusion(InitialConclusion.CHECK_THE_DOCTOR);
         insert(c);
@@ -98,7 +98,7 @@ rule "r6_Initial"
      when
         InitialHypothesis(description == "Initial")
         $q: Quiz()
-        exists Question(id == 5, answer == "Não") from $q.getQuizInitial()
+        exists Question(id == 46, answer == "Não") from $q.getQuizInitial()
      then
        InitialConclusion c = new InitialConclusion(InitialConclusion.ANXIETY_AS_NORMAL_FACTOR);
         insert(c);
@@ -108,7 +108,7 @@ rule "r7_Initial"
      when
         InitialHypothesis(description == "Initial")
         $q: Quiz()
-        exists Question(id ==45, answer == "Sim") from $q.getQuizInitial()
+        exists Question(id ==47, answer == "Sim") from $q.getQuizInitial()
      then
         InitialConclusion c = new InitialConclusion(InitialConclusion.ANXIETY_MEDS_FACTOR);
         insert(c);

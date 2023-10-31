@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router'; // Importe o RouterModule
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms'; // Importe o FormsModule
 
 import { AppRoutingModule } from './app-routing.module';
@@ -22,7 +23,8 @@ import { QuestionnaireinitialComponent } from './questionnaireinitial/questionna
     BrowserModule,
     AppRoutingModule,
     RouterModule, // Fornecendo explicitamente o RouterModule
-    FormsModule // Adicione o FormsModule aqui
+    FormsModule, // Adicione o FormsModule aqui
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

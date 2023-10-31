@@ -1,60 +1,40 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Question } from '../domain/question';
+import { QuestionnaireService } from '../services/questionnaire.service'
 
 @Component({
   selector: 'app-questionnaire',
   templateUrl: './questionnaire.component.html',
-  styleUrls: ['./questionnaire.component.scss']
+  styleUrls: ['./questionnaire.component.scss'],
+  providers: [QuestionnaireService]
 })
-export class QuestionnaireComponent {
+export class QuestionnaireComponent implements OnInit {
   currentPage: number = 1;
-  questionsPage1: string[] = [
-    'Pergunta 1',
-    'Pergunta 2',
-    'Pergunta 3',
-    'Pergunta 4',
-    'Pergunta 5',
-    'Pergunta 6',
-    'Pergunta 7',
-    'Pergunta 8',
-    'Pergunta 9',
-    'Pergunta 10',
-    'Pergunta 11',
-    'Pergunta 12',
-    'Pergunta 13',
-    'Pergunta 14',
-    'Pergunta 15',
-    'Pergunta 16',
-    'Pergunta 17',
-    'Pergunta 18',
-    'Pergunta 19',
-    'Pergunta 20'
-  ];
 
-  questionsPage2: string[] = [
-    'Pergunta 21',
-    'Pergunta 22',
-    'Pergunta 23',
-    'Pergunta 24',
-    'Pergunta 25',
-    'Pergunta 26',
-    'Pergunta 27',
-    'Pergunta 28',
-    'Pergunta 29',
-    'Pergunta 30',
-    'Pergunta 31',
-    'Pergunta 32',
-    'Pergunta 33',
-    'Pergunta 34',
-    'Pergunta 35',
-    'Pergunta 36',
-    'Pergunta 37',
-    'Pergunta 38',
-    'Pergunta 39',
-    'Pergunta 40'
-  ];
+  questionsPage1: Question[] = [];
+  questionsPage2: Question[] = [];
 
-  constructor(private router: Router) {}
+
+  constructor(
+    private router: Router,
+    private service : QuestionnaireService
+    ) {} 
+
+    ngOnInit(): void {
+      this.obtainQuestions();
+    }
+
+    obtainQuestions(): void {
+      this.service.obtain40Questions().subscribe((response: string) => {
+        const inputString = response;
+        const questions = createQuestionsFromString(inputString);
+  
+        // Divide as 40 perguntas em duas listas de 20 perguntas cada
+        this.questionsPage1 = questions.slice(0, 20);
+        this.questionsPage2 = questions.slice(20, 40);
+      });
+    }
 
   nextPage() {
     this.currentPage = 2;
@@ -70,4 +50,21 @@ export class QuestionnaireComponent {
     // Redirecione o usuário para a página de diagnóstico após a submissão
     this.router.navigate(['/diagnosis']);
   }
+}
+
+function createQuestionsFromString(inputString: string): Question[] {
+  const lines = inputString.trim().split('\n');
+  const questions: Question[] = [];
+
+  for (let i = 0; i < lines.length; i += 2) {
+    const id = parseInt(lines[i]);
+    const questionText = lines[i + 1];
+
+    if (!isNaN(id)) {
+      const question = new Question(id, questionText);
+      questions.push(question);
+    }
+  }
+
+  return questions;
 }

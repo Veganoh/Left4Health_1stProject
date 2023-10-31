@@ -11,7 +11,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let question of questionsPage1; let i = index">
-            <td>{{i + 1}}. {{question}}</td>
+            <td>{{question.question}}</td>
             <td>
               <select id="q{{i + 1}}" name="q{{i + 1}}" class="form-control">
                 <option value="1">1. Nada</option>
@@ -42,7 +42,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let question of questionsPage2; let i = index">
-            <td>{{i + 21}}. {{question}}</td>
+            <td>{{question.question}}</td>
             <td>
               <select id="q{{i + 21}}" name="q{{i + 21}}" class="form-control">
                 <option value="1">1. Nada</option>

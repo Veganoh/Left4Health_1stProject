@@ -129,10 +129,10 @@ Initial
 Você sente que sua preocupação é desproporcional em relação à situação ou que você não consegue controlá-la?
 44
 Initial
-Nos últimos seis meses, quantos sintomas dos seguintes sentiu na maioria dos dias: inquietação, fadiga, dificuldade de concentração, irritabilidade, tensão muscular ou problemas para dormir?
+Nos últimos seis meses, sentiu pelo menos 3 dos seguintes sintomas na maioria dos dias: inquietação, fadiga, dificuldade de concentração, irritabilidade, tensão muscular ou problemas para dormir?
 45
 Initial
-Você já foi diagnosticado ou acredita que sua ansiedade excessiva não pode ser explicada por outro problema de saúde mental, como transtorno de pânico, fobia social, transtorno obsessivo-compulsivo, ou outros transtornos similares?
+Você já foi diagnosticado ou acredita que sua ansiedade excessiva pode ser explicada por outro problema de saúde mental, como transtorno de pânico, fobia social, transtorno obsessivo-compulsivo, ou outros transtornos similares?
 46
 Initial
 Essa ansiedade, preocupação ou sintomas físicos causam um impacto significativo em sua vida social, profissional ou em outras áreas importantes?

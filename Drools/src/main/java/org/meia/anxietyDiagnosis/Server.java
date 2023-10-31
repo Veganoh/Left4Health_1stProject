@@ -36,6 +36,8 @@ public class Server {
     static class ObtainInitialQuiz implements HttpHandler {
         @Override
         public void handle(HttpExchange t) throws IOException {
+            t.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
+
             String response = quiz.generateInitialQuizString();
             t.sendResponseHeaders(200,response.getBytes().length);
             OutputStream os = t.getResponseBody();
@@ -47,6 +49,8 @@ public class Server {
     static class ObtainQuiz40 implements HttpHandler {
         @Override
         public void handle(HttpExchange t) throws IOException {
+            t.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
+
             String response = quiz.generateQuiz40String();
             t.sendResponseHeaders(200,response.getBytes().length);
             OutputStream os = t.getResponseBody();
@@ -59,6 +63,8 @@ public class Server {
     static class ObtainInitialQuizResponse implements HttpHandler {
         @Override
         public void handle(HttpExchange t) throws IOException {
+            t.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
+
             InputStreamReader isr = new InputStreamReader(t.getRequestBody(), "utf-8");
             BufferedReader br = new BufferedReader(isr);
             StringBuilder buf = new StringBuilder();
@@ -86,6 +92,8 @@ public class Server {
     static class ObtainQuiz40Response implements HttpHandler {
         @Override
         public void handle(HttpExchange t) throws IOException {
+            t.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
+
             InputStreamReader isr = new InputStreamReader(t.getRequestBody(), "utf-8");
             BufferedReader br = new BufferedReader(isr);
             StringBuilder buf = new StringBuilder();
