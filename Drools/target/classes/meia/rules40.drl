@@ -9,6 +9,9 @@ import org.meia.model.Answer;
 import org.meia.model.QuestionType
 import org.meia.model.Hypothesis;
 
+
+global org.meia.model.Quiz quiz;
+
 query "Conclusions"
 	$conclusion : Conclusion()
 end
@@ -17,14 +20,11 @@ end
 // Regras para ansiedade generalizada
 rule "Verifica as respostas de Ansiedade Generalizada e guarda os factos das respostas para manipulação"
     when
-        $q : Quiz()
-        $question : Question(questionType == QuestionType.GENERAL_ANXIETY, answer != null) from $q.getQuiz40()
+        $question : Question(questionType == QuestionType.GENERAL_ANXIETY, answer != null) from quiz.getQuiz40()
     then
-
-        System.out.println("entrou aqui general");
         Answer a = new Answer($question.getId(),$question.getQuestion(),$question.getAnswer(), QuestionType.GENERAL_ANXIETY);
         insert(a);
-end
+    end
 
 rule "Verificar as respostas da Ansiedade Generalizada e gerar a soma das respostas"
     when
@@ -34,7 +34,6 @@ rule "Verificar as respostas da Ansiedade Generalizada e gerar a soma das respos
         Answer(id == 4, category == QuestionType.GENERAL_ANXIETY,$score4 : answer)
         Answer(id == 5, category == QuestionType.GENERAL_ANXIETY,$score5 : answer)
     then
-        System.out.println("entrou aqui calculo");
         int value = $score1 + $score2 + $score3 + $score4 + $score5;
         CategoryValue cv = new CategoryValue("Valor_Ansiedade_Generalizada",(String.valueOf(value)));
         insert(cv);
@@ -44,28 +43,27 @@ rule "Verificar a pontuação da Ansiedade Generalizada é superior a 15"
     when
         CategoryValue (category == "Valor_Ansiedade_Generalizada", Integer.parseInt(value) >= 15)
     then
-        Conclusion c = new Conclusion(Conclusion.AGORAPHOBIA_SYNDROME);
+        Conclusion c = new Conclusion(Conclusion.GENERAL_ANXIETY);
         insert(c);
 end
 
 // Regras para Sindrome de Pânico
 rule "Verifica as respostas de Síndrome de Pânico e guarda os factos das respostas para manipulação"
 when
-    $q : Quiz()
-    $question : Question(questionType == QuestionType.PANIC_SYNDROME, answer != null) from $q.getQuiz40()
+
+    $question : Question(questionType == QuestionType.PANIC_SYNDROME, answer != null) from quiz.getQuiz40()
 then
     Answer a = new Answer($question.getId(), $question.getQuestion(), $question.getAnswer(), QuestionType.PANIC_SYNDROME);
-    System.out.println(a);
     insert(a);
 end
 
 rule "Verificar as respostas de Síndrome de Pânico e gerar a soma das respostas"
 when
-    Answer(id == 6, category == QuestionType.PANIC_SYNDROME, $score1 : answer)
-    Answer(id == 7, category == QuestionType.PANIC_SYNDROME, $score2 : answer)
-    Answer(id == 8, category == QuestionType.PANIC_SYNDROME, $score3 : answer)
-    Answer(id == 9, category == QuestionType.PANIC_SYNDROME, $score4 : answer)
-    Answer(id == 10, category == QuestionType.PANIC_SYNDROME, $score5 : answer)
+    Answer(id == 8, category == QuestionType.PANIC_SYNDROME, $score1 : answer)
+    Answer(id == 9, category == QuestionType.PANIC_SYNDROME, $score2 : answer)
+    Answer(id == 10, category == QuestionType.PANIC_SYNDROME, $score3 : answer)
+    Answer(id == 11, category == QuestionType.PANIC_SYNDROME, $score4 : answer)
+    Answer(id == 12, category == QuestionType.PANIC_SYNDROME, $score5 : answer)
 then
     int value = $score1 + $score2 + $score3 + $score4 + $score5;
     CategoryValue cv = new CategoryValue("Valor_Síndrome_de_Pânico", String.valueOf(value));
@@ -83,22 +81,21 @@ end
 // Regras para Sindrome de pânico com agoraphobia
 rule "Verifica as respostas de Síndrome de Pânico com Agorafobia e guarda os factos das respostas para manipulação"
 when
-    $q : Quiz()
-    $question : Question(questionType == QuestionType.PANIC_AGORAPHOBIA_SYNDROME, answer != null) from $q.getQuiz40()
+    $question : Question(questionType == QuestionType.PANIC_AGORAPHOBIA_SYNDROME, answer != null) from quiz.getQuiz40()
 then
     Answer a = new Answer($question.getId(), $question.getQuestion(), $question.getAnswer(), QuestionType.PANIC_AGORAPHOBIA_SYNDROME);
-    System.out.println(a);
     insert(a);
 end
 
 rule "Verificar as respostas de Síndrome de Pânico com Agorafobia e gerar a soma das respostas"
 when
-    Answer(id == 11, category == QuestionType.PANIC_AGORAPHOBIA_SYNDROME, $score1 : answer)
-    Answer(id == 12, category == QuestionType.PANIC_AGORAPHOBIA_SYNDROME, $score2 : answer)
-    Answer(id == 13, category == QuestionType.PANIC_AGORAPHOBIA_SYNDROME, $score3 : answer)
-    Answer(id == 14, category == QuestionType.PANIC_AGORAPHOBIA_SYNDROME, $score4 : answer)
-    Answer(id == 15, category == QuestionType.PANIC_AGORAPHOBIA_SYNDROME, $score5 : answer)
+    Answer(id == 15, category == QuestionType.PANIC_AGORAPHOBIA_SYNDROME, $score1 : answer)
+    Answer(id == 16, category == QuestionType.PANIC_AGORAPHOBIA_SYNDROME, $score2 : answer)
+    Answer(id == 17, category == QuestionType.PANIC_AGORAPHOBIA_SYNDROME, $score3 : answer)
+    Answer(id == 18, category == QuestionType.PANIC_AGORAPHOBIA_SYNDROME, $score4 : answer)
+    Answer(id == 19, category == QuestionType.PANIC_AGORAPHOBIA_SYNDROME, $score5 : answer)
 then
+    System.out.println("hello aqui calculo");
     int value = $score1 + $score2 + $score3 + $score4 + $score5;
     CategoryValue cv = new CategoryValue("Valor_Síndrome_de_Pânico_com_Agorafobia", String.valueOf(value));
     insert(cv);
@@ -115,21 +112,19 @@ end
 // Regras para Agoraphobia
 rule "Verifica as respostas de Agoraphobia e guarda os factos das respostas para manipulação"
     when
-        $q : Quiz(teste =="ok")
-        $question : Question(questionType == QuestionType.AGORAPHOBIA_SYNDROME, answer != null) from $q.getQuiz40()
+           $question : Question(questionType == QuestionType.AGORAPHOBIA_SYNDROME, answer != null) from quiz.getQuiz40()
     then
-        Answer a = new Answer($question.getId(),$question.getQuestion(),$question.getAnswer(), QuestionType.AGORAPHOBIA_SYNDROME);
-        System.out.println(a);
-        insert(a);
+           Answer a = new Answer($question.getId(), $question.getQuestion(), $question.getAnswer(), QuestionType.AGORAPHOBIA_SYNDROME);
+    insert(a);
 end
 
 rule "Verificar as respostas da Agoraphobia e gerar a soma das respostas"
     when
-        Answer(id == 16, category == QuestionType.AGORAPHOBIA_SYNDROME,$score1 : answer)
-        Answer(id == 17, category == QuestionType.AGORAPHOBIA_SYNDROME,$score2 : answer)
-        Answer(id == 18, category == QuestionType.AGORAPHOBIA_SYNDROME,$score3 : answer)
-        Answer(id == 19, category == QuestionType.AGORAPHOBIA_SYNDROME,$score4 : answer)
-        Answer(id == 20, category == QuestionType.AGORAPHOBIA_SYNDROME,$score5 : answer)
+        Answer(id == 22, category == QuestionType.AGORAPHOBIA_SYNDROME,$score1 : answer)
+        Answer(id == 23, category == QuestionType.AGORAPHOBIA_SYNDROME,$score2 : answer)
+        Answer(id == 24, category == QuestionType.AGORAPHOBIA_SYNDROME,$score3 : answer)
+        Answer(id == 25, category == QuestionType.AGORAPHOBIA_SYNDROME,$score4 : answer)
+        Answer(id == 26, category == QuestionType.AGORAPHOBIA_SYNDROME,$score5 : answer)
     then
         int value = $score1 + $score2 + $score3 + $score4 + $score5;
         CategoryValue cv = new CategoryValue("Valor_Agoraphobia",(String.valueOf(value)));
@@ -149,21 +144,19 @@ end
 // Regras para Fobia Especifica
 rule "Verifica as respostas de Fobia Específica e guarda os factos das respostas para manipulação"
 when
-    $q : Quiz()
-    $question : Question(questionType == QuestionType.SPECIFIC_PHOBIA, answer != null) from $q.getQuiz40()
-then
-    Answer a = new Answer($question.getId(), $question.getQuestion(), $question.getAnswer(), QuestionType.SPECIFIC_PHOBIA);
-    System.out.println(a);
+     $question : Question(questionType == QuestionType.SPECIFIC_PHOBIA, answer != null) from quiz.getQuiz40()
+    then
+           Answer a = new Answer($question.getId(), $question.getQuestion(), $question.getAnswer(), QuestionType.SPECIFIC_PHOBIA);
     insert(a);
 end
 
 rule "Verificar as respostas de Fobia Específica e gerar a soma das respostas"
 when
-    Answer(id == 21, category == QuestionType.SPECIFIC_PHOBIA, $score1 : answer)
-    Answer(id == 22, category == QuestionType.SPECIFIC_PHOBIA, $score2 : answer)
-    Answer(id == 23, category == QuestionType.SPECIFIC_PHOBIA, $score3 : answer)
-    Answer(id == 24, category == QuestionType.SPECIFIC_PHOBIA, $score4 : answer)
-    Answer(id == 25, category == QuestionType.SPECIFIC_PHOBIA, $score5 : answer)
+    Answer(id == 29, category == QuestionType.SPECIFIC_PHOBIA, $score1 : answer)
+    Answer(id == 30, category == QuestionType.SPECIFIC_PHOBIA, $score2 : answer)
+    Answer(id == 31, category == QuestionType.SPECIFIC_PHOBIA, $score3 : answer)
+    Answer(id == 32, category == QuestionType.SPECIFIC_PHOBIA, $score4 : answer)
+    Answer(id == 33, category == QuestionType.SPECIFIC_PHOBIA, $score5 : answer)
 then
     int value = $score1 + $score2 + $score3 + $score4 + $score5;
     CategoryValue cv = new CategoryValue("Valor_Fobia_Específica", String.valueOf(value));
@@ -181,21 +174,19 @@ end
 // Regras para mutismo seletivo
 rule "Verifica as respostas de Mutismo Seletivo e guarda os factos das respostas para manipulação"
 when
-    $q : Quiz()
-    $question : Question(questionType == QuestionType.SELECTIVE_MUTISM, answer != null) from $q.getQuiz40()
-then
-    Answer a = new Answer($question.getId(), $question.getQuestion(), $question.getAnswer(), QuestionType.SELECTIVE_MUTISM);
-    System.out.println(a);
+ $question : Question(questionType == QuestionType.SELECTIVE_MUTISM, answer != null) from quiz.getQuiz40()
+    then
+           Answer a = new Answer($question.getId(), $question.getQuestion(), $question.getAnswer(), QuestionType.SELECTIVE_MUTISM);
     insert(a);
 end
 
 rule "Verificar as respostas de Mutismo Seletivo e gerar a soma das respostas"
 when
-    Answer(id == 26, category == QuestionType.SELECTIVE_MUTISM, $score1 : answer)
-    Answer(id == 27, category == QuestionType.SELECTIVE_MUTISM, $score2 : answer)
-    Answer(id == 28, category == QuestionType.SELECTIVE_MUTISM, $score3 : answer)
-    Answer(id == 29, category == QuestionType.SELECTIVE_MUTISM, $score4 : answer)
-    Answer(id == 30, category == QuestionType.SELECTIVE_MUTISM, $score5 : answer)
+    Answer(id == 36, category == QuestionType.SELECTIVE_MUTISM, $score1 : answer)
+    Answer(id == 37, category == QuestionType.SELECTIVE_MUTISM, $score2 : answer)
+    Answer(id == 38, category == QuestionType.SELECTIVE_MUTISM, $score3 : answer)
+    Answer(id == 39, category == QuestionType.SELECTIVE_MUTISM, $score4 : answer)
+    Answer(id == 40, category == QuestionType.SELECTIVE_MUTISM, $score5 : answer)
 then
     int value = $score1 + $score2 + $score3 + $score4 + $score5;
     CategoryValue cv = new CategoryValue("Valor_Mutismo_Seletivo", String.valueOf(value));
@@ -213,21 +204,19 @@ end
 // Regras para ansiedade de separação
 rule "Verifica as respostas de Ansiedade de Separação e guarda os factos das respostas para manipulação"
 when
-    $q : Quiz()
-    $question : Question(questionType == QuestionType.SEPARATION_ANXIETY, answer != null) from $q.getQuiz40()
-then
-    Answer a = new Answer($question.getId(), $question.getQuestion(), $question.getAnswer(), QuestionType.SEPARATION_ANXIETY);
-    System.out.println(a);
+ $question : Question(questionType == QuestionType.SEPARATION_ANXIETY, answer != null) from quiz.getQuiz40()
+    then
+           Answer a = new Answer($question.getId(), $question.getQuestion(), $question.getAnswer(), QuestionType.SEPARATION_ANXIETY);
     insert(a);
 end
 
 rule "Verificar as respostas de Ansiedade de Separação e gerar a soma das respostas"
 when
-    Answer(id == 31, category == QuestionType.SEPARATION_ANXIETY, $score1 : answer)
-    Answer(id == 32, category == QuestionType.SEPARATION_ANXIETY, $score2 : answer)
-    Answer(id == 33, category == QuestionType.SEPARATION_ANXIETY, $score3 : answer)
-    Answer(id == 34, category == QuestionType.SEPARATION_ANXIETY, $score4 : answer)
-    Answer(id == 35, category == QuestionType.SEPARATION_ANXIETY, $score5 : answer)
+    Answer(id == 43, category == QuestionType.SEPARATION_ANXIETY, $score1 : answer)
+    Answer(id == 44, category == QuestionType.SEPARATION_ANXIETY, $score2 : answer)
+    Answer(id == 45, category == QuestionType.SEPARATION_ANXIETY, $score3 : answer)
+    Answer(id == 46, category == QuestionType.SEPARATION_ANXIETY, $score4 : answer)
+    Answer(id == 47, category == QuestionType.SEPARATION_ANXIETY, $score5 : answer)
 then
     int value = $score1 + $score2 + $score3 + $score4 + $score5;
     CategoryValue cv = new CategoryValue("Valor_Ansiedade_de_Separacao", String.valueOf(value));
@@ -245,21 +234,19 @@ end
 // Regras para Fobia Social
 rule "Verifica as respostas de Fobia Social e guarda os factos das respostas para manipulação"
 when
-    $q : Quiz()
-    $question : Question(questionType == QuestionType.SOCIAL_PHOBIA, answer != null) from $q.getQuiz40()
-then
-    Answer a = new Answer($question.getId(), $question.getQuestion(), $question.getAnswer(), QuestionType.SOCIAL_PHOBIA);
-    System.out.println(a);
+ $question : Question(questionType == QuestionType.SOCIAL_PHOBIA, answer != null) from quiz.getQuiz40()
+    then
+           Answer a = new Answer($question.getId(), $question.getQuestion(), $question.getAnswer(), QuestionType.SOCIAL_PHOBIA);
     insert(a);
 end
 
 rule "Verificar as respostas de Fobia Social e gerar a soma das respostas"
 when
-    Answer(id == 36, category == QuestionType.SOCIAL_PHOBIA, $score1 : answer)
-    Answer(id == 37, category == QuestionType.SOCIAL_PHOBIA, $score2 : answer)
-    Answer(id == 38, category == QuestionType.SOCIAL_PHOBIA, $score3 : answer)
-    Answer(id == 39, category == QuestionType.SOCIAL_PHOBIA, $score4 : answer)
-    Answer(id == 40, category == QuestionType.SOCIAL_PHOBIA, $score5 : answer)
+    Answer(id == 50, category == QuestionType.SOCIAL_PHOBIA, $score1 : answer)
+    Answer(id == 51, category == QuestionType.SOCIAL_PHOBIA, $score2 : answer)
+    Answer(id == 52, category == QuestionType.SOCIAL_PHOBIA, $score3 : answer)
+    Answer(id == 53, category == QuestionType.SOCIAL_PHOBIA, $score4 : answer)
+    Answer(id == 54, category == QuestionType.SOCIAL_PHOBIA, $score5 : answer)
 then
     int value = $score1 + $score2 + $score3 + $score4 + $score5;
     CategoryValue cv = new CategoryValue("Valor_Fobia_Social", String.valueOf(value));

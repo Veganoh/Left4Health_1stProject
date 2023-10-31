@@ -69,9 +69,11 @@ public class AnxietyDiagnosis {
 
             LiveQuery query = kSession.openLiveQuery("InitialConclusions", null, listener);
 
+            quiz.setTeste("ok");
+            quiz.setTeste2("fixe");
 
-            kSession.insert(quiz);
 
+            kSession.setGlobal("quiz",quiz);
             kSession.fireAllRules();
 
             query.close();
@@ -87,7 +89,7 @@ public class AnxietyDiagnosis {
             // load up the knowledge base
             KieServices ks = KieServices.Factory.get();
             KieContainer kContainer = ks.getKieClasspathContainer();
-            final KieSession kSession = kContainer.newKieSession("ksession-rules40");
+            KieSession kSession = kContainer.newKieSession("ksession-rules40");
             AnxietyDiagnosis.KS = kSession;
             AnxietyDiagnosis.agendaEventListener = new TrackingAgendaEventListener();
             kSession.addEventListener(agendaEventListener);
@@ -119,7 +121,7 @@ public class AnxietyDiagnosis {
 
             quiz.setTeste("ok");
             quiz.setTeste2("fixe");
-            kSession.insert(quiz);
+            kSession.setGlobal("quiz",quiz);
 
             kSession.fireAllRules();
 

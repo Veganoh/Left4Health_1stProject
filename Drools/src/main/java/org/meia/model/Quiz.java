@@ -123,6 +123,7 @@ public class Quiz {
         this.teste2 = teste2;
     }
 
+<<<<<<< Updated upstream
     public String generateQuizString(){
         List<Question> quiz40 = getRandomizedQuiz40();
 
@@ -143,4 +144,6 @@ public class Quiz {
 
         return res;
     }
+=======
+>>>>>>> Stashed changes
 }

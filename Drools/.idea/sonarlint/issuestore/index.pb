@@ -1,9 +1,21 @@
 
 7
 pom.xml,4/4/442292b8a7efeabbe4cc176709b833b1792140ec
-x
-Hsrc/main/java/org/meia/anxietyDiagnosis/TrackingAgendaEventListener.java,7\1\712b0e6ac6d51d223590c5e118ca42f57a505c2e
 _
 /src/main/java/org/meia/model/Justification.java,e\e\eee4be28137d584f5545d1f64c37fe01c60bd605
 `
 0src/main/java/org/meia/anxietyDiagnosis/How.java,f\6\f60f6a1f455d7268b6d5d840f09330a80dd2aaab
+Z
+*src/main/java/org/meia/model/Question.java,c\8\c8b272cd067569f4bbec90da6180ce0a2029b7f2
+c
+3src/main/java/org/meia/model/InitialConclusion.java,1\7\17f0976371e8f92b9b4fd2ead2a18b34c3a57ca7
+\
+,src/main/java/org/meia/model/Hypothesis.java,e\c\ec38856526af4cd4d5d2dd63f8e0d6635b0f5304
+\
+,src/main/java/org/meia/model/Conclusion.java,d\b\db84461290cccc7e210a7e1fbc70514724bfdadf
+_
+/src/main/java/org/meia/model/CategoryValue.java,b\6\b6ce094f4dce6c82411391b500ade886b4c0ef8d
+V
+&src/main/java/org/meia/model/Fact.java,d\1\d14ba2ce82186f9c7b1c5c51db36d4efd67e8ffc
+x
+Hsrc/main/java/org/meia/anxietyDiagnosis/TrackingAgendaEventListener.java,7\1\712b0e6ac6d51d223590c5e118ca42f57a505c2e
