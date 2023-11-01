@@ -35,13 +35,13 @@ rule "Verificar as respostas da Ansiedade Generalizada e gerar a soma das respos
         Answer(id == 5, category == QuestionType.GENERAL_ANXIETY,$score5 : answer)
     then
         int value = $score1 + $score2 + $score3 + $score4 + $score5;
-        CategoryValue cv = new CategoryValue("Valor_Ansiedade_Generalizada",(String.valueOf(value)));
+        CategoryValue cv = new CategoryValue("Ansiedade Generalizada",(String.valueOf(value)));
         insert(cv);
 end
 
 rule "Verificar a pontuação da Ansiedade Generalizada é superior a 15"
     when
-        CategoryValue (category == "Valor_Ansiedade_Generalizada", Integer.parseInt(value) >= 15)
+        CategoryValue (category == "Ansiedade Generalizada", Integer.parseInt(value) >= 15)
     then
         Conclusion c = new Conclusion(Conclusion.GENERAL_ANXIETY);
         insert(c);
@@ -66,13 +66,13 @@ when
     Answer(id == 12, category == QuestionType.PANIC_SYNDROME, $score5 : answer)
 then
     int value = $score1 + $score2 + $score3 + $score4 + $score5;
-    CategoryValue cv = new CategoryValue("Valor_Síndrome_de_Pânico", String.valueOf(value));
+    CategoryValue cv = new CategoryValue("Síndrome de Pânico", String.valueOf(value));
     insert(cv);
 end
 
 rule "Verificar a pontuação da Síndrome de Pânico é superior a 15"
 when
-    CategoryValue(category == "Valor_Síndrome_de_Pânico", Integer.parseInt(value) >= 15)
+    CategoryValue(category == "Síndrome de Pânico", Integer.parseInt(value) >= 15)
 then
     Conclusion c = new Conclusion(Conclusion.PANIC_SYNDROME);
     insert(c);
@@ -95,15 +95,14 @@ when
     Answer(id == 18, category == QuestionType.PANIC_AGORAPHOBIA_SYNDROME, $score4 : answer)
     Answer(id == 19, category == QuestionType.PANIC_AGORAPHOBIA_SYNDROME, $score5 : answer)
 then
-    System.out.println("hello aqui calculo");
     int value = $score1 + $score2 + $score3 + $score4 + $score5;
-    CategoryValue cv = new CategoryValue("Valor_Síndrome_de_Pânico_com_Agorafobia", String.valueOf(value));
+    CategoryValue cv = new CategoryValue("Síndrome de Pânico com Agorafobia", String.valueOf(value));
     insert(cv);
 end
 
 rule "Verificar a pontuação da Síndrome de Pânico com Agorafobia é superior a 15"
 when
-    CategoryValue(category == "Valor_Síndrome_de_Pânico_com_Agorafobia", Integer.parseInt(value) >= 15)
+    CategoryValue(category == "Síndrome de Pânico com Agorafobia", Integer.parseInt(value) >= 15)
 then
     Conclusion c = new Conclusion(Conclusion.PANIC_AGORAPHOBIA_SYNDROME);
     insert(c);
@@ -127,13 +126,13 @@ rule "Verificar as respostas da Agoraphobia e gerar a soma das respostas"
         Answer(id == 26, category == QuestionType.AGORAPHOBIA_SYNDROME,$score5 : answer)
     then
         int value = $score1 + $score2 + $score3 + $score4 + $score5;
-        CategoryValue cv = new CategoryValue("Valor_Agoraphobia",(String.valueOf(value)));
+        CategoryValue cv = new CategoryValue("Agorafobia",(String.valueOf(value)));
         insert(cv);
 end
 
 rule "Verificar a pontuação da Agoraphobia é superior a 15"
     when
-        CategoryValue (category == "Valor_Agoraphobia", Integer.parseInt(value) >= 15)
+        CategoryValue (category == "Agorafobia", Integer.parseInt(value) >= 15)
     then
         Conclusion c = new Conclusion(Conclusion.AGORAPHOBIA_SYNDROME);
         insert(c);
@@ -159,13 +158,13 @@ when
     Answer(id == 33, category == QuestionType.SPECIFIC_PHOBIA, $score5 : answer)
 then
     int value = $score1 + $score2 + $score3 + $score4 + $score5;
-    CategoryValue cv = new CategoryValue("Valor_Fobia_Específica", String.valueOf(value));
+    CategoryValue cv = new CategoryValue("Fobia Específica", String.valueOf(value));
     insert(cv);
 end
 
 rule "Verificar a pontuação de Fobia Específica é superior a 15"
 when
-    CategoryValue(category == "Valor_Fobia_Específica", Integer.parseInt(value) >= 15)
+    CategoryValue(category == "Fobia Específica", Integer.parseInt(value) >= 15)
 then
     Conclusion c = new Conclusion(Conclusion.SPECIFIC_PHOBIA);
     insert(c);
@@ -189,13 +188,13 @@ when
     Answer(id == 40, category == QuestionType.SELECTIVE_MUTISM, $score5 : answer)
 then
     int value = $score1 + $score2 + $score3 + $score4 + $score5;
-    CategoryValue cv = new CategoryValue("Valor_Mutismo_Seletivo", String.valueOf(value));
+    CategoryValue cv = new CategoryValue("Mutismo Seletivo", String.valueOf(value));
     insert(cv);
 end
 
 rule "Verificar a pontuação de Mutismo Seletivo é superior a 15"
 when
-    CategoryValue(category == "Valor_Mutismo_Seletivo", Integer.parseInt(value) >= 15)
+    CategoryValue(category == "Mutismo Seletivo", Integer.parseInt(value) >= 15)
 then
     Conclusion c = new Conclusion(Conclusion.SELECTIVE_MUTISM);
     insert(c);
@@ -219,13 +218,13 @@ when
     Answer(id == 47, category == QuestionType.SEPARATION_ANXIETY, $score5 : answer)
 then
     int value = $score1 + $score2 + $score3 + $score4 + $score5;
-    CategoryValue cv = new CategoryValue("Valor_Ansiedade_de_Separacao", String.valueOf(value));
+    CategoryValue cv = new CategoryValue("Ansiedade de Separação", String.valueOf(value));
     insert(cv);
 end
 
 rule "Verificar a pontuação de Ansiedade de Separação é superior a 15"
 when
-    CategoryValue(category == "Valor_Ansiedade_de_Separacao", Integer.parseInt(value) >= 15)
+    CategoryValue(category == "Ansiedade de Separação", Integer.parseInt(value) >= 15)
 then
     Conclusion c = new Conclusion(Conclusion.SEPARATION_ANXIETY);
     insert(c);
@@ -249,13 +248,13 @@ when
     Answer(id == 54, category == QuestionType.SOCIAL_PHOBIA, $score5 : answer)
 then
     int value = $score1 + $score2 + $score3 + $score4 + $score5;
-    CategoryValue cv = new CategoryValue("Valor_Fobia_Social", String.valueOf(value));
+    CategoryValue cv = new CategoryValue("Fobia Social", String.valueOf(value));
     insert(cv);
 end
 
 rule "Verificar a pontuação de Fobia Social é superior a 15"
 when
-    CategoryValue(category == "Valor_Fobia_Social", Integer.parseInt(value) >= 15)
+    CategoryValue(category == "Fobia Social", Integer.parseInt(value) >= 15)
 then
     Conclusion c = new Conclusion(Conclusion.SOCIAL_PHOBIA);
     insert(c);

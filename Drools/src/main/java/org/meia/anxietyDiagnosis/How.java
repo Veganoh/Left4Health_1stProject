@@ -21,12 +21,12 @@ public class How {
         StringBuilder sb = new StringBuilder();
         Justification j = justifications.get(factNumber);
         if (j != null) { // justification for Fact factNumber was found
-            sb.append(getIdentation(level));
-            sb.append(j.getConclusion() + " was obtained by rule " + j.getRuleName() + " because");
-            sb.append('\n');
+            //sb.append(getIdentation(level));
+            //sb.append(j.getConclusion() + " was obtained by rule " + j.getRuleName() + " porque respondeu assim nas seguintes perguntas:");
+            //sb.append('\n');
             int l = level + 1;
             for (Fact f : j.getLhs()) {
-                sb.append(getIdentation(l));
+                //sb.append(getIdentation(l));
                 sb.append(f);
                 sb.append('\n');
                 if (f instanceof CategoryValue) {

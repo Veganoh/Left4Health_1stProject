@@ -12,6 +12,7 @@ export class Question {
         this.answer = null;
     }
 
+ 
     public getId(): number {
         return this.id;
     }

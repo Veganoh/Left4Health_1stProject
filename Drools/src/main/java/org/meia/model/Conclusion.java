@@ -28,7 +28,7 @@ public class Conclusion extends Fact {
     }
 
     public String toString() {
-        return ("Diagnosis: " + description);
+        return (description);
     }
 
 }

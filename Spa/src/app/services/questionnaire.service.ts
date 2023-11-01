@@ -12,4 +12,9 @@ export class QuestionnaireService {
     const options = { responseType: 'text' as 'json' }; // Set the responseType to 'text'
     return this.http.get("http://localhost:8080/api/obtain40Questions", options) as Observable<string>;
   }
+
+  public answerQuizFinal(answer: string): Observable<string> {
+    const options = { responseType: 'text' as 'json' };
+    return this.http.post("http://localhost:8080/api/answerQuiz40", answer, options) as Observable<string>;
+  }
 }

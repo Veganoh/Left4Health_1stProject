@@ -36,8 +36,6 @@ export class QuestionnaireinitialComponent implements OnInit{
       // Crie uma lista de perguntas com base na string
       const inputString = response;
       this.questions = createQuestionsFromString(inputString);
-
-      console.log(this.questions); // Imprimir as perguntas com as respostas
     });
   }
 
@@ -49,7 +47,6 @@ export class QuestionnaireinitialComponent implements OnInit{
       this.conclusion = response || ''; // Usar uma string vazia como valor padrão se a resposta for undefined
       if (this.conclusion == "Vai iniciar um questionário de 40 perguntas") {
         this.canProceed = true;
-        console.log(this.conclusion);
   
         // Execute a navegação para a próxima página aqui, pois a resposta da API foi recebida com sucesso
         this.router.navigate(['/questionnaire']);
@@ -98,6 +95,11 @@ function createQuestionsFromString(inputString: string): Question[] {
   return questions;
 }
 
+/**
+ * This method receives the answers and transforms them into a string
+ * @param questions 
+ * @returns 
+ */
 function createStringFromAnswers(questions: Question[]): string {
   
   

@@ -11,13 +11,14 @@ import org.kie.api.runtime.rule.ViewChangedEventListener;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.sql.SQLOutput;
 import java.util.Map;
 import java.util.TreeMap;
 
 public class AnxietyDiagnosis {
     public static KieSession KS;
     public static BufferedReader BR;
+
+    public static StringBuilder finalConclusion = new StringBuilder();
 
     public static TrackingAgendaEventListener agendaEventListener;
     public static Map<Integer, Justification> justifications;
@@ -28,14 +29,13 @@ public class AnxietyDiagnosis {
         Quiz quiz = new Quiz();
 
         Reader.assignAnswersToQuizInitial(quiz);
-        System.out.println(quiz.getQuizInitial());
         runEngine(quiz);
 
 
-        if(initialConclusion.toString() == InitialConclusion.START_QUIZ40){
-            Reader.assignAnswersToQuiz40(quiz);
-            runEngine40(quiz);
-        }
+       // Reader.assignAnswersToQuiz40(quiz);
+       // runEngine40(quiz);
+       // System.out.println(finalConclusion.toString());
+
 
 
     }
@@ -68,6 +68,7 @@ public class AnxietyDiagnosis {
             };
 
             LiveQuery query = kSession.openLiveQuery("InitialConclusions", null, listener);
+
             kSession.insert(quiz);
 
             kSession.fireAllRules();
@@ -75,6 +76,8 @@ public class AnxietyDiagnosis {
             query.close();
         } catch (Throwable t) {
             t.printStackTrace();
+        } finally {
+            if(KS != null) KS.dispose();
         }
     }
 
@@ -99,10 +102,9 @@ public class AnxietyDiagnosis {
                 @Override
                 public void rowInserted(Row row) {
                     Conclusion conclusion = (Conclusion) row.get("$conclusion");
-                    System.out.println(">>>" + conclusion.toString());
 
                     How how = new How(AnxietyDiagnosis.justifications);
-                    System.out.println(how.getHowExplanation(conclusion.getId()));
+                    finalConclusion.append(how.getHowExplanation(conclusion.getId()));
 
                     // stop inference engine as soon as a conclusion is obtained
                   //kSession.halt();

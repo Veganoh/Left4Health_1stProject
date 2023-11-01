@@ -25,7 +25,6 @@ public class Server {
         HttpServer server = HttpServer.create(new InetSocketAddress(serverPort), 0);
         server.createContext("/api/obtainInitialQuestions", new ObtainInitialQuiz());
         server.createContext("/api/obtain40Questions", new ObtainQuiz40());
-
         server.createContext("/api/answerQuizInitial", new ObtainInitialQuizResponse());
         server.createContext("/api/answerQuiz40", new ObtainQuiz40Response());
         server.setExecutor(null);
@@ -78,7 +77,6 @@ public class Server {
 
             String answers = buf.toString();
             Reader.assignAnswersToQuiz(quiz,answers);
-
             AnxietyDiagnosis.runEngine(quiz);
 
             String response = AnxietyDiagnosis.initialConclusion.toString();
@@ -109,9 +107,7 @@ public class Server {
             Reader.assignAnswersToQuiz(quiz,answers);
             AnxietyDiagnosis.runEngine40(quiz);
 
-
-            // mudar isto
-            String response = AnxietyDiagnosis.initialConclusion.toString();
+            String response = AnxietyDiagnosis.finalConclusion.toString();
             t.sendResponseHeaders(200,response.getBytes().length);
             OutputStream os = t.getResponseBody();
             os.write(response.getBytes());
