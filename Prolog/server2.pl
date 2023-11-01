@@ -1,5 +1,6 @@
 :- use_module(library(http/thread_httpd)).
 :- use_module(library(http/http_dispatch)).
+:- use_module(library(http/http_client)).
 
 :- consult('base_conhecimento.pl').
 
@@ -20,6 +21,39 @@ obter_questionario(Request) :-
     catch(gerar_questionario(Questionario), _, fail),
     format('Content-type: application/json~n~n'),
     format('~q.', [Questionario]).
+
+
+%:- http_handler('/api/sendQuizInitial', receber_dados, [method(POST)]).
+%receber_dados(Request) :-
+%    http_read_data(Request, Data, []),
+%    format('Content-type: text/plain~n~n'),
+%    format('Dados recebidos no método POST:~n~w', [Data]).
+
+
+
+% Defina o manipulador POST
+:- http_handler('/api/sendQuizInitial', receber_dados, [method(POST)]).
+
+receber_dados(Request) :-
+    http_read_data(Request, Data, []),
+    format('Content-type: text/plain~n~n'),
+    format('Dados recebidos no método POST:~n~w', [Data]),
+    write('Conteúdo do POST recebido:'),
+    writeln(Data).
+ %   processar_factos(Data, 1). % Comece com o FactNumber 1.
+
+% Função para processar o conteúdo do arquivo de texto e gerar fatos
+processar_factos(Text, FactNumber) :-
+    split_string(Text, "\n", "", Linhas), % Divida o texto em linhas
+    processar_linhas(Linhas, FactNumber).
+
+processar_linhas([], _).
+processar_linhas([Linha, Resposta | Resto], FactNumber) :-
+    atom_number(Linha, QuestionId), % Converte a linha para um número
+    assertz(facto(FactNumber, pergunta(QuestionId, Resposta))),
+    NovoFactNumber is FactNumber + 1,
+    processar_linhas(Resto, NovoFactNumber).
+
 
 %:- http_handler('/api/prolog', obter_ansiedade, [method(POST)]).
 %readfacts:-
