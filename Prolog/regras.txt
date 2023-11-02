@@ -1,16 +1,14 @@
-:- set_prolog_flag(encoding, utf8).
 :-dynamic facto/2,ultimo_facto/1.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Metaconhecimento
 
-facto_dispara_regras(tipo(_, sim), [1, 5, 7]).
-facto_dispara_regras(tipo(_, nao), [2, 3, 6]).
-facto_dispara_regras(valor(_, _), [8, 9, 10]).
+facto_dispara_regras(pergunta(_, sim), [1]).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-ultimo_facto(8).
+ultimo_facto(7).
 ultima_regra(10).
 
 % Regras Quiz DSM-5

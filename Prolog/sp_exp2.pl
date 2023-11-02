@@ -25,7 +25,8 @@ arranca_motor:-	facto(N,Facto),
 facto_dispara_regras1(Facto, LRegras):-
 	facto_dispara_regras(Facto, LRegras),
 	!.
-facto_dispara_regras(_, []).
+
+facto_dispara_regras1(_, []).
 % Caso em que o facto nao origina o disparo de qualquer regra.
 
 dispara_regras(N, Facto, [ID|LRegras]):-

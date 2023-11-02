@@ -15,7 +15,7 @@ carrega_bc:-
 		read(NBC),
 		consult(NBC).
 
-% Arranque do Motor de Infer�ncia
+% Arranque do Motor de Inferencia
 
 arranca_motor:-facto(N,Facto),
 		regra ID se LHS entao RHS,
@@ -94,18 +94,18 @@ cria_facto(F,ID,LFactos):-
 	asserta(ultimo_facto(N)),
 	assertz(justifica(N,ID,LFactos)),
 	assertz(facto(N,F)),
-	write('Foi conclu�do o facto n� '),write(N),write(' -> '),write(F),get0(_),!.
+	write('Foi concluido o facto n: '),write(N),write(' -> '),write(F),get0(_),!.
 
 
 
-% Visualiza��o da base de factos
+% Visualizacao da base de factos
 
 mostra_factos:-
 	findall(N, facto(N, _), LFactos),
 	escreve_factos(LFactos).
 
 escreve_factos([I|R]):-facto(I,F),
-	write('O facto n� '),write(I),write(' -> '),write(F),nl,
+	write('O facto n: '),write(I),write(' -> '),write(F),nl,
 	escreve_factos(R).
 escreve_factos([]).
 
