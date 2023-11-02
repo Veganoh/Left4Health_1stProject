@@ -1,0 +1,21 @@
+41
+Initial
+Possui alguma condição clínica do diagnóstico diferencial que pode explicar os sintomas?
+42
+Initial
+Você sente ansiedade e preocupação excessiva em relação a várias áreas da sua vida na maioria dos dias há pelo menos seis meses?
+43
+Initial
+Você sente que sua preocupação é desproporcional em relação à situação ou que você não consegue controlá-la?
+44
+Initial
+Nos últimos seis meses, sentiu pelo menos 3 dos seguintes sintomas na maioria dos dias: inquietação, fadiga, dificuldade de concentração, irritabilidade, tensão muscular ou problemas para dormir?
+45
+Initial
+Você já foi diagnosticado ou acredita que sua ansiedade excessiva pode ser explicada por outro problema de saúde mental, como transtorno de pânico, fobia social, transtorno obsessivo-compulsivo, ou outros transtornos similares?
+46
+Initial
+Essa ansiedade, preocupação ou sintomas físicos causam um impacto significativo em sua vida social, profissional ou em outras áreas importantes?
+47
+Initial
+Os sintomas podem ser explicados por uso de medicamentos, abuso de substâncias ou síndrome de abstinência?
