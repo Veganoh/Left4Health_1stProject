@@ -46,6 +46,9 @@ export class QuestionnaireComponent implements OnInit {
         const response = await this.service.answerQuizFinal(answer).toPromise();
         if (response) {
           this.diagnosis = createCategoriesFromString(response);
+    
+          // Agora você pode passar o diagnóstico para a página de diagnóstico
+          this.router.navigate(['/diagnosis'], { state: { diagnosis: this.diagnosis } });
         } else {
           console.error('Resposta da API é indefinida');
         }
@@ -53,6 +56,7 @@ export class QuestionnaireComponent implements OnInit {
         console.error('Erro na chamada da API:', error);
       }
     }
+    
 
   nextPage() {
     console.log(this.questionsPage1)
