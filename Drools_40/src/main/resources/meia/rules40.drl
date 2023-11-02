@@ -7,7 +7,6 @@ import org.meia.model.Question;
 import org.meia.model.Quiz;
 import org.meia.model.Answer;
 import org.meia.model.QuestionType
-import org.meia.model.Hypothesis;
 
 
 global org.meia.model.Quiz quiz;

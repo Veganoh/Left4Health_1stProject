@@ -38,6 +38,6 @@ public class Answer extends Fact {
 
     @Override
     public String toString() {
-        return getQuestion() + "\n" +getAnswer();
+        return "[" + getAnswer() + "] - " + getQuestion() ;
     }
 }

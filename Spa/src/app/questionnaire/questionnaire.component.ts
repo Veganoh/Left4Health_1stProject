@@ -106,20 +106,17 @@ function createCategoriesFromString(inputString: string): Category[] {
   const lines = inputString.trim().split('\n');
   const categories: Category[] = [];
 
-  for(let i = 0; i < lines.length; i+= 11){
+  for(let i = 0; i < lines.length; i+= 8){
     const currentCategory = new Category();
 
-    currentCategory.setDiagnosis(lines[i]);
-    currentCategory.addQuestion(lines[i+1])
-    currentCategory.addAnswer(lines[i+2])
+    currentCategory.setRegra1(lines[i]);
+    currentCategory.setScore(lines[i+1]);
+    currentCategory.setRegra2(lines[i+2])
     currentCategory.addQuestion(lines[i+3])
-    currentCategory.addAnswer(lines[i+4])
+    currentCategory.addQuestion(lines[i+4])
     currentCategory.addQuestion(lines[i+5])
-    currentCategory.addAnswer(lines[i+6])
+    currentCategory.addQuestion(lines[i+6])
     currentCategory.addQuestion(lines[i+7])
-    currentCategory.addAnswer(lines[i+8])
-    currentCategory.addQuestion(lines[i+9])
-    currentCategory.addAnswer(lines[i+10])
     categories.push(currentCategory);
   }
   console.log(categories)

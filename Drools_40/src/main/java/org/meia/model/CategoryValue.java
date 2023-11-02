@@ -21,6 +21,6 @@ public class CategoryValue extends Fact{
     }
 
     public String toString() {
-        return (category + "\n" + value);
+        return category  +" = "+ value;
     }
 }

@@ -1,28 +1,38 @@
 export class Category {
-    private diagnosis: string;
+    private regra1: string;
+    private regra2: string;
     private questions: string[];
-    private answers: string[];
+    private score: string;
 
     constructor() {
-        this.diagnosis = "";
-        this.answers = [];
+        this.regra1 = "";
+        this.regra2 = "";
         this.questions = [];
+        this.score = "";
     }
 
-    public getDiagnosis(): string {
-        return this.diagnosis;
+    public getRegra1(): string {
+        return this.regra1;
     }
 
-    public setDiagnosis(diagnosis: string): void {
-        this.diagnosis = diagnosis;
+    public setRegra1(regra1: string): void {
+        this.regra1 = regra1;
     }
 
-    public getAnswers(): string[] {
-        return this.answers;
+    public getRegra2(): string {
+        return this.regra2;
     }
 
-    public addAnswer(answer: string): void {
-        this.answers.push(answer);
+    public setRegra2(regra2: string): void {
+        this.regra2 = regra2;
+    }
+
+    public getScore(): string {
+        return this.score;
+    }
+
+    public setScore(score: string): void {
+        this.score = score;
     }
 
     public addQuestion(question: string): void {
@@ -32,6 +42,4 @@ export class Category {
     public getQuestions(): string[] {
         return this.questions;
     }
-
 }
-
