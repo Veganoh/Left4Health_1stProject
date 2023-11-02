@@ -23,7 +23,7 @@ obter_ansiedade(Request) :-
     %format('~w', [Resultado]). % Saída em texto simples
     
 
-:- servidor(8080).
+:- servidor(7000).
 
    
 
@@ -38,5 +38,5 @@ processar_corpo(Dados, Resultado, Contador) :-
 processar_pares([], [], 0).
 processar_pares([_, _ | Resto], Pares, Contador) :-        
     assertz(facto(Contador, pergunta(Pergunta, Resposta))),
-    NewContadorFactos is ContadorFactos+1,
+    NewContadorFactos is ContadorFactos + 1,
     processar_respostas(Resto, Pares, NewContadorFactos).

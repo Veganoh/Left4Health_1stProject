@@ -3,7 +3,7 @@
 :- use_module(library(http/http_server)).
 :- use_module(library(http/http_client)).
 
-:- dynamic(facto/2).
+:- dynamic(facto/2). % Definindo a estrutura de fato (Pergunta, Resposta).
 
 servidor(Porta) :-
     http_server(http_dispatch, [port(Porta)]).
@@ -12,28 +12,38 @@ servidor(Porta) :-
 obter_ansiedade(Request) :-
     member(method(post), Request),
     http_read_data(Request, Data, [to(string)]),
-    Contador = 1, % Inicialize ContadorInicial com o valor desejado  
-    processar_corpo(Data, Resultado, Contador),
+    ContadorInicial = 1, % Inicialize ContadorInicial com o valor desejado
+    processar_corpo(Data, Resultado, ContadorInicial, ContadorFinal),
     format('Content-type: text/plain; charset=UTF-8~n~n'),
-    format('Outras informações, se necessário~n'),
-    format('Número de fatos criados: ~d~n', [Contador]),
+    format('Post recebido com sucesso~n'),
+    format('Numero de fatos criados: ~d~n', [ContadorFinal]),
     format('~w', [Resultado]). % Saída em texto simples
+
 
 :- servidor(8080).
 
-processar_corpo(Dados, Resultado, Contador) :-
-    split_string(Dados, "\n", " \n ", Linhas),
-    %write(Linhas),    
+processar_corpo(Dados, Resultado, Contador, ContadorFinal) :-
+    %Linhas= Dados.split('\r\n'),
+    split_string(Dados, "\r\n", "\r\n", Linhas),
     remover_espacos_e_linhas(Linhas, ListaSemEspacos),
-    processar_pares(ListaSemEspacos, Pares, Contador, NovoContador),
-    Resultado = Pares.
+    split_into_pairs(ListaSemEspacos, Pares),
+    processar_pares(Pares, FactosCriados, Contador, ContadorFinal),
+    Resultado = FactosCriados.
+
+split_into_pairs([], []).
+split_into_pairs([Number, Answer | Rest], [[Number, Answer] | Pairs]) :-
+    split_into_pairs(Rest, Pairs).
+
 
 processar_pares([], [], Contador, Contador).
-
-processar_pares([Pergunta, Resposta | RestoLinhas], [pergunta(Pergunta, Resposta) | RestoPares], Contador, NovoContador) :-
-    assertz(facto(Contador, pergunta(Pergunta, Resposta))),
+processar_pares([[Pergunta, Resposta] | RestoLinhas], [pergunta(Pergunta, Resposta) | RestoPares], Contador, ContadorFinal) :-
+    atom_codes(AtomPergunta, Pergunta),
+    atom_number(AtomPergunta, PeguntaNumber),
+    atom_codes(AtomResposta, Resposta),
+    assertz(facto(Contador, pergunta(PeguntaNumber, AtomResposta))),
     NewContadorFactos is Contador + 1,
-    processar_pares(RestoLinhas, RestoPares, NewContadorFactos, NovoContador).
+    processar_pares(RestoLinhas, RestoPares, NewContadorFactos, ContadorFinal).
+
 
 
 
