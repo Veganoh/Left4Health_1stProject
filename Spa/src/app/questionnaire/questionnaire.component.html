@@ -11,18 +11,19 @@
         </thead>
         <tbody>
           <tr *ngFor="let question of questionsPage1; let i = index">
-            <td>{{question.question}}</td>
+            <td>{{ question.question }}</td>
             <td>
-              <select id="q{{i + 1}}" name="q{{i + 1}}" class="form-control">
-                <option value="1">1. Nada</option>
-                <option value="2">2. Um pouco</option>
-                <option value="3">3. Moderadamente</option>
-                <option value="4">4. Muito</option>
-                <option value="5">5. Extremamente</option>
+              <select [(ngModel)]="question.answer" id="q{{ i + 1 }}" name="q{{ i + 1 }}" class="form-control">
+                <option value=1>1. Nada</option>
+                <option value=2>2. Um pouco</option>
+                <option value=3>3. Moderadamente</option>
+                <option value=4>4. Muito</option>
+                <option selected value=5 selected>5. Extremamente</option>
               </select>
             </td>
           </tr>
         </tbody>
+        
       </table>
     </div>
     <button class="btn btn-primary" (click)="nextPage()">Próxima Página</button>
@@ -44,12 +45,12 @@
           <tr *ngFor="let question of questionsPage2; let i = index">
             <td>{{question.question}}</td>
             <td>
-              <select id="q{{i + 21}}" name="q{{i + 21}}" class="form-control">
+              <select  [(ngModel)]="question.answer" id="q{{i + 21}}" name="q{{i + 21}}" class="form-control">
                 <option value="1">1. Nada</option>
                 <option value="2">2. Um pouco</option>
                 <option value="3">3. Moderadamente</option>
                 <option value="4">4. Muito</option>
-                <option value="5">5. Extremamente</option>
+                <option selected value="5">5. Extremamente</option>
               </select>
             </td>
           </tr>

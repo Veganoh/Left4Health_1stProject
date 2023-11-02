@@ -27,7 +27,6 @@ export class QuestionnaireComponent implements OnInit {
 
     ngOnInit(): void {
       this.obtainQuestions();
-      this.obtainAnswer();
     }
 
     obtainQuestions(): void {
@@ -47,7 +46,6 @@ export class QuestionnaireComponent implements OnInit {
         const response = await this.service.answerQuizFinal(answer).toPromise();
         if (response) {
           this.diagnosis = createCategoriesFromString(response);
-          console.log(this.diagnosis)
         } else {
           console.error('Resposta da API é indefinida');
         }
@@ -57,6 +55,7 @@ export class QuestionnaireComponent implements OnInit {
     }
 
   nextPage() {
+    console.log(this.questionsPage1)
     this.currentPage = 2;
   }
 
@@ -65,6 +64,9 @@ export class QuestionnaireComponent implements OnInit {
   }
 
   submitForm() {
+    console.log(this.questionsPage2)
+    this.obtainAnswer();
+    console.log(this.diagnosis)
     // Lógica para processar as respostas do questionário
 
     // Redirecione o usuário para a página de diagnóstico após a submissão
