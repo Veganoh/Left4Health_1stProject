@@ -10,5 +10,5 @@ main :-
     % Carrega as regras para o motor de inferência
     carrega_bc('C:/Users/mariana/Documents/GitHub/Left4Health_1stProject/Prolog/test/rules.txt'),
     % Chame a função para iniciar o servidor
-    servidor(8080).
+    servidor(7070).
 
