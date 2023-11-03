@@ -2,6 +2,7 @@
 :- use_module(library(http/http_dispatch)).
 :- use_module(library(http/http_server)).
 :- use_module(library(http/http_client)).
+:- consult('Projeto Prolog.pl').
 
 :- dynamic(facto/2). % Definindo a estrutura de fato (Pergunta, Resposta).
 
@@ -18,6 +19,32 @@ obter_ansiedade(Request) :-
     format('Post recebido com sucesso~n'),
     format('Numero de fatos criados: ~d~n', [ContadorFinal]),
     format('~w', [Resultado]). % Saída em texto simples
+
+% Define a handler for the /quizInitial1 endpoint
+:- http_handler('/api/quizInitial1', get_perguntas_iniciais, [method(GET)]).
+
+% Handler for the GET request to /api/quizInitial1 endpoint
+get_perguntas_iniciais(Request) :-
+    todas_perguntas_iniciais(Perguntas),
+    format_response(Perguntas, Response),
+    format('Content-type: text/plain~n~n'),
+    format('~s', [Response]).
+
+% Define a handler for the /api/quiz40 endpoint
+:- http_handler('/api/quiz40', get_perguntas_40, [method(GET)]).
+
+% Handler for the GET request to /api/quiz40 endpoint
+get_perguntas_40(Request) :-
+    perguntas_misturadas(Perguntas),
+    format_response(Perguntas, Response),
+    format('Content-type: text/plain~n~n'),
+    format('~s', [Response]).
+
+format_response([], '').
+format_response([Pergunta|Rest], Formatted) :-
+    format(atom(FormattedPergunta), 'Pergunta: ~s~n', [Pergunta]),
+    format_response(Rest, RestFormatted),
+    atom_concat(FormattedPergunta, RestFormatted, Formatted).
 
 
 :- servidor(8080).
@@ -58,3 +85,6 @@ remover_espacos_e_linhas([Elemento | Resto], [Elemento | SemEspacos]) :-
     Elemento \= ' ', % Se o elemento não for um espaço em branco
     Elemento \= '',  % E não for uma linha em branco
     remover_espacos_e_linhas(Resto, SemEspacos).
+
+
+
