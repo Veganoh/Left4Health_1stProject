@@ -1,14 +1,14 @@
 export class Category {
-    private regra1: string;
-    private regra2: string;
-    private questions: string[];
-    private score: string;
+    public regra1: string;
+    public regra2: string;
+    public questions: string[];
+    public score: number; // Alterado o tipo para number
 
     constructor() {
         this.regra1 = "";
         this.regra2 = "";
         this.questions = [];
-        this.score = "";
+        this.score = 0; // Inicializado com 0 como um número inteiro
     }
 
     public getRegra1(): string {
@@ -27,12 +27,12 @@ export class Category {
         this.regra2 = regra2;
     }
 
-    public getScore(): string {
+    public getScore(): number { // Alterado o tipo de retorno para number
         return this.score;
     }
 
     public setScore(score: string): void {
-        this.score = score;
+        this.score = parseInt(score, 10); // Faz o parse da string para um número inteiro
     }
 
     public addQuestion(question: string): void {

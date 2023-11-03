@@ -65,3 +65,29 @@
   </form>
 </div>
 
+<div class="container questionnaire" *ngIf="currentPage === 3">
+  <h2>Diagnosis</h2>
+  <ul *ngIf="diagnosis.length > 0">
+      <li *ngFor="let category of diagnosis">
+        <div>
+          <p>Regra 1: {{ category.regra1 }}</p>
+          <p>Regra 2: {{ category.regra2 }}</p>
+          <p>Score: {{ category.score }}</p>
+          <ul>
+            <li *ngFor="let question of category.questions">
+              {{ question }}
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+    <p *ngIf="diagnosis.length === 0">No diagnosis found for score > 15</p>
+</div>
+  
+  
+  
+  
+  
+  
+
+

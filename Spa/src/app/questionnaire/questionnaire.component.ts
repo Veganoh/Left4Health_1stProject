@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router , NavigationExtras} from '@angular/router';
 import { Question } from '../domain/question';
 import { QuestionnaireService } from '../services/questionnaire.service';
 import { Category } from '../domain/category';
@@ -17,7 +17,10 @@ export class QuestionnaireComponent implements OnInit {
   questions: Question[] = [];
   questionsPage1: Question[] = [];
   questionsPage2: Question[] = [];
+  
   diagnosis: Category[] = [];
+  positiveDiagnosis: Category[] = [];
+  negativeDiagnosis: Category[] = [];
 
 
   constructor(
@@ -42,13 +45,12 @@ export class QuestionnaireComponent implements OnInit {
 
     async obtainAnswer(): Promise<void> {
       const answer = createStringFromAnswers(this.questions);
+    
       try {
         const response = await this.service.answerQuizFinal(answer).toPromise();
         if (response) {
           this.diagnosis = createCategoriesFromString(response);
-    
-          // Agora você pode passar o diagnóstico para a página de diagnóstico
-          this.router.navigate(['/diagnosis'], { state: { diagnosis: this.diagnosis } });
+          this.getDiagnosis();
         } else {
           console.error('Resposta da API é indefinida');
         }
@@ -59,7 +61,6 @@ export class QuestionnaireComponent implements OnInit {
     
 
   nextPage() {
-    console.log(this.questionsPage1)
     this.currentPage = 2;
   }
 
@@ -68,13 +69,16 @@ export class QuestionnaireComponent implements OnInit {
   }
 
   submitForm() {
-    console.log(this.questionsPage2)
     this.obtainAnswer();
-    console.log(this.diagnosis)
-    // Lógica para processar as respostas do questionário
+    this.currentPage = 3;
+  }
 
-    // Redirecione o usuário para a página de diagnóstico após a submissão
-    this.router.navigate(['/diagnosis']);
+  getDiagnosis() {
+    for (const category of this.diagnosis) {
+        const score = category.score;
+        if(score >= 15) this.positiveDiagnosis.push(category);
+        else this.negativeDiagnosis.push(category) 
+    }
   }
 }
 
@@ -123,7 +127,6 @@ function createCategoriesFromString(inputString: string): Category[] {
     currentCategory.addQuestion(lines[i+7])
     categories.push(currentCategory);
   }
-  console.log(categories)
   return categories;
 }
 
