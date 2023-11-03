@@ -3,6 +3,8 @@
 % Usar base de conhecimento veIculos2.txt
 % Explicacoes como?(how?) e porque nao?(whynot?)
 
+:-consult('aux_methods.pl').
+
 :-op(220,xfx,entao).
 :-op(35,xfy,se).
 :-op(240,fx,regra).
@@ -10,17 +12,19 @@
 :-op(600,xfy,e).
 
 :-dynamic justifica/3.
+:- dynamic(ultimo_facto/1). %Contador de factos inicias
 
-
-carrega_bc(NBC):-
+carrega_bc(Initial_facts,NBC):-
 		consult(NBC),
+		assert(ultimo_facto(Initial_facts)),
         writeln('Regras carregadas para o motor de inferencia').
 
 %Manipulação da função caso nao existam factos, conseguirmos identificar esse erro
 arranca_motor():-	
     %carrega_bc(NBC),
     %writeln('Motor de inferencia executado com sucesso.'),
-    facto(N,Facto),
+	write_last_fact(),
+	facto(N,Facto),
 	facto_dispara_regras1(Facto, LRegras),
 	dispara_regras(N, Facto, LRegras),
 	ultimo_facto(N).
