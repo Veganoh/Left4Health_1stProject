@@ -11,30 +11,16 @@
 
 :-dynamic justifica/3.
 
-% Inicialize a variável global ultimo_fato com 0
-ultimo_facto(0).
 
-
-carrega_bc:-
-		write('NOME DA BASE DE CONHECIMENTO (terminar com .)-> '),
-		read(NBC),
-		consult(NBC).
+carrega_bc(NBC):-
+		consult(NBC),
+        writeln('Regras carregadas para o motor de inferencia').
 
 %Manipulação da função caso nao existam factos, conseguirmos identificar esse erro
-
-arranca_motor2:-
-		conta_factos(N),
-		write(N),
-		facto(N,Facto), 
-		write(N),
-		facto_dispara_regras1(Facto, LRegras),
-		write(N),
-		dispara_regras(N, Facto, LRegras),
-		write(N),
-		%ultimo_facto(N),
-		write(N).
-
-arranca_motor:-	facto(N,Facto),
+arranca_motor():-	
+    %carrega_bc(NBC),
+    %writeln('Motor de inferencia executado com sucesso.'),
+    facto(N,Facto),
 	facto_dispara_regras1(Facto, LRegras),
 	dispara_regras(N, Facto, LRegras),
 	ultimo_facto(N).
@@ -260,8 +246,6 @@ formata(Nivel):-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Funções criadas por nós
 
-
-%Contador de factos, para substituir o "ultimo_facto(X)."
 conta_factos(Contagem) :-
 	findall(_, facto(_, _), LFactos),
     length(LFactos, Contagem).
