@@ -1,23 +1,20 @@
-<div class="diagnosis">
-  <h1 class="title">Resultados do Diagnóstico</h1>
-
-  <ng-container *ngFor="let diagnosisItem of diagnoses" class="diagnosis-item">
-    <div class="diagnosis-item">
-      <h2 class="diagnosis-type">{{ diagnosisItem.type }}</h2>
-
-      <div class="diagnosis-answers">
-        <h3>Respostas:</h3>
-        <ul>
-          <li *ngFor="let answer of diagnosisItem.answers">
-            {{ answer.question }}: {{ answer.answer }}
-          </li>
-        </ul>
+<div class="diagnosis-container">
+  <h2>Diagnoses</h2>
+  <ul *ngIf="diagnoses.length > 0">
+    <li *ngFor="let category of diagnoses">
+      <div>
+        <strong class="diagnosis-score" *ngIf="category.score !== undefined">Diagnosis Score: {{ category.score }}</strong>
+        <p class="diagnosis-description" *ngIf="category.description !== undefined">Diagnosis Description: {{ category.description }}</p>
       </div>
-    </div>
-  </ng-container>
-  
-  <button class="back-button" (click)="returnToHome()">Voltar à Página Inicial</button>
+    </li>
+  </ul>
+  <p *ngIf="diagnoses.length === 0">No diagnoses found for score > 15</p>
+  <button (click)="returnToHome()">Return to Home</button>
 </div>
+
+
+
+
 
 
 

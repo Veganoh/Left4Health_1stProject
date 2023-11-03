@@ -19,3 +19,9 @@ V
 &src/main/java/org/meia/model/Fact.java,d\1\d14ba2ce82186f9c7b1c5c51db36d4efd67e8ffc
 x
 Hsrc/main/java/org/meia/anxietyDiagnosis/TrackingAgendaEventListener.java,7\1\712b0e6ac6d51d223590c5e118ca42f57a505c2e
+^
+.src/main/java/org/meia/model/QuestionType.java,8\f\8f261d0743ff595b340bc93572794e97f25ed6dc
+m
+=src/main/java/org/meia/anxietyDiagnosis/AnxietyDiagnosis.java,8\7\87f48f441f663b9398f9357507497e9f55de4775
+c
+3src/main/java/org/meia/anxietyDiagnosis/Server.java,3\4\3496ce29cfacfcf186a45718d6bf1dfb22a587dc

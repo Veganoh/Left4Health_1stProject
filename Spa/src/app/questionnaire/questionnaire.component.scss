@@ -14,29 +14,33 @@
   color: #007bff;
   margin: 20px 0;
   font-weight: bold;
+  font-family: Arial, sans-serif; /* Mantém a fonte Arial */
 }
 
 .questionnaire table {
   width: 100%;
   border-collapse: collapse;
+  font-family: Arial, sans-serif; /* Mantém a fonte Arial */
 }
 
-.questionnaire tr {
-  border-bottom: 1px solid #ddd;
-}
-
-.questionnaire td {
+.questionnaire thead th, .questionnaire tbody td {
+  border-bottom: 2px solid #007bff; /* Cor da borda igual à cor do título */
   padding: 10px;
   font-size: 16px;
-  border-radius: 10px; /* Adiciona bordas arredondadas para as perguntas */
+  text-align: left; /* Alinha o texto à esquerda */
+  font-family: Arial, sans-serif; /* Mantém a fonte Arial */
 }
 
 .questionnaire select {
   font-family: Arial, sans-serif;
 }
 
+.button-container {
+  text-align: left; /* Alinha o conteúdo à esquerda */
+}
+
 .questionnaire button {
-  margin-top: 20px; /* Move os botões para baixo */
+  margin-top: 20px;
   padding: 10px 20px;
   background-color: #007BFF;
   color: #fff;
@@ -44,9 +48,74 @@
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
-  margin-right: 10px; /* Adiciona margem direita para separar os botões */
+  font-family: Arial, sans-serif; /* Mantém a fonte Arial */
+  .questionnaire {
+  text-align: center;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  float: right;
+}
+
+.bg.bg-primary{
+  float: right;
+}
+
+.questionnaire h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.questionnaire h1.title {
+  font-size: 30px;
+  color: #007bff;
+  margin: 20px 0;
+  font-weight: bold;
+  font-family: Arial, sans-serif; /* Mantém a fonte Arial */
+}
+
+.questionnaire table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif; /* Mantém a fonte Arial */
+}
+
+.questionnaire thead th, .questionnaire tbody td {
+  border-bottom: 2px solid #007bff; /* Cor da borda igual à cor do título */
+  padding: 10px;
+  font-size: 16px;
+  text-align: left; /* Alinha o texto à esquerda */
+  font-family: Arial, sans-serif; /* Mantém a fonte Arial */
+}
+
+.questionnaire select {
+  font-family: Arial, sans-serif;
+}
+
+.button-container {
+  text-align: left; /* Alinha o conteúdo à esquerda */
+}
+
+.questionnaire button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-family: Arial, sans-serif; /* Mantém a fonte Arial */
 }
 
 .questionnaire button:hover {
   background-color: #0056b3;
 }
+
+}
+
+.questionnaire button:hover {
+  background-color: #0056b3;
+}
+
+
+

@@ -1,34 +1,28 @@
 export class Question {
-
-    private id : number;
-
+    private id: number;
     public question: string;
-
-    public answer : string | null;
-
-    constructor(id : number, question: string){
-        this.id = id;
-        this.question = question;
-        this.answer = null;
+    public answer: string | null;
+  
+    constructor(id: number, question: string) {
+      this.id = id;
+      this.question = question;
+      this.answer = null;
     }
-
- 
+  
     public getId(): number {
-        return this.id;
+      return this.id;
     }
   
     public getQuestion(): string {
-        return this.question;
+      return this.question;
     }
   
     public getAnswer(): string | null {
-        return this.answer;
+      return this.answer;
     }
-
+  
     public setAnswer(answer: string): void {
-        this.answer = answer;
+      this.answer = answer;
     }
-
-    
-}
+  }
 

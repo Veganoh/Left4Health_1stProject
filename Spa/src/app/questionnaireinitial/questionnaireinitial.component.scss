@@ -4,9 +4,9 @@
   font-family: Arial, sans-serif;
 }
 
-.questionnaireinitial h2 {
-  font-size: 24px;
-  color: #007bff; /* Cor do título */
+.questionnaireinitial h1 {
+  font-size: 28px;
+  color: #007bff;
   margin-bottom: 20px;
 }
 
@@ -21,19 +21,35 @@
   padding: 0;
 }
 
-.questionnaireinitial li {
+.question-item {
+  display: flex;
+  align-items: center;
   font-size: 16px;
   text-align: left;
   padding: 10px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 2px solid #007bff; /* Cor da borda igual à cor do título */
+}
+
+.question-text {
+  flex: 1; /* Ocupa todo o espaço disponível à esquerda */
+}
+
+.radio-options {
+  display: flex;
+  align-items: center; /* Alinha os botões "Sim" e "Não" à direita */
+}
+
+.radio-option {
+  margin-right: 10px;
 }
 
 .questionnaireinitial .buttons {
-  margin-top: 20px; /* Move os botões para baixo */
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .questionnaireinitial button {
-  margin-right: 10px; /* Adiciona margem direita para separar os botões */
   padding: 10px 20px;
   background-color: #007BFF;
   color: #fff;
@@ -47,15 +63,14 @@
   background-color: #0056b3;
 }
 
-.questionnaireinitial .radio-option {
-  display: inline-block;
-  margin-right: 10px; /* Adiciona margem direita para separar os botões de opção */
-}
-
-/* Estilo para o aviso */
 .questionnaireinitial .warning {
-  background-color: #ffc107; /* Cor de fundo do aviso */
+  background-color: #ffc107;
   padding: 10px;
   border-radius: 5px;
-  margin-top: 20px;
+  margin: 0 auto; /* Centraliza horizontalmente, mantendo margens verticais */
+  align-content: center;
+  max-width: 600px;
+  text-align: center; /* Centraliza o texto dentro dos warnings */
 }
+
+
