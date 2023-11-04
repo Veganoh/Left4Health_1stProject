@@ -133,11 +133,18 @@ calcular_valor_total_sindrome(Transtorno, QuestionIds, Total) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Metodos auxiliares de manipulação dos pedidos
 
+%format_response([], '').
+%format_response([Pergunta|Rest], Formatted) :-
+%    format(atom(FormattedPergunta), 'Pergunta: ~s~n', [Pergunta]),
+%    format_response(Rest, RestFormatted),
+%    atom_concat(FormattedPergunta, RestFormatted, Formatted).
+
 format_response([], '').
-format_response([Pergunta|Rest], Formatted) :-
-    format(atom(FormattedPergunta), 'Pergunta: ~s~n', [Pergunta]),
+format_response([(ID, Pergunta) | Rest], Formatted) :-
+    format(atom(FormattedPergunta), '~d~n~w~n', [ID, Pergunta]),
     format_response(Rest, RestFormatted),
     atom_concat(FormattedPergunta, RestFormatted, Formatted).
+
 
 processar_corpo(Dados, Resultado, Contador, ContadorFinal) :-
     split_string(Dados, "\r\n", "\r\n", Linhas),

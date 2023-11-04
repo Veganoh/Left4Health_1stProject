@@ -73,7 +73,7 @@ pergunta(ansiedade_separacao, 40, "Tem sintomas físicos de ansiedade, como palp
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Método para receber todas as perguntas iniciais todos os tipos de transtorno
 todas_perguntas_iniciais(ListaPerguntasInicias) :-
-    findall(Pergunta, pergunta_inicial(_, _, Pergunta), ListaPerguntasInicias).
+    findall((ID, Pergunta), pergunta_inicial(_, ID, Pergunta), ListaPerguntasInicias).
 
 % Método para receber todas as perguntas de todos os tipos de transtorno de maneira aleatória
 perguntas_misturadas(ListaPerguntasMisturadas) :-
@@ -82,7 +82,7 @@ perguntas_misturadas(ListaPerguntasMisturadas) :-
 
 % Método para receber todas as perguntas de todos os tipos de transtorno
     todas_perguntas(ListaPerguntas) :-
-        findall(Pergunta, pergunta(_, _, Pergunta), ListaPerguntas).
+        findall((ID, Pergunta), pergunta(_, ID, Pergunta), ListaPerguntas).
     
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
