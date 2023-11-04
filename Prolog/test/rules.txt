@@ -5,6 +5,7 @@
 % Metaconhecimento
 
 facto_dispara_regras(pergunta(_, sim), [1,5,7]).
+facto_dispara_regras(pergunta(_, nao), [2,3,4,6]).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
