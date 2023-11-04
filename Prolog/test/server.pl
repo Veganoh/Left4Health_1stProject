@@ -4,6 +4,7 @@
 :- use_module(library(http/http_client)).
 
 :-consult('aux_methods.pl'). 
+:- consult('engine.pl').
 
 :- dynamic ultimo_facto/1. %Contador de factos inicias
 :- dynamic facto/2. % Definindo a estrutura de fato (Pergunta, Resposta).
@@ -34,6 +35,8 @@ get_perguntas_iniciais(Request) :-
 
 % HTTP POST para receber as respostas do quizInitial
 :- http_handler('/api/answerQuizInitial', quizInitial, [method(post)]).
+% HTTP POST para receber as respostas do quizInitial
+:- http_handler('/api/answerQuizInitial', quizInitial, [method(post)]).
 quizInitial(Request) :-
     member(method(post), Request),
     http_read_data(Request, Data, [to(string)]),
@@ -43,10 +46,15 @@ quizInitial(Request) :-
     ValorUltimoFacto is ContadorFinal-1,
     retractall(ultimo_facto(_)), % Remove the existing ultimo_facto
     assert(ultimo_facto(ValorUltimoFacto)), % Assert the new value
-    format('Access-Control-Allow-Origin: *~n'),
+    arranca_motor(),
+    conclusion_inicial(ConclusaoGerada),
+    extrair_nome_conclusao(ConclusaoGerada, TipoConclusao),
     format('Content-type: text/plain; charset=UTF-8~n~n'),
-    format('Numero de fatos criados: ~d~n', [ValorUltimoFacto]),
-    format('~w', [Resultado]). % Saída em texto simples
+    descricao_conclusao(TipoConclusao, Descricao),
+    format('~w', [Descricao]).
+     % Saída em texto simples
+
+
 
 % Define a handler for the /api/obtain40Questions endpoint
 :- http_handler('/api/obtain40Questions', get_perguntas_40, [method(get)]).
