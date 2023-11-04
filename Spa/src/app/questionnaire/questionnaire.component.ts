@@ -46,6 +46,19 @@ export class QuestionnaireComponent implements OnInit {
       });
     }
 
+    redirectToChartsPage() {
+      const navigationExtras: NavigationExtras = {
+        state: {
+          diagnosis: this.diagnosis,
+        },
+      };
+      this.router.navigate(['/charts'], navigationExtras);
+    }
+
+    goToHomePage() {
+      this.router.navigate(['/']); 
+    }
+
     async obtainAnswer(): Promise<void> {
       const answer = createStringFromAnswers(this.questions);
     
@@ -147,7 +160,6 @@ function createCategoriesFromString(inputString: string): Category[] {
     categories.push(currentCategory);
   }
   return categories;
-
 }
 
 

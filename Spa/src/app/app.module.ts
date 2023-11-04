@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router'; // Importe o RouterModule
+import { RouterModule } from '@angular/router'; 
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms'; // Importe o FormsModule
+import { FormsModule } from '@angular/forms';
+import { NgChartsModule  } from 'ng2-charts'; 
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,6 +12,7 @@ import { QuestionnaireComponent } from './questionnaire/questionnaire.component'
 import { DiagnosisComponent } from './diagnosis/diagnosis.component';
 import { HomeComponent } from './home/home.component';
 import { QuestionnaireinitialComponent } from './questionnaireinitial/questionnaireinitial.component';
+import { ChartsComponent } from './charts/charts.component';
 
 @NgModule({
   declarations: [
@@ -17,14 +20,16 @@ import { QuestionnaireinitialComponent } from './questionnaireinitial/questionna
     QuestionnaireComponent,
     DiagnosisComponent,
     HomeComponent,
-    QuestionnaireinitialComponent
+    QuestionnaireinitialComponent,
+    ChartsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule, // Fornecendo explicitamente o RouterModule
-    FormsModule, // Adicione o FormsModule aqui
+    RouterModule, 
+    FormsModule, 
     HttpClientModule,
+    NgChartsModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
