@@ -1,0 +1,77 @@
+.questionnaireinitial {
+    text-align: left;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .questionnaireinitial h1 {
+    font-size: 28px;
+    color: #007bff;
+    margin-bottom: 20px;
+  }
+  
+  .questionnaireinitial p {
+    font-size: 16px;
+    color: #333;
+    margin: 20px 0;
+  }
+  
+  .questionnaireinitial ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .question-item {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    text-align: left;
+    padding: 10px;
+    border-bottom: 2px solid #007bff; /* Cor da borda igual à cor do título */
+  }
+  
+  .question-text {
+    flex: 1; /* Ocupa todo o espaço disponível à esquerda */
+  }
+  
+  .radio-options {
+    display: flex;
+    align-items: center; /* Alinha os botões "Sim" e "Não" à direita */
+  }
+  
+  .radio-option {
+    margin-right: 10px;
+  }
+  
+  .questionnaireinitial .buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .questionnaireinitial button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .questionnaireinitial button:hover {
+    background-color: #0056b3;
+  }
+  
+  .questionnaireinitial .warning {
+    background-color: #ffc107;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 0 auto; /* Centraliza horizontalmente, mantendo margens verticais */
+    align-content: center;
+    max-width: 600px;
+    text-align: center; /* Centraliza o texto dentro dos warnings */
+  }
+  
+  
+  

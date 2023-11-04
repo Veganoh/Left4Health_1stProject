@@ -17,4 +17,14 @@ export class QuestionnaireInitialService {
     const options = { responseType: 'text' as 'json' };
     return this.http.post("http://localhost:8080/api/answerQuizInitial", answer, options) as Observable<string>;
   }
+
+  public obtainInitialQuestionsProlog(): Observable<string> {
+    const options = { responseType: 'text' as 'json' }; // Set the responseType to 'text'
+    return this.http.get("http://localhost:7070/api/obtainInitialQuestions", options) as Observable<string>;
+  }
+
+  public answerQuizInitialProlog(answer: string): Observable<string> {
+    const options = { responseType: 'text' as 'json' };
+    return this.http.post("http://localhost:7070/api/answerQuizInitial", answer, options) as Observable<string>;
+  }
 }
