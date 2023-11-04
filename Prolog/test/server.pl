@@ -23,7 +23,7 @@ sayHello(Request):-
     format('Hello World!').
 
 % Define a handler for the /quizInitial endpoint
-:- http_handler('/api/quizInitial', get_perguntas_iniciais, [method(get)]).
+:- http_handler('/api/obtainInitialQuestions', get_perguntas_iniciais, [method(get)]).
 % Handler for the GET request to /api/quizInitial endpoint
 get_perguntas_iniciais(Request) :-
     todas_perguntas_iniciais(Perguntas),
@@ -31,18 +31,8 @@ get_perguntas_iniciais(Request) :-
     format('Content-type: text/plain~n~n'),
     format('~s', [Response]).
 
-% Define a handler for the /api/quiz40 endpoint
-:- http_handler('/api/quiz40', get_perguntas_40, [method(get)]).
-% Handler for the GET request to /api/quiz40 endpoint
-get_perguntas_40(Request) :-
-    perguntas_misturadas(Perguntas),
-    format_response(Perguntas, Response),
-    format('Content-type: text/plain~n~n'),
-    format('~s', [Response]).
-
-
 % HTTP POST para receber as respostas do quizInitial
-:- http_handler('/api/answersQuizInitial', quizInitial, [method(post)]).
+:- http_handler('/api/answerQuizInitial', quizInitial, [method(post)]).
 quizInitial(Request) :-
     member(method(post), Request),
     http_read_data(Request, Data, [to(string)]),
@@ -55,6 +45,90 @@ quizInitial(Request) :-
     format('Content-type: text/plain; charset=UTF-8~n~n'),
     format('Numero de fatos criados: ~d~n', [ValorUltimoFacto]),
     format('~w', [Resultado]). % Saída em texto simples
+
+% Define a handler for the /api/quiz40 endpoint
+:- http_handler('/api/quiz40', get_perguntas_40, [method(get)]).
+% Handler for the GET request to /api/quiz40 endpoint
+get_perguntas_40(Request) :-
+    perguntas_misturadas(Perguntas),
+    format_response(Perguntas, Response),
+    format('Content-type: text/plain~n~n'),
+    format('~s', [Response]).
+
+process_lines([], _).
+process_lines([QuestionIdString, "5"|Rest], QuestionId) :-
+    atom_number(QuestionIdString, QuestionId),
+    assertz(facto(QuestionId, pergunta(QuestionId, 5))),
+    NextQuestionId is QuestionId + 1,
+    process_lines(Rest, NextQuestionId).
+
+% HTTP POST to receive answers for quiz40
+:- http_handler('/api/answersQuiz40', quiz40, [method(post)]).
+quiz40(Request) :-
+    member(method(post), Request),
+    http_read_data(Request, Data, [to(string)]),
+    ultimo_facto(X),
+    X1 is X + 1,
+    processar_corpo(Data, Resultado, X1, ContadorFinal),
+    ValorUltimoFacto is ContadorFinal - 1,
+    retractall(ultimo_facto(_)), % Remove the existing ultimo_facto
+    assert(ultimo_facto(ValorUltimoFacto)), % Assert the new value
+    format('Content-type: text/plain; charset=UTF-8~n~n'),
+    format('Numero de fatos criados: ~d~n', [ValorUltimoFacto]),
+    format('~w', [Resultado]). % Saída em texto simples
+
+% Define the route handler for the GET request
+:- http_handler('/api/resultados', handle_resultados, [method(get)]).
+
+% Predicate to handle the GET request and send back the calculated results
+handle_resultados(Request) :-
+    calcula_valores_totais(Resultados),
+    generate_resultados_text(Resultados, ResultadosText),
+    format('Content-type: text/plain~n~n'),
+    format(ResultadosText).
+
+calcular_valor_total_sindrome(Transtorno, QuestionIds) :-
+    findall(Valor, (
+        member(QuestionId, QuestionIds),
+        facto(QuestionId, pergunta(QuestionId, Valor))
+    ), Valores),
+    sum_list(Valores, Total),
+    assertz(transtorno(Transtorno, total(Total))),
+    %write('Valor Total para '), write(Transtorno), write(': '), 
+    write(Total), nl.
+
+calcula_valores_totais(Resultados) :-
+    calcular_valor_total_sindrome(ansiedade_Generalizada,[1,2,3,4,5], Total1),
+    calcular_valor_total_sindrome(transtorno_de_Panico,[6,7,8,9,10], Total2),
+    calcular_valor_total_sindrome(transtorno_de_Panico_com_Agorafobia,[11,12,13,14,15], Total3),
+    calcular_valor_total_sindrome(agorafobia,[16,17,18,19,20], Total4),
+    calcular_valor_total_sindrome(ansiedade_Social,[21,22,23,24,25], Total5),
+    calcular_valor_total_sindrome(fobia_especifica,[26,27,28,29,30], Total6),
+    calcular_valor_total_sindrome(mutismo_Seletivo,[31,32,33,34,35], Total7),
+    calcular_valor_total_sindrome(ansiedade_de_separacao,[36,37,38,39,40], Total8),
+    Resultados = [
+        ['ansiedade_Generalizada', Total1],
+        ['transtorno_de_Panico', Total2],
+        ['transtorno_de_Panico_com_Agorafobia', Total3],
+        ['agorafobia', Total4],
+        ['ansiedade_Social', Total5],
+        ['fobia_especifica', Total6],
+        ['mutismo_Seletivo', Total7],
+        ['ansiedade_de_separacao', Total8]
+    ].
+
+generate_resultados_text([], '').
+generate_resultados_text([[Sindrome, Valor] | Rest], Text) :-
+    generate_resultados_text(Rest, RestText),
+    format(atom(Text), 'Resultados foram: ~w: ~w~n~w', [Sindrome, Valor, RestText]).
+
+
+calcular_valor_total_sindrome(Transtorno, QuestionIds, Total) :-
+    findall(Valor, (
+        member(QuestionId, QuestionIds),
+        facto(QuestionId, pergunta(QuestionId, Valor))
+    ), Valores),
+    sum_list(Valores, Total).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Metodos auxiliares de manipulação dos pedidos
@@ -84,4 +158,3 @@ create_facts([[Pergunta, Resposta] | RestoLinhas], [pergunta(Pergunta, Resposta)
     assertz(facto(Contador, pergunta(PeguntaNumber, AtomResposta))),
     NewContadorFactos is Contador + 1,
     create_facts(RestoLinhas, RestoPares, NewContadorFactos, ContadorFinal).
-
