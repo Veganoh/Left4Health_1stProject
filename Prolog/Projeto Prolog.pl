@@ -9,6 +9,13 @@ pergunta_inicial(quizInitial, 45, "Você já foi diagnosticado ou acredita que s
 pergunta_inicial(quizInitial, 46, "Essa ansiedade, preocupação ou sintomas físicos causam um impacto significativo em sua vida social, profissional ou em outras áreas importantes?").
 pergunta_inicial(quizInitial, 47, "Os sintomas podem ser explicados por uso de medicamentos, abuso de substâncias ou síndrome de abstinência?").
 
+gerar_string:-
+    pergunta_inicial(_,ID,Pergunta),
+    format('~w~n~w~n', [ID, Pergunta]),
+    fail.
+gerar_strings.
+
+
 
 % Perguntas relacionadas à Síndrome de Ansiedade Generalizada
 pergunta(sindrome_ansiedade_generalizada, 1, "Nas últimas semanas, com que frequência você se sentiu tenso, nervoso ou ansioso, mesmo quando não havia motivo óbvio para se sentir assim?").

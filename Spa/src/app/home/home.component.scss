@@ -4,6 +4,8 @@
   font-family: Arial, sans-serif;
 }
 
+
+
 .header {
   padding: 20px;
   border-radius: 10px;
@@ -22,6 +24,16 @@
   color: #007bff;
   margin: 20px 0;
   font-weight: bold;
+  animation: fadeIn 2s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .select-diagnosis-text {
@@ -46,13 +58,15 @@
   padding: 10px 20px;
   border: 2px solid #007bff;
   border-radius: 5px;
-  transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.3s, color 0.3s, transform 0.3s;
   cursor: pointer;
 }
 
 .button-with-border:hover {
   background-color: #007bff;
   color: #fff;
+  transform: scale(1.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .footer {
@@ -65,14 +79,15 @@
   margin-top: 20px;
 }
 
-visit-text {
+.visit-link {
+  text-decoration: none;
+  color: #007bff;
+  transition: text-decoration 0.3s, color 0.3s;
   font-weight: bold;
 }
 
-visit-link {
-  text-decoration: none;
-  color: #007bff;
-  transition: text-decoration 0.3s;
-  font-weight: bold;
+.visit-link:hover {
+  text-decoration: underline;
+  color: #0056b3;
 }
 

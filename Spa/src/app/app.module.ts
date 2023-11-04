@@ -12,7 +12,9 @@ import { QuestionnaireComponent } from './questionnaire/questionnaire.component'
 import { DiagnosisComponent } from './diagnosis/diagnosis.component';
 import { HomeComponent } from './home/home.component';
 import { QuestionnaireinitialComponent } from './questionnaireinitial/questionnaireinitial.component';
+
 import { ChartsComponent } from './charts/charts.component';
+import { QuestionnaireInitialPrologComponent } from './prolog/questionnaire-initial-prolog/questionnaire-initial-prolog.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { ChartsComponent } from './charts/charts.component';
     DiagnosisComponent,
     HomeComponent,
     QuestionnaireinitialComponent,
-    ChartsComponent
+    ChartsComponent,
+    QuestionnaireInitialPrologComponent,
+    ChartsComponent,
   ],
   imports: [
     BrowserModule,
