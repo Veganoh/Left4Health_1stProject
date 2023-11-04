@@ -1,13 +1,13 @@
-:- set_prolog_flag(encoding, utf8).
+:- encoding(utf8).
 
 % Perguntas relacionas com o quiz Initial
-pergunta(quizInitial, 41, "Possuí alguma condição clinica do diagnóstico diferencial pode explicar os sintomas?").
-pergunta(quizInitial, 42, "Você sente ansiedade e preocupação excessiva em relação a várias áreas da sua vida na maioria dos dias há pelo menos seis meses?").
-pergunta(quizInitial, 43, "Você sente que sua preocupação é desproporcional em relação à situação ou que você não consegue controlá-la?").
-pergunta(quizInitial, 44, "Nos últimos seis meses, quantos sintomas dos seguintes sentiu na maioria dos dias: inquietação, fadiga, dificuldade de concentração, irritabilidade, tensão muscular ou problemas para dormir?").
-pergunta(quizInitial, 45, "Você já foi diagnosticado ou acredita que sua ansiedade excessiva não pode ser explicada por outro problema de saúde mental, como transtorno de pânico, fobia social, transtorno obsessivo-compulsivo, ou outros transtornos similares?").
-pergunta(quizInitial, 46, "Essa ansiedade, preocupação ou sintomas físicos causam um impacto significativo em sua vida social, profissional ou em outras áreas importantes?").
-pergunta(quizInitial, 47, "Os sintomas podem ser explicados por uso de medicamentos, abuso de substâncias ou síndrome de abstinência?").
+pergunta_inicial(quizInitial, 41, "Possuí alguma condição clinica do diagnóstico diferencial pode explicar os sintomas?").
+pergunta_inicial(quizInitial, 42, "Você sente ansiedade e preocupação excessiva em relação a várias áreas da sua vida na maioria dos dias há pelo menos seis meses?").
+pergunta_inicial(quizInitial, 43, "Você sente que sua preocupação é desproporcional em relação à situação ou que você não consegue controlá-la?").
+pergunta_inicial(quizInitial, 44, "Nos últimos seis meses, quantos sintomas dos seguintes sentiu na maioria dos dias: inquietação, fadiga, dificuldade de concentração, irritabilidade, tensão muscular ou problemas para dormir?").
+pergunta_inicial(quizInitial, 45, "Você já foi diagnosticado ou acredita que sua ansiedade excessiva não pode ser explicada por outro problema de saúde mental, como transtorno de pânico, fobia social, transtorno obsessivo-compulsivo, ou outros transtornos similares?").
+pergunta_inicial(quizInitial, 46, "Essa ansiedade, preocupação ou sintomas físicos causam um impacto significativo em sua vida social, profissional ou em outras áreas importantes?").
+pergunta_inicial(quizInitial, 47, "Os sintomas podem ser explicados por uso de medicamentos, abuso de substâncias ou síndrome de abstinência?").
 
 
 % Perguntas relacionadas à Síndrome de Ansiedade Generalizada
@@ -76,6 +76,10 @@ resposta(nenhum_transtorno, "Não atinge os valores suficientes para nenhum dos 
 % Método para receber todas as perguntas de todos os tipos de transtorno
 todas_perguntas(ListaPerguntas) :-
     findall(Pergunta, pergunta(_, _, Pergunta), ListaPerguntas).
+
+% Método para receber todas as perguntas iniciais todos os tipos de transtorno
+todas_perguntas_iniciais(ListaPerguntasInicias) :-
+    findall(Pergunta, pergunta_inicial(_, _, Pergunta), ListaPerguntasInicias).
 
 % Método para receber todas as perguntas de todos os tipos de transtorno de maneira aleatória
 perguntas_misturadas(ListaPerguntasMisturadas) :-

@@ -109,12 +109,41 @@ escreve_factos([I|R]):-facto(I,F),
 	escreve_factos(R).
 escreve_factos([]).
 
-% Predicate to calculate and store total Valor for sindrome_de_panico
-%calculate_total_valor_sindrome_de_panico :-
-%    findall(Valor, (between(1, 5, Id), facto(Id, pergunta(Id, Valor))), Valores),
-%    sum_list(Valores, Total),
-%    assertz(transtorno(sindrome_de_panico, total(Total))).
-%	write('Total Valor for sindrome_de_panico: '), 
-%    write(Total).
+calcular_valor_total_sindrome(Transtorno, QuestionIds) :-
+    findall(Valor, (
+        member(QuestionId, QuestionIds),
+        facto(QuestionId, pergunta(QuestionId, Valor))
+    ), Valores),
+    sum_list(Valores, Total),
+    assertz(transtorno(Transtorno, total(Total))),
+    %write('Valor Total para '), write(Transtorno), write(': '), 
+    write(Total), nl.
+
+calcula_valores_totais :-
+    calcular_valor_total_sindrome(ansiedade_Generalizada,[1,2,3,4,5], Total1),
+    calcular_valor_total_sindrome(transtorno_de_Panico,[6,7,8,9,10], Total2),
+    calcular_valor_total_sindrome(transtorno_de_Panico_com_Agorafobia,[11,12,13,14,15], Total3),
+    calcular_valor_total_sindrome(agorafobia,[16,17,18,19,20], Total4),
+    calcular_valor_total_sindrome(ansiedade_Social,[21,22,23,24,25], Total5),
+    calcular_valor_total_sindrome(fobia_especifica,[26,27,28,29,30], Total6),
+    calcular_valor_total_sindrome(mutismo_Seletivo,[31,32,33,34,35], Total7),
+    calcular_valor_total_sindrome(ansiedade_de_separacao,[36,37,38,39,40], Total8),
+    asserta(su(total(Total1, Total2, Total3, Total4, Total5, Total6, Total7, Total8))),
+	write('Total para ansiedade_Generalizada: '), write(Total1), nl,
+    write('Total para transtorno_de_Panico: '), write(Total2), nl,
+    write('Total para transtorno_de_Panico_com_Agorafobia: '), write(Total3), nl,
+    write('Total para agorafobia: '), write(Total4), nl,
+    write('Total para ansiedade_Social: '), write(Total5), nl,
+    write('Total para fobia_especifica: '), write(Total6), nl,
+    write('Total para mutismo_Seletivo: '), write(Total7), nl,
+    write('Total para ansiedade_de_separacao: '), write(Total8), nl.
+
+calcular_valor_total_sindrome(Transtorno, QuestionIds, Total) :-
+    findall(Valor, (
+        member(QuestionId, QuestionIds),
+        facto(QuestionId, pergunta(QuestionId, Valor))
+    ), Valores),
+    sum_list(Valores, Total).
+
 
 
