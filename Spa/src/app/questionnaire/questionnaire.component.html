@@ -67,9 +67,8 @@
 
 <div class="container diagnosis" *ngIf="currentPage === 3">
   
-  <h1 class="title">Diagnosis</h1>
+  <h1 class="title">Diagnóstico</h1>
   <ul *ngIf="diagnosis.length > 0">
-    {{diagnosis.length}}
     <li *ngFor="let category of diagnosisMaior; let last = last">
       <div>
         <hr style="border: 1px solid blue; margin: 20px;">
@@ -86,14 +85,17 @@
       </div>
     </li>
   </ul>
+      <button (click)="goToHomePage()">Retornar à Página Inicial</button>
+
       <button (click)="onBotaoClicado()">Pontuação abaixo de 15</button>
+
+      <button class="btn btn-primary" (click)="redirectToChartsPage()">Gráficos</button>
       
 </div>
 <div class="container diagnosis" *ngIf="currentPage === 4">
   
   <h1 class="title">Diagnosis</h1>
   <ul *ngIf="diagnosis.length > 0">
-    {{diagnosis.length}}
     <li *ngFor="let category of diagnosisMenor; let last = last">
       <div>
         <hr style="border: 1px solid blue; margin: 20px;">
@@ -110,7 +112,9 @@
       </div>
     </li>
   </ul>
-      
+
+      <button (click)="goToPage(3)">Voltar á pagina Anterior </button>
+      <button (click)="goToHomePage()">Retornar à Página Inicial</button> 
 </div>
   
   

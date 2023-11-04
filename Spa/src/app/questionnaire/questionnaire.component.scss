@@ -1,3 +1,4 @@
+/* Estilos para a classe .questionnaire */
 .questionnaire {
   text-align: center;
   padding: 20px;
@@ -14,21 +15,22 @@
   color: #007bff;
   margin: 20px 0;
   font-weight: bold;
-  font-family: Arial, sans-serif; /* Mantém a fonte Arial */
+  font-family: Arial, sans-serif;
 }
 
 .questionnaire table {
   width: 100%;
   border-collapse: collapse;
-  font-family: Arial, sans-serif; /* Mantém a fonte Arial */
+  font-family: Arial, sans-serif;
 }
 
-.questionnaire thead th, .questionnaire tbody td {
-  border-bottom: 2px solid #007bff; /* Cor da borda igual à cor do título */
+.questionnaire thead th,
+.questionnaire tbody td {
+  border-bottom: 2px solid #007bff;
   padding: 10px;
   font-size: 16px;
-  text-align: left; /* Alinha o texto à esquerda */
-  font-family: Arial, sans-serif; /* Mantém a fonte Arial */
+  text-align: left;
+  font-family: Arial, sans-serif;
 }
 
 .questionnaire select {
@@ -36,11 +38,12 @@
 }
 
 .button-container {
-  text-align: left; /* Alinha o conteúdo à esquerda */
+  text-align: left;
 }
 
 .questionnaire button {
   margin-top: 20px;
+  margin-right: 10px; /* Espaço à direita dos botões */
   padding: 10px 20px;
   background-color: #007BFF;
   color: #fff;
@@ -48,87 +51,26 @@
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
-  font-family: Arial, sans-serif; /* Mantém a fonte Arial */
-  .questionnaire {
-  text-align: center;
-  padding: 20px;
   font-family: Arial, sans-serif;
-  float: right;
-}
-
-.bg.bg-primary{
-  float: right;
-}
-
-.questionnaire h1 {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
-.questionnaire h1.title {
-  font-size: 30px;
-  color: #007bff;
-  margin: 20px 0;
-  font-weight: bold;
-  font-family: Arial, sans-serif; /* Mantém a fonte Arial */
-}
-
-.questionnaire table {
-  width: 100%;
-  border-collapse: collapse;
-  font-family: Arial, sans-serif; /* Mantém a fonte Arial */
-}
-
-.questionnaire thead th, .questionnaire tbody td {
-  border-bottom: 2px solid #007bff; /* Cor da borda igual à cor do título */
-  padding: 10px;
-  font-size: 16px;
-  text-align: left; /* Alinha o texto à esquerda */
-  font-family: Arial, sans-serif; /* Mantém a fonte Arial */
-}
-
-.questionnaire select {
-  font-family: Arial, sans-serif;
-}
-
-.button-container {
-  text-align: left; /* Alinha o conteúdo à esquerda */
-}
-
-.questionnaire button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #007BFF;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  font-family: Arial, sans-serif; /* Mantém a fonte Arial */
 }
 
 .questionnaire button:hover {
   background-color: #0056b3;
 }
 
-}
-
-.questionnaire button:hover {
-  background-color: #0056b3;
-}
-
+/* Estilos para a classe .diagnosis */
 .diagnosis {
-  text-align: left; /* Alinhar todo o conteúdo à esquerda */
+  text-align: left;
   padding: 20px;
-  font-family: Arial, sans-serif; /* Aplicar fonte Arial */
+  font-family: Arial, sans-serif;
 }
 
 .diagnosis h1 {
-  font-size: 36px; /* Aumentar o tamanho do título */
+  font-size: 36px;
   color: #007bff;
   margin: 20px 0;
   font-weight: bold;
-  font-family: Arial, sans-serif; /* Aplicar fonte Arial */
+  font-family: Arial, sans-serif;
 }
 
 .diagnosis ul {
@@ -144,11 +86,12 @@
   font-size: 16px;
   text-align: left;
   margin-bottom: 10px;
-  font-family: Arial, sans-serif; /* Aplicar fonte Arial */
+  font-family: Arial, sans-serif;
 }
 
 .diagnosis button {
   margin-top: 20px;
+  margin-right: 10px; /* Espaço à direita dos botões */
   padding: 10px 20px;
   background-color: #007BFF;
   color: #fff;
@@ -156,7 +99,7 @@
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
-  font-family: Arial, sans-serif; /* Aplicar fonte Arial */
+  font-family: Arial, sans-serif;
 }
 
 .diagnosis button:hover {
@@ -164,13 +107,13 @@
 }
 
 .diagnosis h2 {
-  font-size: 24px; /* Tamanho maior para os títulos de ansiedade */
+  font-size: 24px;
   color: #007bff;
   margin: 10px 0;
 }
 
 .diagnosis p.score {
-  font-weight: bold; /* Dar ênfase ao score */
+  font-weight: bold;
 }
 
 .diagnosis table {
@@ -191,5 +134,4 @@
 .diagnosis table td p {
   margin: 10px 0;
 }
-
 

@@ -16,6 +16,10 @@ export class HomeComponent {
   }
 
   redirectToQuestionnaireinitial() {
-    this.router.navigate(['/questionnaireinitial']); // Redirecionar para a página "questionnaireinitial"
+    if (this.selectedTool === 'prolog') {
+      this.router.navigate(['/questionnaireinitialProlog']);
+    } else {
+      this.router.navigate(['/questionnaireinitial']);
+    }
   }
 }

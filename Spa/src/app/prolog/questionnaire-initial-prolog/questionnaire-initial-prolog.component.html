@@ -1,0 +1,35 @@
+<div class="questionnaireinitial">
+  <h1>Questionário Inicial</h1> <!-- Alterado para h1 para um título um pouco maior -->
+  <p><strong>Responda a cada questão selecionando a resposta sim ou não</strong></p> <!-- Negrito e alinhamento igual ao das questões -->
+
+  <!-- Lista de perguntas -->
+  <ul>
+    <li *ngFor="let question of questions; let i = index" class="question-item">
+      <div class="question-text">{{ question.question }}</div>
+      <div class="radio-options">
+        <label class="radio-option">
+          <input type="radio" [(ngModel)]="question.answer" [value]="'sim'" [name]="'answer' + i">
+          Sim
+        </label>
+        <label class="radio-option">
+          <input type="radio" [(ngModel)]="question.answer" [value]="'nao'" [name]="'answer' + i">
+          Não
+        </label>
+      </div>
+    </li>
+  </ul>
+
+  <!-- Botões -->
+  <div class="buttons">
+    <button (click)="returnToHome()">Voltar ao Menu Principal</button>
+    <button (click)="continueQuestionnaire()">Continuar Questionário</button>
+  </div>
+
+  <!-- Aviso -->
+  <div class="warning" *ngIf="showWarning">
+    <p>{{ conclusion }}</p>
+  </div>
+</div>
+
+
+
