@@ -11,6 +11,8 @@ const routes: Routes = [
   { path: 'diagnosis', component: DiagnosisComponent }, // Rota para o componente "diagnosis"
   { path: 'questionnaireinitial', component: QuestionnaireinitialComponent }, // Rota para o componente "questionnaireinitial"
   // Outras rotas do seu aplicativo
+
+  
 ];
 
 @NgModule({

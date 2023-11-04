@@ -21,6 +21,9 @@ export class QuestionnaireComponent implements OnInit {
   diagnosis: Category[] = [];
   positiveDiagnosis: Category[] = [];
   negativeDiagnosis: Category[] = [];
+  diagnosisMaior: any;
+  diagnosisMenor: any;
+  active = false; // Inicialmente oculto
 
 
   constructor(
@@ -74,11 +77,27 @@ export class QuestionnaireComponent implements OnInit {
   }
 
   getDiagnosis() {
-    for (const category of this.diagnosis) {
+    this.diagnosisMaior = this.diagnosis?.filter(category => category.score > 14);
+    this.diagnosisMenor = this.diagnosis?.filter(category => category.score < 15);
+    for (const category of this.diagnosisMaior) {
         const score = category.score;
         if(score >= 15) this.positiveDiagnosis.push(category);
-        else this.negativeDiagnosis.push(category) 
+        else this.negativeDiagnosis.push(category)
     }
+    for (const category of this.diagnosisMenor) {
+      const score = category.score;
+      if(score >= 15) this.positiveDiagnosis.push(category);
+      else this.negativeDiagnosis.push(category)
+  }  
+  }
+
+
+  onBotaoClicado() {
+    this.currentPage = 3;
+    
+    // Ative a exibição da página 4
+    this.active = true;
+    this.currentPage = 4;
   }
 }
 
@@ -128,6 +147,7 @@ function createCategoriesFromString(inputString: string): Category[] {
     categories.push(currentCategory);
   }
   return categories;
+
 }
 
 

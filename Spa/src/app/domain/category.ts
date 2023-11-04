@@ -28,10 +28,12 @@ export class Category {
     }
 
     public getScore(): number { // Alterado o tipo de retorno para number
+        console.log(this.score)
         return this.score;
     }
 
     public setScore(score: string): void {
+        console.log(this.score)
         this.score = parseInt(score, 10); // Faz o parse da string para um número inteiro
     }
 

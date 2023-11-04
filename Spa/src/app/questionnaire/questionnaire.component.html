@@ -65,23 +65,52 @@
   </form>
 </div>
 
-<div class="container questionnaire" *ngIf="currentPage === 3">
-  <h2>Diagnosis</h2>
+<div class="container diagnosis" *ngIf="currentPage === 3">
+  
+  <h1 class="title">Diagnosis</h1>
   <ul *ngIf="diagnosis.length > 0">
-      <li *ngFor="let category of diagnosis">
-        <div>
-          <p>Regra 1: {{ category.regra1 }}</p>
-          <p>Regra 2: {{ category.regra2 }}</p>
-          <p>Score: {{ category.score }}</p>
-          <ul>
-            <li *ngFor="let question of category.questions">
-              {{ question }}
-            </li>
-          </ul>
-        </div>
-      </li>
-    </ul>
-    <p *ngIf="diagnosis.length === 0">No diagnosis found for score > 15</p>
+    {{diagnosis.length}}
+    <li *ngFor="let category of diagnosisMaior; let last = last">
+      <div>
+        <hr style="border: 1px solid blue; margin: 20px;">
+        <p><strong>Regra 1: </strong>{{ category.regra1 }}</p>
+        <p><strong>Regra 2: </strong>{{ category.regra2 }}</p>
+        <p style="background-color: orange; color: white; padding: 10px 20px; border-radius: 5px; display: inline-block; text-align: center;">Score: {{ category.score }}</p>
+
+        <ul>
+          <li *ngFor="let question of category.questions">
+            {{ question }}
+          </li>
+        </ul>
+        <hr *ngIf="last" style="border: 1px solid blue; margin: 20px;">
+      </div>
+    </li>
+  </ul>
+      <button (click)="onBotaoClicado()">Pontuação abaixo de 15</button>
+      
+</div>
+<div class="container diagnosis" *ngIf="currentPage === 4">
+  
+  <h1 class="title">Diagnosis</h1>
+  <ul *ngIf="diagnosis.length > 0">
+    {{diagnosis.length}}
+    <li *ngFor="let category of diagnosisMenor; let last = last">
+      <div>
+        <hr style="border: 1px solid blue; margin: 20px;">
+        <p><strong>Regra 1: </strong>{{ category.regra1 }}</p>
+        <p><strong>Regra 2: </strong>{{ category.regra2 }}</p>
+        <p style="background-color: orange; color: white; padding: 10px 20px; border-radius: 5px; display: inline-block; text-align: center;">Score: {{ category.score }}</p>
+
+        <ul>
+          <li *ngFor="let question of category.questions">
+            {{ question }}
+          </li>
+        </ul>
+        <hr *ngIf="last" style="border: 1px solid blue; margin: 20px;">
+      </div>
+    </li>
+  </ul>
+      
 </div>
   
   
