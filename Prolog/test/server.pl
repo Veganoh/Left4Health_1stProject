@@ -4,6 +4,7 @@
 :- use_module(library(http/http_client)).
 
 :-consult('aux_methods.pl'). 
+:- consult('engine.pl').
 
 :- dynamic ultimo_facto/1. %Contador de factos inicias
 :- dynamic facto/2. % Definindo a estrutura de fato (Pergunta, Resposta).
@@ -28,9 +29,12 @@ sayHello(Request):-
 get_perguntas_iniciais(Request) :-
     todas_perguntas_iniciais(Perguntas),
     format_response(Perguntas, Response),
+    format('Access-Control-Allow-Origin: *~n'),
     format('Content-type: text/plain~n~n'),
     format('~s', [Response]).
 
+% HTTP POST para receber as respostas do quizInitial
+:- http_handler('/api/answerQuizInitial', quizInitial, [method(post)]).
 % HTTP POST para receber as respostas do quizInitial
 :- http_handler('/api/answerQuizInitial', quizInitial, [method(post)]).
 quizInitial(Request) :-
@@ -42,16 +46,23 @@ quizInitial(Request) :-
     ValorUltimoFacto is ContadorFinal-1,
     retractall(ultimo_facto(_)), % Remove the existing ultimo_facto
     assert(ultimo_facto(ValorUltimoFacto)), % Assert the new value
+    arranca_motor(),
+    conclusion_inicial(ConclusaoGerada),
     format('Content-type: text/plain; charset=UTF-8~n~n'),
-    format('Numero de fatos criados: ~d~n', [ValorUltimoFacto]),
-    format('~w', [Resultado]). % Saída em texto simples
+    conclusion_get_description(ConclusaoGerada, Descricao),
+    format('~w', [Descricao]).
+    
+     % Saída em texto simples
 
-% Define a handler for the /api/quiz40 endpoint
-:- http_handler('/api/quiz40', get_perguntas_40, [method(get)]).
-% Handler for the GET request to /api/quiz40 endpoint
+
+
+% Define a handler for the /api/obtain40Questions endpoint
+:- http_handler('/api/obtain40Questions', get_perguntas_40, [method(get)]).
+% Handler for the GET request to /api/obtain40Questions endpoint
 get_perguntas_40(Request) :-
     perguntas_misturadas(Perguntas),
     format_response(Perguntas, Response),
+    format('Access-Control-Allow-Origin: *~n'),
     format('Content-type: text/plain~n~n'),
     format('~s', [Response]).
 
@@ -63,7 +74,7 @@ process_lines([QuestionIdString, "5"|Rest], QuestionId) :-
     process_lines(Rest, NextQuestionId).
 
 % HTTP POST to receive answers for quiz40
-:- http_handler('/api/answersQuiz40', quiz40, [method(post)]).
+:- http_handler('/api/answerQuiz40', quiz40, [method(post)]).
 quiz40(Request) :-
     member(method(post), Request),
     http_read_data(Request, Data, [to(string)]),
@@ -73,6 +84,7 @@ quiz40(Request) :-
     ValorUltimoFacto is ContadorFinal - 1,
     retractall(ultimo_facto(_)), % Remove the existing ultimo_facto
     assert(ultimo_facto(ValorUltimoFacto)), % Assert the new value
+    format('Access-Control-Allow-Origin: *~n'),
     format('Content-type: text/plain; charset=UTF-8~n~n'),
     format('Numero de fatos criados: ~d~n', [ValorUltimoFacto]),
     format('~w', [Resultado]). % Saída em texto simples

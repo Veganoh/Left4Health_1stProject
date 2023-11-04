@@ -13,11 +13,15 @@
 
 :-dynamic justifica/3.
 :-dynamic ultimo_facto/1. %Contador de factos inicias
+:- dynamic conclusion_inicial/1.
 
 carrega_bc(Initial_facts,NBC):-
-		consult(NBC),
-		assert(ultimo_facto(Initial_facts)),
-        writeln('Regras carregadas para o motor de inferencia').
+%carrega_bc:-
+	%Initial_facts=0, 
+	%consult('C:/Users/mariana/Documents/GitHub/Left4Health_1stProject/Prolog/test/rules.txt'),
+	consult(NBC),
+	assert(ultimo_facto(Initial_facts)),
+    writeln('Regras carregadas para o motor de inferencia').
 
 %Manipulação da função caso nao existam factos, conseguirmos identificar esse erro
 arranca_motor():-
@@ -101,8 +105,10 @@ cria_facto(F,ID,LFactos):-
 	asserta(ultimo_facto(N)),
 	assertz(justifica(N,ID,LFactos)),
 	assertz(facto(N,F)),
-	write('Foi concluido o facto n: '),write(N),write(' -> '),write(F),get0(_),!.
-
+	%adiciona o facto criado ao facto das conclusões
+	asserta(conclusion_inicial(F)),
+	%write('Foi concluido o facto n: '),write(N),write(' -> '),write(F),get0(_),!.
+	write('Foi concluido o facto n: '),write(N),write(' -> '),write(F),!.
 
 
 
@@ -249,6 +255,7 @@ formata(Nivel):-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Funções criadas por nós
 
-conta_factos(Contagem) :-
+conta_factos :-
 	findall(_, facto(_, _), LFactos),
-    length(LFactos, Contagem).
+    length(LFactos, Contagem),
+	write(Contagem).

@@ -70,7 +70,17 @@ pergunta(ansiedade_separacao, 39, "Há pesadelos frequentes envolvendo a ideia d
 pergunta(ansiedade_separacao, 40, "Tem sintomas físicos de ansiedade, como palpitações, sudorese, tremores ou falta de ar, ao pensar na ideia de se separar da pessoa significativa?").
 
 
+%Conclusões 
+
+conclusao(anxiety_as_normal_factor, "Ansiedade como condição do ser humano").
+conclusao(anxiety_secondary_factor, "Tratar condição clínica e reavaliar persistência ou não dos sintomas de ansiedade após tratamento").
+conclusao(anxiety_meds_factor, "Reavaliar necessidade dos medicamentos, tratar abuso de substância ou síndrome de abstinência e após reavaliar persistência ou não dos sintomas ansiosos.").
+conclusao(check_the_doctor, "Contactar um Especialista").
+conclusao(start_quiz40, "Vai iniciar um questionário de 40 perguntas").
+
+%Manipulação de perguntas.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 % Método para receber todas as perguntas iniciais todos os tipos de transtorno
 todas_perguntas_iniciais(ListaPerguntasInicias) :-
     findall((ID, Pergunta), pergunta_inicial(_, ID, Pergunta), ListaPerguntasInicias).
@@ -84,14 +94,28 @@ perguntas_misturadas(ListaPerguntasMisturadas) :-
     todas_perguntas(ListaPerguntas) :-
         findall((ID, Pergunta), pergunta(_, ID, Pergunta), ListaPerguntas).
     
-
+%Manipulação de conclusões
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Metodo para extrair o tipo da conclusão
+extrair_nome_conclusao(Facto, Nome) :-
+    Facto =.. [_, Nome].
+
+%Metodo para visualizar a descrição da conclusão
+descricao_conclusao(Conclusao, Descricao) :-
+    conclusao(Conclusao, Descricao).
+
+conclusion_get_description(Facto, Descricao):-
+    extrair_nome_conclusao(Facto,Nome),
+    descricao_conclusao(Nome, Descricao).
+
+
 %Teste de contador
-:- dynamic(ultimo_facto/1). %Contador de factos inicias
+%:- dynamic(ultimo_facto/1). %Contador de factos inicias
 
-update_last_facts(NewValue) :-
-    retract(ultimo_facto(_)),  % Remova a versão anterior da variável
-    assert(ultimo_facto(NewValue)).  % Adicione a nova versão da variável
+%update_last_facts(NewValue) :-
+    %retract(ultimo_facto(_)),  % Remova a versão anterior da variável
+    %assert(ultimo_facto(NewValue)).  % Adicione a nova versão da variável
 
-write_last_fact():-
-    write(ultimo_facto(X)).
+%write_last_fact:-
+    %ultimo_facto(X),
+    %write(X).
