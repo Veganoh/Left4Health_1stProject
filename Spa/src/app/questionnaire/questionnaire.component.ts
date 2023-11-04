@@ -86,7 +86,7 @@ export class QuestionnaireComponent implements OnInit {
 
   submitForm() {
     this.obtainAnswer();
-    this.currentPage = 3;
+    if(this.positiveDiagnosis.length == 0)     this.currentPage = 4;
   }
 
   getDiagnosis() {
