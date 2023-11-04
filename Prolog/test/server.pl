@@ -43,8 +43,8 @@ quizInitial(Request) :-
     ValorUltimoFacto is ContadorFinal-1,
     retractall(ultimo_facto(_)), % Remove the existing ultimo_facto
     assert(ultimo_facto(ValorUltimoFacto)), % Assert the new value
-    format('Content-type: text/plain; charset=UTF-8~n~n'),
     format('Access-Control-Allow-Origin: *~n'),
+    format('Content-type: text/plain; charset=UTF-8~n~n'),
     format('Numero de fatos criados: ~d~n', [ValorUltimoFacto]),
     format('~w', [Resultado]). % Saída em texto simples
 
