@@ -23,7 +23,7 @@ sayHello(Request):-
     format('Hello World!').
 
 % Define a handler for the /quizInitial endpoint
-:- http_handler('/api/quizInitial', get_perguntas_iniciais, [method(get)]).
+:- http_handler('/api/obtainInitialQuestions', get_perguntas_iniciais, [method(get)]).
 % Handler for the GET request to /api/quizInitial endpoint
 get_perguntas_iniciais(Request) :-
     todas_perguntas_iniciais(Perguntas),
@@ -32,7 +32,7 @@ get_perguntas_iniciais(Request) :-
     format('~s', [Response]).
 
 % HTTP POST para receber as respostas do quizInitial
-:- http_handler('/api/answersQuizInitial', quizInitial, [method(post)]).
+:- http_handler('/api/answerQuizInitial', quizInitial, [method(post)]).
 quizInitial(Request) :-
     member(method(post), Request),
     http_read_data(Request, Data, [to(string)]),
@@ -67,13 +67,25 @@ process_lines([QuestionIdString, "5"|Rest], QuestionId) :-
 quiz40(Request) :-
     member(method(post), Request),
     http_read_data(Request, Data, [to(string)]),
-    processar_corpo(Data, Resultado, 8, ContadorFinal),
+    ultimo_facto(X),
+    X1 is X + 1,
+    processar_corpo(Data, Resultado, X1, ContadorFinal),
     ValorUltimoFacto is ContadorFinal - 1,
     retractall(ultimo_facto(_)), % Remove the existing ultimo_facto
     assert(ultimo_facto(ValorUltimoFacto)), % Assert the new value
     format('Content-type: text/plain; charset=UTF-8~n~n'),
     format('Numero de fatos criados: ~d~n', [ValorUltimoFacto]),
     format('~w', [Resultado]). % Saída em texto simples
+
+% Define the route handler for the GET request
+:- http_handler('/api/resultados', handle_resultados, [method(get)]).
+
+% Predicate to handle the GET request and send back the calculated results
+handle_resultados(Request) :-
+    calcula_valores_totais(Resultados),
+    generate_resultados_text(Resultados, ResultadosText),
+    format('Content-type: text/plain~n~n'),
+    format(ResultadosText).
 
 calcular_valor_total_sindrome(Transtorno, QuestionIds) :-
     findall(Valor, (
@@ -85,7 +97,7 @@ calcular_valor_total_sindrome(Transtorno, QuestionIds) :-
     %write('Valor Total para '), write(Transtorno), write(': '), 
     write(Total), nl.
 
-calcula_valores_totais :-
+calcula_valores_totais(Resultados) :-
     calcular_valor_total_sindrome(ansiedade_Generalizada,[1,2,3,4,5], Total1),
     calcular_valor_total_sindrome(transtorno_de_Panico,[6,7,8,9,10], Total2),
     calcular_valor_total_sindrome(transtorno_de_Panico_com_Agorafobia,[11,12,13,14,15], Total3),
@@ -94,22 +106,22 @@ calcula_valores_totais :-
     calcular_valor_total_sindrome(fobia_especifica,[26,27,28,29,30], Total6),
     calcular_valor_total_sindrome(mutismo_Seletivo,[31,32,33,34,35], Total7),
     calcular_valor_total_sindrome(ansiedade_de_separacao,[36,37,38,39,40], Total8),
-    assertz(total_calculado(ansiedade_Generalizada, Total1)),
-    assertz(total_calculado(transtorno_de_Panico, Total2)),
-    assertz(total_calculado(transtorno_de_Panico_com_Agorafobia, Total3)),
-    assertz(total_calculado(agorafobia, Total4)),
-    assertz(total_calculado(ansiedade_Social, Total5)),
-    assertz(total_calculado(fobia_especifica, Total6)),
-    assertz(total_calculado(mutismo_Seletivo, Total7)),
-    assertz(total_calculado(ansiedade_de_separacao, Total8)),
-	write('Total para ansiedade_Generalizada: '), write(Total1), nl,
-    write('Total para transtorno_de_Panico: '), write(Total2), nl,
-    write('Total para transtorno_de_Panico_com_Agorafobia: '), write(Total3), nl,
-    write('Total para agorafobia: '), write(Total4), nl,
-    write('Total para ansiedade_Social: '), write(Total5), nl,
-    write('Total para fobia_especifica: '), write(Total6), nl,
-    write('Total para mutismo_Seletivo: '), write(Total7), nl,
-    write('Total para ansiedade_de_separacao: '), write(Total8), nl.
+    Resultados = [
+        ['ansiedade_Generalizada', Total1],
+        ['transtorno_de_Panico', Total2],
+        ['transtorno_de_Panico_com_Agorafobia', Total3],
+        ['agorafobia', Total4],
+        ['ansiedade_Social', Total5],
+        ['fobia_especifica', Total6],
+        ['mutismo_Seletivo', Total7],
+        ['ansiedade_de_separacao', Total8]
+    ].
+
+generate_resultados_text([], '').
+generate_resultados_text([[Sindrome, Valor] | Rest], Text) :-
+    generate_resultados_text(Rest, RestText),
+    format(atom(Text), 'Resultados foram: ~w: ~w~n~w', [Sindrome, Valor, RestText]).
+
 
 calcular_valor_total_sindrome(Transtorno, QuestionIds, Total) :-
     findall(Valor, (
