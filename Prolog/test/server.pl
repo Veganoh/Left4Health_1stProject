@@ -28,6 +28,7 @@ sayHello(Request):-
 get_perguntas_iniciais(Request) :-
     todas_perguntas_iniciais(Perguntas),
     format_response(Perguntas, Response),
+    format('Access-Control-Allow-Origin: *~n'),
     format('Content-type: text/plain~n~n'),
     format('~s', [Response]).
 
@@ -43,6 +44,7 @@ quizInitial(Request) :-
     retractall(ultimo_facto(_)), % Remove the existing ultimo_facto
     assert(ultimo_facto(ValorUltimoFacto)), % Assert the new value
     format('Content-type: text/plain; charset=UTF-8~n~n'),
+    format('Access-Control-Allow-Origin: *~n'),
     format('Numero de fatos criados: ~d~n', [ValorUltimoFacto]),
     format('~w', [Resultado]). % Saída em texto simples
 
@@ -52,6 +54,7 @@ quizInitial(Request) :-
 get_perguntas_40(Request) :-
     perguntas_misturadas(Perguntas),
     format_response(Perguntas, Response),
+    format('Access-Control-Allow-Origin: *~n'),
     format('Content-type: text/plain~n~n'),
     format('~s', [Response]).
 
@@ -73,6 +76,7 @@ quiz40(Request) :-
     ValorUltimoFacto is ContadorFinal - 1,
     retractall(ultimo_facto(_)), % Remove the existing ultimo_facto
     assert(ultimo_facto(ValorUltimoFacto)), % Assert the new value
+    format('Access-Control-Allow-Origin: *~n'),
     format('Content-type: text/plain; charset=UTF-8~n~n'),
     format('Numero de fatos criados: ~d~n', [ValorUltimoFacto]),
     format('~w', [Resultado]). % Saída em texto simples
@@ -84,6 +88,7 @@ quiz40(Request) :-
 handle_resultados(Request) :-
     calcula_valores_totais(Resultados),
     generate_resultados_text(Resultados, ResultadosText),
+    format('Access-Control-Allow-Origin: *~n'),
     format('Content-type: text/plain~n~n'),
     format(ResultadosText).
 
