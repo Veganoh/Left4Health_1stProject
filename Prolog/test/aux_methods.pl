@@ -86,7 +86,7 @@ perguntas_misturadas(ListaPerguntasMisturadas) :-
     
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Tesde de contador
+%Teste de contador
 :- dynamic(ultimo_facto/1). %Contador de factos inicias
 
 update_last_facts(NewValue) :-

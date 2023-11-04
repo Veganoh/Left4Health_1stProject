@@ -5,14 +5,13 @@
 
 :-consult('aux_methods.pl'). 
 
-:- dynamic(ultimo_facto/1). %Contador de factos inicias
-:- dynamic(facto/2). % Definindo a estrutura de fato (Pergunta, Resposta).
+:- dynamic ultimo_facto/1. %Contador de factos inicias
+:- dynamic facto/2. % Definindo a estrutura de fato (Pergunta, Resposta).
 
 
 % Inicia o servidor
 servidor(Initial_facts,Port) :-
     assert(ultimo_facto(Initial_facts)),
-    write(Initial_facts) ,
     http_server(http_dispatch, [port(Port)]).
 
 %Pedidos HTTPS
@@ -50,10 +49,11 @@ quizInitial(Request) :-
     ContadorInicial = 1, % Inicialize ContadorInicial com o valor desejado
     processar_corpo(Data, Resultado, ContadorInicial, ContadorFinal),
     %update_last_facts(Initial_facts),
+    ValorUltimoFacto is ContadorFinal-1,
+    retractall(ultimo_facto(_)), % Remove the existing ultimo_facto
+    assert(ultimo_facto(ValorUltimoFacto)), % Assert the new value
     format('Content-type: text/plain; charset=UTF-8~n~n'),
-    %format('Contador: ~d~n', [Initial_facts]),
-    format('Contador: ~d~n', [ContadorFinal-1]),
-    format('Numero de fatos criados: ~d~n', [ContadorFinal-1]),
+    format('Numero de fatos criados: ~d~n', [ValorUltimoFacto]),
     format('~w', [Resultado]). % Saída em texto simples
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

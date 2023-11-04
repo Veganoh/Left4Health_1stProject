@@ -12,7 +12,7 @@
 :-op(600,xfy,e).
 
 :-dynamic justifica/3.
-:- dynamic(ultimo_facto/1). %Contador de factos inicias
+:-dynamic ultimo_facto/1. %Contador de factos inicias
 
 carrega_bc(Initial_facts,NBC):-
 		consult(NBC),
@@ -20,10 +20,7 @@ carrega_bc(Initial_facts,NBC):-
         writeln('Regras carregadas para o motor de inferencia').
 
 %Manipulação da função caso nao existam factos, conseguirmos identificar esse erro
-arranca_motor():-	
-    %carrega_bc(NBC),
-    %writeln('Motor de inferencia executado com sucesso.'),
-	write_last_fact(),
+arranca_motor():-
 	facto(N,Facto),
 	facto_dispara_regras1(Facto, LRegras),
 	dispara_regras(N, Facto, LRegras),
@@ -32,6 +29,7 @@ arranca_motor():-
 facto_dispara_regras1(Facto, LRegras):-
 	facto_dispara_regras(Facto, LRegras),
 	!.
+
 facto_dispara_regras1(_, []).
 % Caso em que o facto nao origina o disparo de qualquer regra.
 
@@ -97,13 +95,14 @@ cria_facto(F,_,_):-
 	facto(_,F),!.
 
 cria_facto(F,ID,LFactos):-
-	%retract(ultimo_facto(N1)),
-	ultimo_facto(N),
-	N1 is N+1,
-	asserta(ultimo_facto(N1)),
+	ultimo_facto(LastFact),
+	retractall(ultimo_facto(_)),
+	N is LastFact+1,
+	asserta(ultimo_facto(N)),
 	assertz(justifica(N,ID,LFactos)),
 	assertz(facto(N,F)),
 	write('Foi concluido o facto n: '),write(N),write(' -> '),write(F),get0(_),!.
+
 
 
 
