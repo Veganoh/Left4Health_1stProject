@@ -55,26 +55,6 @@ get_perguntas_40(Request) :-
     format('Content-type: text/plain~n~n'),
     format('~s', [Response]).
 
-% Define a handler for the /answersQuiz40 endpoint
-%:- http_handler('/api/answersQuiz40', answers_quiz40_handler, [methods([post])]).
-
-% Handler for the POST request to /answersQuiz40 endpoint
-%answers_quiz40_handler(Request) :-
-%    http_read_data(Request, Data, []),
-%    process_input(Data, Response),
-%    format('Content-type: text/plain~n~n'),
-%    format('~s', [Response]).
-
-answers_quiz40_handler(Request) :-
-    http_read_data(Request, Data, []),
-    processar_corpo(Data),
-    format('Content-type: text/plain~n~n'),
-    format('Answers processed and asserted as facts.').
-
-process_and_assert_answers(InputData) :-
-    split_string(InputData, "\n", "", Lines),
-    process_lines(Lines, 1).
-
 process_lines([], _).
 process_lines([QuestionIdString, "5"|Rest], QuestionId) :-
     atom_number(QuestionIdString, QuestionId),
@@ -87,7 +67,7 @@ process_lines([QuestionIdString, "5"|Rest], QuestionId) :-
 quiz40(Request) :-
     member(method(post), Request),
     http_read_data(Request, Data, [to(string)]),
-    processar_corpo(Data, Resultado, 1, ContadorFinal),
+    processar_corpo(Data, Resultado, 8, ContadorFinal),
     ValorUltimoFacto is ContadorFinal - 1,
     retractall(ultimo_facto(_)), % Remove the existing ultimo_facto
     assert(ultimo_facto(ValorUltimoFacto)), % Assert the new value
