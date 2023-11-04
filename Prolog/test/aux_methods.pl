@@ -97,13 +97,16 @@ perguntas_misturadas(ListaPerguntasMisturadas) :-
 %Manipulação de conclusões
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Metodo para extrair o tipo da conclusão
-extrair_nome_conclusao(Fato, Nome) :-
-    Fato =.. [_, Nome].
-
+extrair_nome_conclusao(Facto, Nome) :-
+    Facto =.. [_, Nome].
 
 %Metodo para visualizar a descrição da conclusão
 descricao_conclusao(Conclusao, Descricao) :-
     conclusao(Conclusao, Descricao).
+
+conclusion_get_description(Facto, Descricao):-
+    extrair_nome_conclusao(Facto,Nome),
+    descricao_conclusao(Nome, Descricao).
 
 
 %Teste de contador

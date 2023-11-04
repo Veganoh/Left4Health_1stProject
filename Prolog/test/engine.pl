@@ -107,8 +107,8 @@ cria_facto(F,ID,LFactos):-
 	assertz(facto(N,F)),
 	%adiciona o facto criado ao facto das conclusões
 	asserta(conclusion_inicial(F)),
-	write('Foi concluido o facto n: '),write(N),write(' -> '),write(F),get0(_),!.
-
+	%write('Foi concluido o facto n: '),write(N),write(' -> '),write(F),get0(_),!.
+	write('Foi concluido o facto n: '),write(N),write(' -> '),write(F),!.
 
 
 

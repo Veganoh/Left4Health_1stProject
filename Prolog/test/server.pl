@@ -48,10 +48,10 @@ quizInitial(Request) :-
     assert(ultimo_facto(ValorUltimoFacto)), % Assert the new value
     arranca_motor(),
     conclusion_inicial(ConclusaoGerada),
-    extrair_nome_conclusao(ConclusaoGerada, TipoConclusao),
     format('Content-type: text/plain; charset=UTF-8~n~n'),
-    descricao_conclusao(TipoConclusao, Descricao),
+    conclusion_get_description(ConclusaoGerada, Descricao),
     format('~w', [Descricao]).
+    
      % Saída em texto simples
 
 
