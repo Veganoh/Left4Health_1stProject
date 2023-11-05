@@ -20,9 +20,9 @@ carrega_bc:-
 arranca_motor:-	
 	calcula_valores_totais,
 	facto(N,Facto),
-		facto_dispara_regras1(Facto, LRegras),
-		dispara_regras(N, Facto, LRegras),
-		ultimo_facto(N).
+	facto_dispara_regras1(Facto, LRegras),
+	dispara_regras(N, Facto, LRegras),
+	ultimo_facto(N).
 
 verifica_condicoes([]).
 verifica_condicoes([Condicao | Resto]) :-

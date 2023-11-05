@@ -2,7 +2,8 @@
 % Metaconhecimento
 % Usar base de conhecimento veIculos2.txt
 % Explica��es como?(how?) e porque n�o?(whynot?)
-:- encoding(utf8).
+%:- encoding(utf8).
+
 :-op(220,xfx,entao).
 :-op(35,xfy,se).
 :-op(240,fx,regra).
@@ -10,17 +11,27 @@
 :-op(600,xfy,e).
 
 :-dynamic justifica/3.
+:-dynamic ultimo_facto/1. %Contador de factos inicias
 
 
-carrega_bc:-
-	consult('C:/Users/mariana/Documents/GitHub/Left4Health_1stProject/Prolog/Quiz40/rules40.txt').
+
+carrega_bc(NBC):-
+	concat(NBC, "quiz40/rules40.txt", Result),
+	consult(Result).
 
 arranca_motor:-	
 	calcula_valores_totais,
+	writeln("ola 1"),
+	ultimo_facto(LastFact),
+	writeln(LastFact),
 	facto(N,Facto),
-		facto_dispara_regras1(Facto, LRegras),
-		dispara_regras(N, Facto, LRegras),
-		ultimo_facto(N).
+	writeln("ola 2"),
+	facto_dispara_regras1(Facto, LRegras),
+	writeln("ola 3"),
+	dispara_regras(N, Facto, LRegras),
+	writeln("ola 4"),
+	ultimo_facto(N),
+	writeln("ola").
 
 verifica_condicoes([]).
 verifica_condicoes([Condicao | Resto]) :-
@@ -34,6 +45,10 @@ facto_dispara_regras1(_, []).
 % Caso em que o facto n�o origina o disparo de qualquer regra.
 
 dispara_regras(N, Facto, [ID|LRegras]):-
+	write('Facto'),
+	writeln(Facto),
+	write('ID'),
+	writeln(ID),
 	regra ID se LHS entao RHS,
 	facto_esta_numa_condicao(Facto,LHS),
 	% Instancia Facto em LHS
@@ -95,10 +110,8 @@ cria_facto(F,_,_):-
 	facto(_,F),!.
 
 cria_facto(F,ID,LFactos):-
-	
-	ultimo_facto(LastFact),
 	retract(ultimo_facto(N1)),
-	N is LastFact+1,
+	N is N1+1,
 	asserta(ultimo_facto(N)),
 	assertz(justifica(N,ID,LFactos)),
 	assertz(facto(N,F)),
@@ -255,15 +268,15 @@ calcula_valores_totais :-
     calcular_valor_total_sindrome(ansiedade_Social,[21,22,23,24,25], Total5),
     calcular_valor_total_sindrome(fobia_especifica,[26,27,28,29,30], Total6),
     calcular_valor_total_sindrome(mutismo_Seletivo,[31,32,33,34,35], Total7),
-    calcular_valor_total_sindrome(ansiedade_de_separacao,[36,37,38,39,40], Total8).
-	%write('Total para ansiedade_Generalizada: '), write(Total1), nl,
-    %write('Total para transtorno_de_Panico: '), write(Total2), nl,
-    %write('Total para transtorno_de_Panico_com_Agorafobia: '), write(Total3), nl,
-    %write('Total para agorafobia: '), write(Total4), nl,
-    %write('Total para ansiedade_Social: '), write(Total5), nl,
-    %write('Total para fobia_especifica: '), write(Total6), nl,
-    %write('Total para mutismo_Seletivo: '), write(Total7), nl,
-    %write('Total para ansiedade_de_separacao: '), write(Total8), nl.
+    calcular_valor_total_sindrome(ansiedade_de_separacao,[36,37,38,39,40], Total8),
+	write('Total para ansiedade_Generalizada: '), write(Total1), nl,
+    write('Total para transtorno_de_Panico: '), write(Total2), nl,
+    write('Total para transtorno_de_Panico_com_Agorafobia: '), write(Total3), nl,
+    write('Total para agorafobia: '), write(Total4), nl,
+    write('Total para ansiedade_Social: '), write(Total5), nl,
+    write('Total para fobia_especifica: '), write(Total6), nl,
+    write('Total para mutismo_Seletivo: '), write(Total7), nl,
+    write('Total para ansiedade_de_separacao: '), write(Total8), nl.
 
 calcular_valor_total_sindrome(Transtorno, QuestionIds, Total) :-
     findall(Valor, (
@@ -271,7 +284,7 @@ calcular_valor_total_sindrome(Transtorno, QuestionIds, Total) :-
         facto(QuestionId, pergunta(QuestionId, Valor))
     ), Valores),
     sum_list(Valores, Total),
-	%write(transtorno(Transtorno, Total)),
+	write(transtorno(Transtorno, Total)),
 	cria_facto(transtorno(Transtorno, Total), _, _).
     %assertz(transtorno(Transtorno, Total)).
 
