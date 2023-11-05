@@ -17,7 +17,7 @@ public class Conclusion extends Fact {
 
     public static final String AGORAPHOBIA_SYNDROME = "AgoraFobia";
 
-    public static final String NOT_AGORAPHOBIA_SYNDROME = "Não é AgoraFobia";
+    public static final String NOT_AGORAPHOBIA_SYNDROME = "Não tem AgoraFobia";
 
     public static final String SPECIFIC_PHOBIA = "Fobia Especifica";
 

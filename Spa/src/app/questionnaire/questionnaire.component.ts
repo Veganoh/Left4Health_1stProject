@@ -46,15 +46,6 @@ export class QuestionnaireComponent implements OnInit {
       });
     }
 
-    redirectToChartsPage() {
-      const navigationExtras: NavigationExtras = {
-        state: {
-          diagnosis: this.diagnosis,
-        },
-      };
-      this.router.navigate(['/charts'], navigationExtras);
-    }
-
     goToHomePage() {
       this.router.navigate(['/']); 
     }
@@ -86,7 +77,7 @@ export class QuestionnaireComponent implements OnInit {
 
   submitForm() {
     this.obtainAnswer();
-    if(this.positiveDiagnosis.length == 0)     this.currentPage = 4;
+    this.currentPage = 3;
   }
 
   getDiagnosis() {

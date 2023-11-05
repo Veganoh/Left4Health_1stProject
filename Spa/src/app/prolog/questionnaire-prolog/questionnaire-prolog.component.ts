@@ -34,7 +34,7 @@ export class QuestionnairePrologComponent {
     }
 
     obtainQuestions(): void {
-      this.service.obtain40Questions().subscribe((response: string) => {
+      this.service.obtain40QuestionsProlog().subscribe((response: string) => {
         const inputString = response;
         this.questions = createQuestionsFromString(inputString);
   
@@ -53,7 +53,7 @@ export class QuestionnairePrologComponent {
       const answer = createStringFromAnswers(this.questions);
     
       try {
-        const response = await this.service.answerQuizFinal(answer).toPromise();
+        const response = await this.service.answerQuizFinalProlog(answer).toPromise();
         if (response) {
           this.diagnosis = createCategoriesFromString(response);
           this.getDiagnosis();
@@ -78,15 +78,6 @@ export class QuestionnairePrologComponent {
       if(this.positiveDiagnosis.length == 0)     this.currentPage = 4;
     }
 
-    redirectToChartsPage() {
-      const navigationExtras: NavigationExtras = {
-        state: {
-          diagnosis: this.diagnosis,
-        },
-      };
-      this.router.navigate(['/charts'], navigationExtras);
-    }
-    
     getDiagnosis() {
       this.diagnosisMaior = this.diagnosis?.filter(category => category.score > 14);
       this.diagnosisMenor = this.diagnosis?.filter(category => category.score < 15);
@@ -105,8 +96,6 @@ export class QuestionnairePrologComponent {
   
     onBotaoClicado() {
       this.currentPage = 3;
-      
-      // Ative a exibição da página 4
       this.active = true;
       this.currentPage = 4;
     }

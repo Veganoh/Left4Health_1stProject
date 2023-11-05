@@ -13,7 +13,6 @@ import { DiagnosisComponent } from './diagnosis/diagnosis.component';
 import { HomeComponent } from './home/home.component';
 import { QuestionnaireinitialComponent } from './questionnaireinitial/questionnaireinitial.component';
 
-import { ChartsComponent } from './charts/charts.component';
 import { QuestionnaireInitialPrologComponent } from './prolog/questionnaire-initial-prolog/questionnaire-initial-prolog.component';
 import { QuestionnairePrologComponent } from './prolog/questionnaire-prolog/questionnaire-prolog.component';
 
@@ -24,9 +23,7 @@ import { QuestionnairePrologComponent } from './prolog/questionnaire-prolog/ques
     DiagnosisComponent,
     HomeComponent,
     QuestionnaireinitialComponent,
-    ChartsComponent,
     QuestionnaireInitialPrologComponent,
-    ChartsComponent,
     QuestionnairePrologComponent,
   ],
   imports: [

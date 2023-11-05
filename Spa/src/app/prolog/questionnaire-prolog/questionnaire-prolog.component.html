@@ -87,10 +87,7 @@
     </ul>
         <button (click)="goToHomePage()">Retornar à Página Inicial</button>
   
-        <button (click)="onBotaoClicado()" *ngIf="negativeDiagnosis.length > 0">Pontuação abaixo de 15</button>
-  
-        <button class="btn btn-primary" (click)="redirectToChartsPage()">Gráficos</button>
-        
+        <button (click)="onBotaoClicado()" *ngIf="negativeDiagnosis.length > 0">Pontuação abaixo de 15</button>        
   </div>
   <div class="container diagnosis" *ngIf="currentPage === 4">
     
@@ -112,7 +109,6 @@
         </div>
       </li>
     </ul>
-  
         <button (click)="goToPage(3)" *ngIf="positiveDiagnosis.length != 0">Voltar à pagina Anterior </button>
         <button (click)="goToHomePage()">Retornar à Página Inicial</button> 
   </div>  
