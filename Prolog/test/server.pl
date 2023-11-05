@@ -80,7 +80,7 @@ quiz40(Request) :-
     http_read_data(Request, Data, [to(string)]),
     ultimo_facto(X),
     X1 is X + 1,
-    processar_corpo(Data, Resultado, X1, ContadorFinal),
+    processar_corpo_numbers(Data, Resultado, X1, ContadorFinal),
     ValorUltimoFacto is ContadorFinal - 1,
     retractall(ultimo_facto(_)), % Remove the existing ultimo_facto
     assert(ultimo_facto(ValorUltimoFacto)), % Assert the new value
@@ -90,26 +90,20 @@ quiz40(Request) :-
     format('~w', [Resultado]). % Saída em texto simples
 
 % Define the route handler for the GET request
-:- http_handler('/api/resultados', handle_resultados, [method(get)]).
-
+:- http_handler('/api/resultados', resultados, [method(get)]).
 % Predicate to handle the GET request and send back the calculated results
-handle_resultados(Request) :-
+resultados(Request) :-
     calcula_valores_totais(Resultados),
-    generate_resultados_text(Resultados, ResultadosText),
-    format('Access-Control-Allow-Origin: *~n'),
-    format('Content-type: text/plain~n~n'),
-    format(ResultadosText).
+    format('Content-type: text/plain~n~n', []),
+    format_totals(Resultados).
 
-calcular_valor_total_sindrome(Transtorno, QuestionIds) :-
-    findall(Valor, (
-        member(QuestionId, QuestionIds),
-        facto(QuestionId, pergunta(QuestionId, Valor))
-    ), Valores),
-    sum_list(Valores, Total),
-    assertz(transtorno(Transtorno, total(Total))),
-    %write('Valor Total para '), write(Transtorno), write(': '), 
-    write(Total), nl.
+% Format the totals as plain text
+format_totals([]).
+format_totals([[Sindrome, Total] | Rest]) :-
+    format('~w: ~w~n', [Sindrome, Total]),
+    format_totals(Rest).
 
+% Modified calcula_valores_totais/1 to return a list of syndrome names and totals
 calcula_valores_totais(Resultados) :-
     calcular_valor_total_sindrome(ansiedade_Generalizada,[1,2,3,4,5], Total1),
     calcular_valor_total_sindrome(transtorno_de_Panico,[6,7,8,9,10], Total2),
@@ -135,13 +129,24 @@ generate_resultados_text([[Sindrome, Valor] | Rest], Text) :-
     generate_resultados_text(Rest, RestText),
     format(atom(Text), 'Resultados foram: ~w: ~w~n~w', [Sindrome, Valor, RestText]).
 
+calcular_valor_total_sindrome(Transtorno, QuestionIds) :-
+    findall(Valor, (
+        member(QuestionId, QuestionIds),
+        facto(QuestionId, pergunta(QuestionId, Valor))
+    ), Valores),
+    sum_list(Valores, Total),
+    assertz(transtorno(Transtorno, total(Total))),
+    %write('Valor Total para '), write(Transtorno), write(': '), 
+    write(Total), nl.
 
 calcular_valor_total_sindrome(Transtorno, QuestionIds, Total) :-
     findall(Valor, (
         member(QuestionId, QuestionIds),
         facto(QuestionId, pergunta(QuestionId, Valor))
     ), Valores),
-    sum_list(Valores, Total).
+    sum_list(Valores, Total),
+    assertz(transtorno(Transtorno, total(Total))).
+    %write(transtorno(Transtorno, total(Total))).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Metodos auxiliares de manipulação dos pedidos
@@ -165,6 +170,12 @@ processar_corpo(Dados, Resultado, Contador, ContadorFinal) :-
     create_facts(Pares, FactosCriados, Contador, ContadorFinal),
     Resultado = FactosCriados.
 
+processar_corpo_numbers(Dados, Resultado, Contador, ContadorFinal) :-
+    split_string(Dados, "\r\n", "\r\n", Linhas),
+    split_into_pairs(Linhas, Pares),
+    create_facts(Pares, FactosCriados, Contador, ContadorFinal),
+    Resultado = FactosCriados.
+
 split_into_pairs([], []).
 split_into_pairs([Number, Answer | Rest], [[Number, Answer] | Pairs]) :-
     split_into_pairs(Rest, Pairs).
@@ -175,6 +186,16 @@ create_facts([[Pergunta, Resposta] | RestoLinhas], [pergunta(Pergunta, Resposta)
     atom_codes(AtomPergunta, Pergunta),
     atom_number(AtomPergunta, PeguntaNumber),
     atom_codes(AtomResposta, Resposta),
-    assertz(facto(Contador, pergunta(PeguntaNumber, AtomResposta))),
+    assertz(facto(Contador, pergunta(PeguntaNumber, Resposta))),
+    NewContadorFactos is Contador + 1,
+    create_facts(RestoLinhas, RestoPares, NewContadorFactos, ContadorFinal).
+
+create_facts_numbers([], [], Contador, Contador).
+create_facts_numbers([[Pergunta, Resposta] | RestoLinhas], [pergunta(Pergunta, Resposta) | RestoPares], Contador, ContadorFinal) :-
+    atom_codes(AtomPergunta, Pergunta),
+    atom_number(AtomPergunta, PeguntaNumber),
+    atom_codes(AtomResposta, Resposta),
+    atom_number(AtomResposta, RespostaNumber),
+    assertz(facto(Contador, pergunta(PeguntaNumber, RespostaNumber))),
     NewContadorFactos is Contador + 1,
     create_facts(RestoLinhas, RestoPares, NewContadorFactos, ContadorFinal).
