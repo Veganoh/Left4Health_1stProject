@@ -1,0 +1,143 @@
+:-dynamic facto/2,ultimo_facto/1.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Metaconhecimento
+
+facto_dispara_regras(transtorno(ansiedade_Generalizada, _), [1, 2]).
+facto_dispara_regras(transtorno(transtorno_de_Panico, _), [3, 4]).
+facto_dispara_regras(transtorno(transtorno_de_Panico_com_Agorafobia, _), [5, 6]).
+facto_dispara_regras(transtorno(agorafobia, _), [7, 8]).
+facto_dispara_regras(transtorno(ansiedade_Social, _), [9, 10]).
+facto_dispara_regras(transtorno(fobia_especifica, _), [11, 12]).
+facto_dispara_regras(transtorno(mutismo_Seletivo, _), [13, 14]).
+facto_dispara_regras(transtorno(ansiedade_de_separacao, _), [15, 16]).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ultimo_facto(40).
+ultima_regra(16).
+
+% QUiz40
+
+regra 1
+    se [transtorno(ansiedade_Generalizada,_) e avalia(transtorno(ansiedade_Generalizada, >=, 15))] 
+    entao [cria_facto(conclusao(ansiedade_Generalizada, Total, provavel))] :- calcular_valor_total_sindrome(ansiedade_Generalizada,[1,2,3,4,5], Total).
+
+regra 2
+    se [transtorno(ansiedade_Generalizada,_) e avalia(transtorno(ansiedade_Generalizada,<,15))]
+    entao [cria_facto(conclusao(ansiedade_Generalizada, Total, nao_provavel))] :- calcular_valor_total_sindrome(ansiedade_Generalizada,[1,2,3,4,5], Total).
+
+regra 3 
+    se [transtorno(transtorno_de_Panico,_) e avalia(transtorno(transtorno_de_Panico, >=, 15))] 
+    entao [cria_facto(conclusao(transtorno_de_Panico, Total, provavel))] :- calcular_valor_total_sindrome(transtorno_de_Panico,[6,7,8,9,10], Total).
+
+regra 4
+    se [transtorno(transtorno_de_Panico,_) e avalia(transtorno(transtorno_de_Panico,<,15))]
+    entao [cria_facto(conclusao(transtorno_de_Panico, Total, nao_provavel))] :- calcular_valor_total_sindrome(transtorno_de_Panico,[6,7,8,9,10], Total).
+
+regra 5
+    se [transtorno(transtorno_de_Panico_com_Agorafobia,_) e avalia(transtorno(transtorno_de_Panico_com_Agorafobia, >=, 15))] 
+    entao [cria_facto(conclusao(transtorno_de_Panico_com_Agorafobia, Total, provavel))] :- calcular_valor_total_sindrome(ansiedade_Generalizada,[11,12,13,14,15], Total).
+
+regra 6
+    se [transtorno(transtorno_de_Panico_com_Agorafobia,_) e avalia(transtorno(transtorno_de_Panico_com_Agorafobia,<,15))]
+    entao [cria_facto(conclusao(transtorno_de_Panico_com_Agorafobia, Total, nao_provavel))] :- calcular_valor_total_sindrome(ansiedade_Generalizada,[11,12,13,14,15], Total).
+
+regra 7
+    se [transtorno(agorafobia,_) e avalia(transtorno(agorafobia, >=, 15))] 
+    entao [cria_facto(conclusao(agorafobia, Total, provavel))] :- calcular_valor_total_sindrome(agorafobia,[16,17,18,19,20], Total).
+
+regra 8
+    se [transtorno(agorafobia,_) e avalia(transtorno(agorafobia,<,15))]
+    entao [cria_facto(conclusao(agorafobia, Total, nao_provavel))] :- calcular_valor_total_sindrome(agorafobia,[16,17,18,19,20], Total).
+
+regra 9
+    se [transtorno(ansiedade_Social,_) e avalia(transtorno(ansiedade_Social, >=, 15))] 
+    entao [cria_facto(conclusao(ansiedade_Social, Total, provavel))] :- calcular_valor_total_sindrome(ansiedade_Social,[21,22,23,24,25], Total).
+
+regra 10
+    se [transtorno(ansiedade_Social,_) e avalia(transtorno(ansiedade_Social,<,15))]
+    entao [cria_facto(conclusao(ansiedade_Social, Total, nao_provavel))] :- calcular_valor_total_sindrome(ansiedade_Social,[21,22,23,24,25], Total).
+
+regra 11
+    se [transtorno(fobia_especifica,_) e avalia(transtorno(fobia_especifica, >=, 15))] 
+    entao [cria_facto(conclusao(fobia_especifica, Total, provavel))] :- calcular_valor_total_sindrome(fobia_especifica,[26,27,28,29,30], Total).
+
+regra 12
+    se [transtorno(fobia_especifica,_) e avalia(transtorno(fobia_especifica,<,15))]
+    entao [cria_facto(conclusao(fobia_especifica, Total, nao_provavel))] :- calcular_valor_total_sindrome(fobia_especifica,[26,27,28,29,30], Total).
+
+regra 13
+    se [transtorno(mutismo_Seletivo,_) e avalia(transtorno(mutismo_Seletivo, >=, 15))] 
+    entao [cria_facto(conclusao(mutismo_Seletivo, Total, provavel))] :- calcular_valor_total_sindrome(mutismo_Seletivo,[31,32,33,34,35], Total).
+
+regra 14
+    se [transtorno(mutismo_Seletivo,_) e avalia(transtorno(mutismo_Seletivo,<,15))]
+    entao [cria_facto(conclusao(mutismo_Seletivo, Total, nao_provavel))] :- calcular_valor_total_sindrome(mutismo_Seletivo,[31,32,33,34,35], Total).
+
+regra 15
+    se [transtorno(ansiedade_de_separacao,_) e avalia(transtorno(ansiedade_de_separacao, >=, 15))] 
+    entao [cria_facto(conclusao(ansiedade_de_separacao, Total, provavel))] :- calcular_valor_total_sindrome(ansiedade_de_separacao,[36,37,38,39,40], Total).
+
+regra 16
+    se [transtorno(ansiedade_de_separacao,_) e avalia(transtorno(ansiedade_de_separacao,<,15))]
+    entao [cria_facto(conclusao(ansiedade_de_separacao, Total, nao_provavel))] :- calcular_valor_total_sindrome(ansiedade_de_separacao,[36,37,38,39,40], Total).
+
+
+% Valores fixos das respostas do questionário
+% Ansiedade_Generalizada
+facto(1,pergunta(1,5)).
+facto(2,pergunta(2,5)).
+facto(3,pergunta(3,5)).
+facto(4,pergunta(4,5)).
+facto(5,pergunta(5,5)).
+
+% Transtorno_de_Panico
+facto(6,pergunta(6,4)).
+facto(7,pergunta(7,4)).
+facto(8,pergunta(8,4)).
+facto(9,pergunta(9,4)).
+facto(10,pergunta(10,4)).
+
+% Transtorno_de_Panico_com_Agorafobia
+facto(11,pergunta(11,3)).  
+facto(12,pergunta(12,3)).
+facto(13,pergunta(13,3)).
+facto(14,pergunta(14,3)).
+facto(15,pergunta(15,3)).
+
+% Agorafobia
+facto(16,pergunta(16,2)).
+facto(17,pergunta(17,2)).
+facto(18,pergunta(18,2)).
+facto(19,pergunta(19,2)).
+facto(20,pergunta(20,2)).
+
+% Ansiedade_Social
+facto(21,pergunta(21,1)).  
+facto(22,pergunta(22,1)).
+facto(23,pergunta(23,1)).
+facto(24,pergunta(24,1)).
+facto(25,pergunta(25,1)).
+
+% Fobia_especifica
+facto(26,pergunta(26,5)).
+facto(27,pergunta(27,5)).
+facto(28,pergunta(28,5)).
+facto(29,pergunta(29,5)).
+facto(30,pergunta(30,5)).
+
+% Mutismo_Seletivo
+facto(31,pergunta(31,4)).  
+facto(32,pergunta(32,4)).
+facto(33,pergunta(33,4)).
+facto(34,pergunta(34,4)).
+facto(35,pergunta(35,4)).
+
+% Ansiedade_de_separacao
+facto(36,pergunta(36,5)).
+facto(37,pergunta(37,5)).
+facto(38,pergunta(38,5)).
+facto(39,pergunta(39,5)).
+facto(40,pergunta(40,5)).
