@@ -1,0 +1,38 @@
+:-dynamic facto/2,ultimo_facto/1.
+
+
+
+ultima_regra(8).
+ultimo_facto(1).
+
+regra 1
+    se [pergunta("41","sim")]
+    entao [cria_facto(conclusao(anxiety_secondary_factor))].
+
+regra 2
+    se [pergunta("42","nao")]
+    entao [cria_facto(conclusao(anxiety_as_normal_factor))].
+
+regra 3
+    se [pergunta("43","nao")]
+    entao [cria_facto(conclusao(anxiety_as_normal_factor))].
+
+regra 4
+ 	se [pergunta("44","nao")]
+ 	entao [cria_facto(conclusao(check_the_doctor))].
+
+regra 5
+    se [pergunta("45","sim")]
+    entao [cria_facto(conclusao(anxiety_secondary_factor))].
+
+regra 6
+    se [pergunta("46","nao")]
+    entao [cria_facto(conclusao(anxiety_as_normal_factor))].
+    
+regra 7
+    se [pergunta("47","sim")]
+    entao [cria_facto(conclusao(anxiety_meds_factor))].
+
+regra 8
+    se [pergunta("41","nao") e pergunta("42","sim") e pergunta("43","sim") e pergunta("44","sim") e pergunta("45","nao") e pergunta("46","sim") e pergunta("47","nao")] 
+    entao [cria_facto(conclusao(start_quiz40))].

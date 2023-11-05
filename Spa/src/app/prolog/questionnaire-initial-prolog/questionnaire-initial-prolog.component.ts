@@ -38,17 +38,21 @@ export class QuestionnaireInitialPrologComponent {
     async obtainAnswer(): Promise<void> {
       this.canProceed = false;
       const answer = createStringFromAnswers(this.questions);
+    
       try {
-        const response = await this.service.answerQuizInitialProlog(answer).toPromise();
-        this.conclusion = response || ''; // Usar uma string vazia como valor padrão se a resposta for undefined
-        if (this.conclusion == "Vai iniciar um questionário de 40 perguntas") {
-          this.canProceed = true;
-          this.router.navigate(['/questionnaire']);
-        }
+        await this.service.answerQuizInitialProlog(answer).toPromise();
       } catch (error) {
-        console.error('Erro na chamada da API:', error);
+        this.service.obtainAnswerQuizInitialProlog().subscribe((response: string) => {
+          const r = response;
+          this.conclusion = r || '';
+          if (this.conclusion == "Vai iniciar um questionário de 40 perguntas") {
+            this.canProceed = true;
+            this.router.navigate(['/questionnaire']);
+          }
+        });
       }
     }
+    
 
     
   returnToHome() {
