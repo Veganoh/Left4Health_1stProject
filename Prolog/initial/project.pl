@@ -4,6 +4,6 @@
 :-consult('aux_methods.pl').
 
 
-main_initial :-   
+main :-   
     carrega_bc,
     servidor(7070).

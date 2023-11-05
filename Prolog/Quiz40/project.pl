@@ -4,6 +4,6 @@
 %:-consult('aux_methods.pl').
 
 
-main_quiz40 :-   
+main :-   
     carrega_bc,
     servidor(7071).
