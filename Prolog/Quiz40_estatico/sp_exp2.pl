@@ -3,6 +3,10 @@
 % Usar base de conhecimento veIculos2.txt
 % Explica��es como?(how?) e porque n�o?(whynot?)
 
+:- consult('C:/Users/Leonardo/Desktop/ISEP/Left4Health_1stProject/Prolog/Quiz40_estatico/quiz40.pl').
+
+:- encoding(utf8).
+
 :-op(220,xfx,entao).
 :-op(35,xfy,se).
 :-op(240,fx,regra).
@@ -104,8 +108,8 @@ cria_facto(F,ID,LFactos):-
 	asserta(ultimo_facto(N)),
 	assertz(justifica(N,ID,LFactos)),
 	assertz(facto(N,F)),
-	write(facto(N,F)).
-	%rite('Foi conclu�do o facto n� '),write(N),write(' -> '),write(F),get0(_),!.
+	%write(facto(N,F)).
+	write('Foi concluído o facto nº '),write(N),write(' -> '),write(F),get0(_),!.
 
 
 
@@ -131,39 +135,29 @@ mostra_factos:-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Gera��o de explica��es do tipo "Como"
+% Geraçao de explicações do tipo "Como"
 
-como(N):-ultimo_facto(Last),Last<N,!,
-	write('Essa conclus�o n�o foi tirada'),nl,nl.
-como(N):-justifica(N,ID,LFactos),!,
-	facto(N,F),
-	write('Conclui o facto n� '),write(N),write(' -> '),write(F),nl,
-	write('pela regra '),write(ID),nl,
-	write('por se ter verificado que:'),nl,
-	escreve_factos(LFactos),
-	write('********************************************************'),nl,
-	explica(LFactos).
-como(N):-facto(N,F),
-	write('O facto n� '),write(N),write(' -> '),write(F),nl,
-	write('foi conhecido inicialmente'),nl,
-	write('********************************************************'),nl.
+como(N) :-
+    (facto(N, conclusao(Transtorno, Total, provavel)) ->
+        write(Transtorno), write(' = '), write(Total), 
+        (Total >= 15 ->
+            write(' foi obtida com estas perguntas e é provável porque o resultado foi maior ou igual a 15:'), nl,
+            get_ids_by_transtorno(Transtorno, QuestionIds),
+            explain_questions(QuestionIds)
+        ; write(' foi obtida com estas perguntas e não é provável porque o resultado foi menor que 15:'), nl,
+            get_ids_by_transtorno(Transtorno, QuestionIds),
+            explain_questions(QuestionIds)
+        )
+    ; write('Conclusão não encontrada para o número: '), write(N), nl
+    ).
 
-
-escreve_factos([I|R]):-facto(I,F), !,
-	write('O facto n� '),write(I),write(' -> '),write(F),write(' � verdadeiro'),nl,
-	escreve_factos(R).
-escreve_factos([I|R]):-
-	write('A condi��o '),write(I),write(' � verdadeira'),nl,
-	escreve_factos(R).
-escreve_factos([]).
-
-explica([I|R]):- \+ integer(I),!,explica(R).
-explica([I|R]):-como(I),
-		explica(R).
-explica([]):-	write('********************************************************'),nl.
-
-
-
+explain_questions(QuestionIds) :-
+    member(ID, QuestionIds),
+    facto(ID, pergunta(_, Value)),
+    pergunta(Transtorno, ID, Question),
+    format('[~w] = ~w~n', [Value, Question]),
+    fail.
+explain_questions(_, _).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Gera��o de explica��es do tipo "Porque nao"
@@ -282,3 +276,34 @@ conclusao_provavel(Lista) :-
 
 conclusao_nao_provavel(Lista) :-
     findall(X, facto(_, conclusao(X, _, nao_provavel)), Lista).
+
+fatos_provaveis(FatosProvaveis) :-
+    conclusao_provavel(ListaProvavel),
+    findall(Facto, (
+        member(conclusao(N, _, provavel), ListaProvavel),
+        facto(_, Facto)
+    ), ListaFatosProvaveis),
+	write(FatosProvaveis),
+    list_to_set(ListaFatosProvaveis, FatosProvaveis).
+
+fatos_nao_provaveis(FatosNaoProvaveis) :-
+    conclusao_nao_provavel(ListaNaoProvavel),
+    findall(Facto, (
+        member(conclusao(N, _, provavel), ListaNaoProvavel),
+        facto(_, Facto)
+    ), ListaFatosNaoProvaveis),
+	write(FatosNaoProvaveis),
+    list_to_set(ListaFatosNaoProvaveis, FatosNaoProvaveis).
+
+% Sample rules associating Transtorno with IDs
+transtorno_ids(ansiedade_Generalizada, [1, 2, 3, 4, 5]).
+transtorno_ids(transtorno_de_Panico, [6, 7, 8, 9, 10]).
+transtorno_ids(transtorno_de_Panico_com_Agorafobia, [11, 12, 13, 14, 15]).
+transtorno_ids(agorafobia, [16, 17, 18, 19, 20]).
+transtorno_ids(ansiedade_Social, [21, 22, 23, 24, 25]).
+transtorno_ids(fobia_especifica, [26, 27, 28, 29, 30]).
+transtorno_ids(mutismo_Seletivo, [31, 32, 33, 34, 35]).
+transtorno_ids(ansiedade_de_separacao, [36, 37, 38, 39, 40]).
+
+get_ids_by_transtorno(Transtorno, IDs) :-
+    transtorno_ids(Transtorno, IDs).

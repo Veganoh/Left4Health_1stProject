@@ -88,10 +88,10 @@ regra 16
 % Valores fixos das respostas do questionário
 % Ansiedade_Generalizada
 facto(1,pergunta(1,5)).
-facto(2,pergunta(2,5)).
-facto(3,pergunta(3,5)).
-facto(4,pergunta(4,5)).
-facto(5,pergunta(5,5)).
+facto(2,pergunta(2,4)).
+facto(3,pergunta(3,3)).
+facto(4,pergunta(4,2)).
+facto(5,pergunta(5,1)).
 
 % Transtorno_de_Panico
 facto(6,pergunta(6,4)).
