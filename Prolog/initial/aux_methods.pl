@@ -26,16 +26,3 @@ conclusao(start_quiz40, "Vai iniciar um questionário de 40 perguntas").
 todas_perguntas_iniciais(ListaPerguntasInicias) :-
     findall((ID, Pergunta), pergunta_inicial(_, ID, Pergunta), ListaPerguntasInicias).
 
-%Manipulação de conclusões
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Metodo para extrair o tipo da conclusão
-extrair_nome_conclusao(Facto, Nome) :-
-    Facto =.. [_, Nome].
-
-%Metodo para visualizar a descrição da conclusão
-descricao_conclusao(Conclusao, Descricao) :-
-    conclusao(Conclusao, Descricao).
-
-conclusion_get_description(Facto, Descricao):-
-    extrair_nome_conclusao(Facto,Nome),
-    descricao_conclusao(Nome, Descricao).

@@ -1,9 +1,9 @@
 % Importar os módulos necessários
 :- consult('engine.pl').
 :- consult('server.pl').
-:-consult('aux_methods.pl').
+%:-consult('aux_methods.pl').
 
 
-main_initial :-   
+main_quiz40 :-   
     carrega_bc,
-    servidor(7070).
+    servidor(7071).
