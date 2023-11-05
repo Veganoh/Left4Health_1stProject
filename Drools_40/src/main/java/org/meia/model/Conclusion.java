@@ -33,7 +33,7 @@ public class Conclusion extends Fact {
 
     public static final String SOCIAL_PHOBIA = "Fobia Social";
 
-    public static final String NOT_SOCIAL_PHOBIA = "Fobia Social";
+    public static final String NOT_SOCIAL_PHOBIA = "Não tem Fobia Social";
 
 
 
