@@ -47,7 +47,7 @@ export class QuestionnaireInitialPrologComponent {
           this.conclusion = r || '';
           if (this.conclusion == "Vai iniciar um questionário de 40 perguntas") {
             this.canProceed = true;
-            this.router.navigate(['/questionnaire']);
+            this.router.navigate(['/questionnaireProlog']);
           }
         });
       }

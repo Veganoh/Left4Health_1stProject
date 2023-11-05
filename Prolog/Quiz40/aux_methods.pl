@@ -3,16 +3,6 @@
 %Base de conhecimento
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Perguntas relacionas com o quiz Initial
-pergunta_inicial(quizInitial, 41, "Possuí alguma condição clinica do diagnóstico diferencial pode explicar os sintomas?").
-pergunta_inicial(quizInitial, 42, "Você sente ansiedade e preocupação excessiva em relação a várias áreas da sua vida na maioria dos dias há pelo menos seis meses?").
-pergunta_inicial(quizInitial, 43, "Você sente que sua preocupação é desproporcional em relação à situação ou que você não consegue controlá-la?").
-pergunta_inicial(quizInitial, 44, "Nos últimos seis meses, quantos sintomas dos seguintes sentiu na maioria dos dias: inquietação, fadiga, dificuldade de concentração, irritabilidade, tensão muscular ou problemas para dormir?").
-pergunta_inicial(quizInitial, 45, "Você já foi diagnosticado ou acredita que sua ansiedade excessiva não pode ser explicada por outro problema de saúde mental, como transtorno de pânico, fobia social, transtorno obsessivo-compulsivo, ou outros transtornos similares?").
-pergunta_inicial(quizInitial, 46, "Essa ansiedade, preocupação ou sintomas físicos causam um impacto significativo em sua vida social, profissional ou em outras áreas importantes?").
-pergunta_inicial(quizInitial, 47, "Os sintomas podem ser explicados por uso de medicamentos, abuso de substâncias ou síndrome de abstinência?").
-
-
 % Perguntas relacionadas à Síndrome de Ansiedade Generalizada
 pergunta(sindrome_ansiedade_generalizada, 1, "Nas últimas semanas, com que frequência você se sentiu tenso, nervoso ou ansioso, mesmo quando não havia motivo óbvio para se sentir assim?").
 pergunta(sindrome_ansiedade_generalizada, 2, "Você tem dificuldade em controlar seus pensamentos ansiosos, mesmo quando tenta concentrar-se em outras coisas?").
@@ -72,18 +62,25 @@ pergunta(ansiedade_separacao, 40, "Tem sintomas físicos de ansiedade, como palp
 
 %Conclusões 
 
-conclusao(anxiety_as_normal_factor, "Ansiedade como condição do ser humano").
-conclusao(anxiety_secondary_factor, "Tratar condição clínica e reavaliar persistência ou não dos sintomas de ansiedade após tratamento").
-conclusao(anxiety_meds_factor, "Reavaliar necessidade dos medicamentos, tratar abuso de substância ou síndrome de abstinência e após reavaliar persistência ou não dos sintomas ansiosos.").
-conclusao(check_the_doctor, "Contactar um Especialista").
-conclusao(start_quiz40, "Vai iniciar um questionário de 40 perguntas").
+conclusao(general_anxiety, "Ansiedade Generalizada").
+conclusao(not_general_anxiety, "Não tem Ansiedade Generalizada").
+conclusao(panic_syndrome, "Síndrome de Pânico").
+conclusao(not_panic_syndrome, "Não tem Síndrome de Pânico").
+conclusao(panic_agoraphobia_syndrome, "Síndrome de Pânico com AgoraFobia").
+conclusao(not_panic_agoraphobia_syndrome, "Não tem Síndrome de Pânico com AgoraFobia").
+conclusao(agoraphobia_syndrome, "AgoraFobia").
+conclusao(not_agoraphobia_syndrome, "Não é AgoraFobia").
+conclusao(specific_phobia, "Fobia Especifica").
+conclusao(not_specific_phobia, "Não tem Fobia Especifica").
+conclusao(selective_mutism, "Mutismo Seletivo").
+conclusao(not_selective_mutism, "Não tem Mutismo Seletivo").
+conclusao(separation_anxiety, "Ansiedade de Separação").
+conclusao(not_separation_anxiety, "Não tem Ansiedade de Separação").
+conclusao(social_phobia, "Fobia Social").
+conclusao(not_social_phobia, "Não tem Fobia Social").
 
 %Manipulação de perguntas.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% Método para receber todas as perguntas iniciais todos os tipos de transtorno
-todas_perguntas_iniciais(ListaPerguntasInicias) :-
-    findall((ID, Pergunta), pergunta_inicial(_, ID, Pergunta), ListaPerguntasInicias).
 
 % Método para receber todas as perguntas de todos os tipos de transtorno de maneira aleatória
 perguntas_misturadas(ListaPerguntasMisturadas) :-
@@ -93,29 +90,22 @@ perguntas_misturadas(ListaPerguntasMisturadas) :-
 % Método para receber todas as perguntas de todos os tipos de transtorno
     todas_perguntas(ListaPerguntas) :-
         findall((ID, Pergunta), pergunta(_, ID, Pergunta), ListaPerguntas).
-    
-%Manipulação de conclusões
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Metodo para extrair o tipo da conclusão
-extrair_nome_conclusao(Facto, Nome) :-
-    Facto =.. [_, Nome].
 
-%Metodo para visualizar a descrição da conclusão
-descricao_conclusao(Conclusao, Descricao) :-
-    conclusao(Conclusao, Descricao).
+%Comum aos dois 
+reset_factos:-
+    retractall(facto(_,_)),
+    retract(ultimo_facto(N)),
+    assertz(ultimo_facto(1)).
 
-conclusion_get_description(Facto, Descricao):-
-    extrair_nome_conclusao(Facto,Nome),
-    descricao_conclusao(Nome, Descricao).
-
-
-%Teste de contador
-%:- dynamic(ultimo_facto/1). %Contador de factos inicias
-
-%update_last_facts(NewValue) :-
-    %retract(ultimo_facto(_)),  % Remova a versão anterior da variável
-    %assert(ultimo_facto(NewValue)).  % Adicione a nova versão da variável
-
-%write_last_fact:-
-    %ultimo_facto(X),
-    %write(X).
+adicionar_factos([]).
+adicionar_factos([[ID,Resposta]]) :-
+    !,
+    ultimo_facto(N),
+    assertz(facto(N, pergunta(ID, Resposta))).
+adicionar_factos([[ID,Resposta]|T]):-
+    ultimo_facto(N),
+    assertz(facto(N,pergunta(ID,Resposta))),
+    N1 is N + 1,
+    retract(ultimo_facto(N)),
+    assertz(ultimo_facto(N1)),
+    adicionar_factos(T).

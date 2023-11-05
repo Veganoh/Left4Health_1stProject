@@ -1,0 +1,114 @@
+<div class="container questionnaire" *ngIf="currentPage === 1">
+    <h1 class="title">Questionário de Ansiedade (Página 1/2)</h1>
+    <form>
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead class="thead-dark">
+            <tr>
+              <th>Pergunta</th>
+              <th>Resposta</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let question of questionsPage1; let i = index">
+              <td>{{ question.question }}</td>
+              <td>
+                <select [(ngModel)]="question.answer" id="q{{ i + 1 }}" name="q{{ i + 1 }}" class="form-control">
+                  <option value="1">1. Nada</option>
+                  <option value="2">2. Um pouco</option>
+                  <option value="3">3. Moderadamente</option>
+                  <option value="4">4. Muito</option>
+                  <option selected value="5">5. Extremamente</option>
+                </select>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="button-container">
+        <button class="btn btn-primary" (click)="nextPage()">Próxima Página</button>
+      </div>
+    </form>
+  </div>
+  
+  <div class="container questionnaire" *ngIf="currentPage === 2">
+    <h1 class="title">Questionário de Ansiedade (Página 2/2)</h1>
+    <form>
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead class="thead-dark">
+            <tr>
+              <th>Pergunta</th>
+              <th>Resposta</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let question of questionsPage2; let i = index">
+              <td>{{ question.question }}</td>
+              <td>
+                <select [(ngModel)]="question.answer" id="q{{ i + 21 }}" name="q{{ i + 21 }}" class="form-control">
+                  <option value="1">1. Nada</option>
+                  <option value="2">2. Um pouco</option>
+                  <option value="3">3. Moderadamente</option>
+                  <option value="4">4. Muito</option>
+                  <option selected value="5">5. Extremamente</option>
+                </select>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="button-container">
+        <button class="btn btn-primary" (click)="goToPage(1)">Página Anterior</button>
+        <button class="btn btn-primary" (click)="submitForm()">Submeter Resultados</button>
+      </div>
+    </form>
+  </div>
+  
+  <div class="container diagnosis" *ngIf="currentPage === 3">
+    
+    <h1 class="title">Diagnóstico</h1>
+    <ul *ngIf="diagnosis.length > 0">
+      <li *ngFor="let category of diagnosisMaior; let last = last">
+        <div>
+          <hr style="border: 1px solid blue; margin: 20px;">
+          <p><strong>Regra 1: </strong>{{ category.regra1 }}</p>
+          <p><strong>Regra 2: </strong>{{ category.regra2 }}</p>
+          <p style="background-color: orange; color: white; padding: 10px 20px; border-radius: 5px; display: inline-block; text-align: center;">Score: {{ category.score }}</p>
+  
+          <ul>
+            <li *ngFor="let question of category.questions">
+              {{ question }}
+            </li>
+          </ul>
+          <hr *ngIf="last" style="border: 1px solid blue; margin: 20px;">
+        </div>
+      </li>
+    </ul>
+        <button (click)="goToHomePage()">Retornar à Página Inicial</button>
+  
+        <button (click)="onBotaoClicado()" *ngIf="negativeDiagnosis.length > 0">Pontuação abaixo de 15</button>        
+  </div>
+  <div class="container diagnosis" *ngIf="currentPage === 4">
+    
+    <h1 class="title">Diagnosis</h1>
+    <ul *ngIf="diagnosis.length > 0">
+      <li *ngFor="let category of diagnosisMenor; let last = last">
+        <div>
+          <hr style="border: 1px solid blue; margin: 20px;">
+          <p><strong>Regra 1: </strong>{{ category.regra1 }}</p>
+          <p><strong>Regra 2: </strong>{{ category.regra2 }}</p>
+          <p style="background-color: orange; color: white; padding: 10px 20px; border-radius: 5px; display: inline-block; text-align: center;">Score: {{ category.score }}</p>
+  
+          <ul>
+            <li *ngFor="let question of category.questions">
+              {{ question }}
+            </li>
+          </ul>
+          <hr *ngIf="last" style="border: 1px solid blue; margin: 20px;">
+        </div>
+      </li>
+    </ul>
+        <button (click)="goToPage(3)" *ngIf="positiveDiagnosis.length != 0">Voltar à pagina Anterior </button>
+        <button (click)="goToHomePage()">Retornar à Página Inicial</button> 
+  </div>  

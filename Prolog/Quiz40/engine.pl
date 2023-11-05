@@ -1,10 +1,8 @@
-% Versao preparada para lidar com regras que contenham negacao (nao)
+% Vers�o preparada para lidar com regras que contenham nega��o (nao)
 % Metaconhecimento
 % Usar base de conhecimento veIculos2.txt
-% Explicacoes como?(how?) e porque nao?(whynot?)
-
-:-consult('aux_methods.pl').
-
+% Explica��es como?(how?) e porque n�o?(whynot?)
+:- encoding(utf8).
 :-op(220,xfx,entao).
 :-op(35,xfy,se).
 :-op(240,fx,regra).
@@ -12,30 +10,28 @@
 :-op(600,xfy,e).
 
 :-dynamic justifica/3.
-:-dynamic ultimo_facto/1. %Contador de factos inicias
-:- dynamic conclusion_inicial/1.
 
-carrega_bc(Initial_facts,NBC):-
-%carrega_bc:-
-	%Initial_facts=0, 
-	%consult('C:/Users/mariana/Documents/GitHub/Left4Health_1stProject/Prolog/test/rules.txt'),
-	consult(NBC),
-	assert(ultimo_facto(Initial_facts)),
-    writeln('Regras carregadas para o motor de inferencia').
 
-%Manipulação da função caso nao existam factos, conseguirmos identificar esse erro
-arranca_motor():-
+carrega_bc:-
+	consult('C:/Users/mariana/Documents/GitHub/Left4Health_1stProject/Prolog/Quiz40/rules40.txt').
+
+arranca_motor:-	
+	calcula_valores_totais,
 	facto(N,Facto),
-	facto_dispara_regras1(Facto, LRegras),
-	dispara_regras(N, Facto, LRegras),
-	ultimo_facto(N).
+		facto_dispara_regras1(Facto, LRegras),
+		dispara_regras(N, Facto, LRegras),
+		ultimo_facto(N).
+
+verifica_condicoes([]).
+verifica_condicoes([Condicao | Resto]) :-
+    Condicao,
+    verifica_condicoes(Resto).
 
 facto_dispara_regras1(Facto, LRegras):-
 	facto_dispara_regras(Facto, LRegras),
 	!.
-
 facto_dispara_regras1(_, []).
-% Caso em que o facto nao origina o disparo de qualquer regra.
+% Caso em que o facto n�o origina o disparo de qualquer regra.
 
 dispara_regras(N, Facto, [ID|LRegras]):-
 	regra ID se LHS entao RHS,
@@ -99,16 +95,15 @@ cria_facto(F,_,_):-
 	facto(_,F),!.
 
 cria_facto(F,ID,LFactos):-
+	
 	ultimo_facto(LastFact),
-	retractall(ultimo_facto(_)),
+	retract(ultimo_facto(N1)),
 	N is LastFact+1,
 	asserta(ultimo_facto(N)),
 	assertz(justifica(N,ID,LFactos)),
 	assertz(facto(N,F)),
-	%adiciona o facto criado ao facto das conclusões
-	asserta(conclusion_inicial(F)),
-	%write('Foi concluido o facto n: '),write(N),write(' -> '),write(F),get0(_),!.
-	write('Foi concluido o facto n: '),write(N),write(' -> '),write(F),!.
+	write(facto(N,F)).
+	%rite('Foi conclu�do o facto n� '),write(N),write(' -> '),write(F),get0(_),!.
 
 
 
@@ -137,26 +132,26 @@ mostra_factos:-
 % Gera��o de explica��es do tipo "Como"
 
 como(N):-ultimo_facto(Last),Last<N,!,
-	write('Essa conclusao nao foi tirada'),nl,nl.
+	write('Essa conclus�o n�o foi tirada'),nl,nl.
 como(N):-justifica(N,ID,LFactos),!,
 	facto(N,F),
-	write('Conclui o facto n: '),write(N),write(' -> '),write(F),nl,
+	write('Conclui o facto n� '),write(N),write(' -> '),write(F),nl,
 	write('pela regra '),write(ID),nl,
 	write('por se ter verificado que:'),nl,
 	escreve_factos(LFactos),
 	write('********************************************************'),nl,
 	explica(LFactos).
 como(N):-facto(N,F),
-	write('O facto n: '),write(N),write(' -> '),write(F),nl,
+	write('O facto n� '),write(N),write(' -> '),write(F),nl,
 	write('foi conhecido inicialmente'),nl,
 	write('********************************************************'),nl.
 
 
 escreve_factos([I|R]):-facto(I,F), !,
-	write('O facto n: '),write(I),write(' -> '),write(F),write(' e verdadeiro'),nl,
+	write('O facto n� '),write(I),write(' -> '),write(F),write(' � verdadeiro'),nl,
 	escreve_factos(R).
 escreve_factos([I|R]):-
-	write('A condicao '),write(I),write(' e verdadeira'),nl,
+	write('A condi��o '),write(I),write(' � verdadeira'),nl,
 	escreve_factos(R).
 escreve_factos([]).
 
@@ -169,8 +164,8 @@ explica([]):-	write('********************************************************'),
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Geracao de explicacoes do tipo "Porque nao"
-% Exemplo: ?- whynot(classe(meu_veiculo,ligeiro)).
+% Gera��o de explica��es do tipo "Porque nao"
+% Exemplo: ?- whynot(classe(meu_ve�culo,ligeiro)).
 
 whynot(Facto):-
 	whynot(Facto,1).
@@ -178,16 +173,16 @@ whynot(Facto):-
 whynot(Facto,_):-
 	facto(_, Facto),
 	!,
-	write('O facto '),write(Facto),write(' nao e falso!'),nl.
+	write('O facto '),write(Facto),write(' n�o � falso!'),nl.
 whynot(Facto,Nivel):-
 	encontra_regras_whynot(Facto,LLPF),
 	whynot1(LLPF,Nivel).
 whynot(nao Facto,Nivel):-
 	formata(Nivel),write('Porque:'),write(' O facto '),write(Facto),
-	write(' e verdadeiro'),nl.
+	write(' � verdadeiro'),nl.
 whynot(Facto,Nivel):-
 	formata(Nivel),write('Porque:'),write(' O facto '),write(Facto),
-	write(' nao esta definido na base de conhecimento'),nl.
+	write(' n�o est� definido na base de conhecimento'),nl.
 
 %  As explica��es do whynot(Facto) devem considerar todas as regras que poderiam dar origem a conclus�o relativa ao facto Facto
 
@@ -235,14 +230,14 @@ encontra_premissas_falsas([]).
 explica_porque_nao([],_).
 explica_porque_nao([nao avalia(X)|LPF],Nivel):-
 	!,
-	formata(Nivel),write('A condicao nao '),write(X),write(' e falsa'),nl,
+	formata(Nivel),write('A condi��o nao '),write(X),write(' � falsa'),nl,
 	explica_porque_nao(LPF,Nivel).
 explica_porque_nao([avalia(X)|LPF],Nivel):-
 	!,
-	formata(Nivel),write('A condicao '),write(X),write(' e falsa'),nl,
+	formata(Nivel),write('A condi��o '),write(X),write(' � falsa'),nl,
 	explica_porque_nao(LPF,Nivel).
 explica_porque_nao([P|LPF],Nivel):-
-	formata(Nivel),write('A premissa '),write(P),write(' e falsa'),nl,
+	formata(Nivel),write('A premissa '),write(P),write(' � falsa'),nl,
 	Nivel1 is Nivel+1,
 	whynot(P,Nivel1),
 	explica_porque_nao(LPF,Nivel).
@@ -250,12 +245,38 @@ explica_porque_nao([P|LPF],Nivel):-
 formata(Nivel):-
 	Esp is (Nivel-1)*5, tab(Esp).
 
+% Novos predicados
 
+calcula_valores_totais :-
+    calcular_valor_total_sindrome(ansiedade_Generalizada,[1,2,3,4,5], Total1),
+    calcular_valor_total_sindrome(transtorno_de_Panico,[6,7,8,9,10], Total2),
+    calcular_valor_total_sindrome(transtorno_de_Panico_com_Agorafobia,[11,12,13,14,15], Total3),
+    calcular_valor_total_sindrome(agorafobia,[16,17,18,19,20], Total4),
+    calcular_valor_total_sindrome(ansiedade_Social,[21,22,23,24,25], Total5),
+    calcular_valor_total_sindrome(fobia_especifica,[26,27,28,29,30], Total6),
+    calcular_valor_total_sindrome(mutismo_Seletivo,[31,32,33,34,35], Total7),
+    calcular_valor_total_sindrome(ansiedade_de_separacao,[36,37,38,39,40], Total8).
+	%write('Total para ansiedade_Generalizada: '), write(Total1), nl,
+    %write('Total para transtorno_de_Panico: '), write(Total2), nl,
+    %write('Total para transtorno_de_Panico_com_Agorafobia: '), write(Total3), nl,
+    %write('Total para agorafobia: '), write(Total4), nl,
+    %write('Total para ansiedade_Social: '), write(Total5), nl,
+    %write('Total para fobia_especifica: '), write(Total6), nl,
+    %write('Total para mutismo_Seletivo: '), write(Total7), nl,
+    %write('Total para ansiedade_de_separacao: '), write(Total8), nl.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Funções criadas por nós
+calcular_valor_total_sindrome(Transtorno, QuestionIds, Total) :-
+    findall(Valor, (
+        member(QuestionId, QuestionIds),
+        facto(QuestionId, pergunta(QuestionId, Valor))
+    ), Valores),
+    sum_list(Valores, Total),
+	%write(transtorno(Transtorno, Total)),
+	cria_facto(transtorno(Transtorno, Total), _, _).
+    %assertz(transtorno(Transtorno, Total)).
 
-conta_factos :-
-	findall(_, facto(_, _), LFactos),
-    length(LFactos, Contagem),
-	write(Contagem).
+conclusao_provavel(Lista) :-
+    findall(X, facto(_, conclusao(X, _, provavel)), Lista).
+
+conclusao_nao_provavel(Lista) :-
+    findall(X, facto(_, conclusao(X, _, nao_provavel)), Lista).

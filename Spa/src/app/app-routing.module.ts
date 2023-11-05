@@ -4,8 +4,8 @@ import { HomeComponent } from './home/home.component';
 import { QuestionnaireComponent } from './questionnaire/questionnaire.component';
 import { DiagnosisComponent } from './diagnosis/diagnosis.component';
 import { QuestionnaireinitialComponent } from './questionnaireinitial/questionnaireinitial.component';
-import { ChartsComponent } from './charts/charts.component'
 import { QuestionnaireInitialPrologComponent } from './prolog/questionnaire-initial-prolog/questionnaire-initial-prolog.component';
+import { QuestionnairePrologComponent } from './prolog/questionnaire-prolog/questionnaire-prolog.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent }, // Rota da página inicial
@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'questionnaireinitial', component: QuestionnaireinitialComponent }, // Rota para o componente "questionnaireinitial"
   { path: 'questionnaireinitialProlog', component: QuestionnaireInitialPrologComponent }, // Rota para o componente "questionnaireinitialProlog"
   { path: 'questionnaireinitial', component: QuestionnaireinitialComponent },
-  { path: 'charts', component: ChartsComponent } // Rota para o componente "questionnaireinitial"
+  { path: 'questionnaireProlog', component: QuestionnairePrologComponent},
   // Outras rotas do seu aplicativo
 
   

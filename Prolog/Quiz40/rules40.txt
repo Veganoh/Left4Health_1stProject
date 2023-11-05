@@ -1,0 +1,85 @@
+:-dynamic facto/2,ultimo_facto/1.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Metaconhecimento
+
+facto_dispara_regras(transtorno(ansiedade_Generalizada, _), [1, 2]).
+facto_dispara_regras(transtorno(transtorno_de_Panico, _), [3, 4]).
+facto_dispara_regras(transtorno(transtorno_de_Panico_com_Agorafobia, _), [5, 6]).
+facto_dispara_regras(transtorno(agorafobia, _), [7, 8]).
+facto_dispara_regras(transtorno(ansiedade_Social, _), [9, 10]).
+facto_dispara_regras(transtorno(fobia_especifica, _), [11, 12]).
+facto_dispara_regras(transtorno(mutismo_Seletivo, _), [13, 14]).
+facto_dispara_regras(transtorno(ansiedade_de_separacao, _), [15, 16]).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ultimo_facto(1).
+ultima_regra(16).
+
+% QUiz40
+
+regra 1
+    se [transtorno(ansiedade_Generalizada,_) e avalia(transtorno(ansiedade_Generalizada, >=, 15))] 
+    entao [cria_facto(conclusao(ansiedade_Generalizada, Total, provavel))] :- calcular_valor_total_sindrome(ansiedade_Generalizada,[1,2,3,4,5], Total).
+
+regra 2
+    se [transtorno(ansiedade_Generalizada,_) e avalia(transtorno(ansiedade_Generalizada,<,15))]
+    entao [cria_facto(conclusao(ansiedade_Generalizada, Total, nao_provavel))] :- calcular_valor_total_sindrome(ansiedade_Generalizada,[1,2,3,4,5], Total).
+
+regra 3 
+    se [transtorno(transtorno_de_Panico,_) e avalia(transtorno(transtorno_de_Panico, >=, 15))] 
+    entao [cria_facto(conclusao(transtorno_de_Panico, Total, provavel))] :- calcular_valor_total_sindrome(transtorno_de_Panico,[6,7,8,9,10], Total).
+
+regra 4
+    se [transtorno(transtorno_de_Panico,_) e avalia(transtorno(transtorno_de_Panico,<,15))]
+    entao [cria_facto(conclusao(transtorno_de_Panico, Total, nao_provavel))] :- calcular_valor_total_sindrome(transtorno_de_Panico,[6,7,8,9,10], Total).
+
+regra 5
+    se [transtorno(transtorno_de_Panico_com_Agorafobia,_) e avalia(transtorno(transtorno_de_Panico_com_Agorafobia, >=, 15))] 
+    entao [cria_facto(conclusao(transtorno_de_Panico_com_Agorafobia, Total, provavel))] :- calcular_valor_total_sindrome(ansiedade_Generalizada,[11,12,13,14,15], Total).
+
+regra 6
+    se [transtorno(transtorno_de_Panico_com_Agorafobia,_) e avalia(transtorno(transtorno_de_Panico_com_Agorafobia,<,15))]
+    entao [cria_facto(conclusao(transtorno_de_Panico_com_Agorafobia, Total, nao_provavel))] :- calcular_valor_total_sindrome(ansiedade_Generalizada,[11,12,13,14,15], Total).
+
+regra 7
+    se [transtorno(agorafobia,_) e avalia(transtorno(agorafobia, >=, 15))] 
+    entao [cria_facto(conclusao(agorafobia, Total, provavel))] :- calcular_valor_total_sindrome(agorafobia,[16,17,18,19,20], Total).
+
+regra 8
+    se [transtorno(agorafobia,_) e avalia(transtorno(agorafobia,<,15))]
+    entao [cria_facto(conclusao(agorafobia, Total, nao_provavel))] :- calcular_valor_total_sindrome(agorafobia,[16,17,18,19,20], Total).
+
+regra 9
+    se [transtorno(ansiedade_Social,_) e avalia(transtorno(ansiedade_Social, >=, 15))] 
+    entao [cria_facto(conclusao(ansiedade_Social, Total, provavel))] :- calcular_valor_total_sindrome(ansiedade_Social,[21,22,23,24,25], Total).
+
+regra 10
+    se [transtorno(ansiedade_Social,_) e avalia(transtorno(ansiedade_Social,<,15))]
+    entao [cria_facto(conclusao(ansiedade_Social, Total, nao_provavel))] :- calcular_valor_total_sindrome(ansiedade_Social,[21,22,23,24,25], Total).
+
+regra 11
+    se [transtorno(fobia_especifica,_) e avalia(transtorno(fobia_especifica, >=, 15))] 
+    entao [cria_facto(conclusao(fobia_especifica, Total, provavel))] :- calcular_valor_total_sindrome(fobia_especifica,[26,27,28,29,30], Total).
+
+regra 12
+    se [transtorno(fobia_especifica,_) e avalia(transtorno(fobia_especifica,<,15))]
+    entao [cria_facto(conclusao(fobia_especifica, Total, nao_provavel))] :- calcular_valor_total_sindrome(fobia_especifica,[26,27,28,29,30], Total).
+
+regra 13
+    se [transtorno(mutismo_Seletivo,_) e avalia(transtorno(mutismo_Seletivo, >=, 15))] 
+    entao [cria_facto(conclusao(mutismo_Seletivo, Total, provavel))] :- calcular_valor_total_sindrome(mutismo_Seletivo,[31,32,33,34,35], Total).
+
+regra 14
+    se [transtorno(mutismo_Seletivo,_) e avalia(transtorno(mutismo_Seletivo,<,15))]
+    entao [cria_facto(conclusao(mutismo_Seletivo, Total, nao_provavel))] :- calcular_valor_total_sindrome(mutismo_Seletivo,[31,32,33,34,35], Total).
+
+regra 15
+    se [transtorno(ansiedade_de_separacao,_) e avalia(transtorno(ansiedade_de_separacao, >=, 15))] 
+    entao [cria_facto(conclusao(ansiedade_de_separacao, Total, provavel))] :- calcular_valor_total_sindrome(ansiedade_de_separacao,[36,37,38,39,40], Total).
+
+regra 16
+    se [transtorno(ansiedade_de_separacao,_) e avalia(transtorno(ansiedade_de_separacao,<,15))]
+    entao [cria_facto(conclusao(ansiedade_de_separacao, Total, nao_provavel))] :- calcular_valor_total_sindrome(ansiedade_de_separacao,[36,37,38,39,40], Total).

@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Router , NavigationExtras} from '@angular/router';
-import { Question } from '../domain/question';
-import { QuestionnaireService } from '../services/questionnaire.service';
-import { Category } from '../domain/category';
-
+import { Question } from '../../domain/question';
+import { QuestionnaireService } from '../../services/questionnaire.service';
+import { Category } from '../../domain/category';
 
 @Component({
-  selector: 'app-questionnaire',
-  templateUrl: './questionnaire.component.html',
-  styleUrls: ['./questionnaire.component.scss'],
+  selector: 'app-questionnaire-prolog',
+  templateUrl: './questionnaire-prolog.component.html',
+  styleUrls: ['./questionnaire-prolog.component.scss'],
   providers: [QuestionnaireService]
 })
-export class QuestionnaireComponent implements OnInit {
+export class QuestionnairePrologComponent {
   currentPage: number = 1;
 
   questions: Question[] = [];
@@ -25,7 +24,6 @@ export class QuestionnaireComponent implements OnInit {
   diagnosisMenor: any;
   active = false; // Inicialmente oculto
 
-
   constructor(
     private router: Router,
     private service : QuestionnaireService
@@ -36,7 +34,7 @@ export class QuestionnaireComponent implements OnInit {
     }
 
     obtainQuestions(): void {
-      this.service.obtain40Questions().subscribe((response: string) => {
+      this.service.obtain40QuestionsProlog().subscribe((response: string) => {
         const inputString = response;
         this.questions = createQuestionsFromString(inputString);
   
@@ -46,6 +44,7 @@ export class QuestionnaireComponent implements OnInit {
       });
     }
 
+    
     goToHomePage() {
       this.router.navigate(['/']); 
     }
@@ -54,7 +53,7 @@ export class QuestionnaireComponent implements OnInit {
       const answer = createStringFromAnswers(this.questions);
     
       try {
-        const response = await this.service.answerQuizFinal(answer).toPromise();
+        const response = await this.service.answerQuizFinalProlog(answer).toPromise();
         if (response) {
           this.diagnosis = createCategoriesFromString(response);
           this.getDiagnosis();
@@ -65,45 +64,46 @@ export class QuestionnaireComponent implements OnInit {
         console.error('Erro na chamada da API:', error);
       }
     }
-    
 
-  nextPage() {
-    this.currentPage = 2;
-  }
+    nextPage() {
+      this.currentPage = 2;
+    }
+  
+    goToPage(page: number) {
+      this.currentPage = page;
+    }
+  
+    submitForm() {
+      this.obtainAnswer();
+      if(this.positiveDiagnosis.length == 0)     this.currentPage = 4;
+    }
 
-  goToPage(page: number) {
-    this.currentPage = page;
-  }
-
-  submitForm() {
-    this.obtainAnswer();
-    this.currentPage = 3;
-  }
-
-  getDiagnosis() {
-    this.diagnosisMaior = this.diagnosis?.filter(category => category.score > 14);
-    this.diagnosisMenor = this.diagnosis?.filter(category => category.score < 15);
-    for (const category of this.diagnosisMaior) {
+    getDiagnosis() {
+      this.diagnosisMaior = this.diagnosis?.filter(category => category.score > 14);
+      this.diagnosisMenor = this.diagnosis?.filter(category => category.score < 15);
+      for (const category of this.diagnosisMaior) {
+          const score = category.score;
+          if(score >= 15) this.positiveDiagnosis.push(category);
+          else this.negativeDiagnosis.push(category)
+      }
+      for (const category of this.diagnosisMenor) {
         const score = category.score;
         if(score >= 15) this.positiveDiagnosis.push(category);
         else this.negativeDiagnosis.push(category)
+    }  
     }
-    for (const category of this.diagnosisMenor) {
-      const score = category.score;
-      if(score >= 15) this.positiveDiagnosis.push(category);
-      else this.negativeDiagnosis.push(category)
-  }  
-  }
-
-
-  onBotaoClicado() {
-    this.currentPage = 3;
-    
-    // Ative a exibição da página 4
-    this.active = true;
-    this.currentPage = 4;
-  }
+  
+  
+    onBotaoClicado() {
+      this.currentPage = 3;
+      this.active = true;
+      this.currentPage = 4;
+    }
 }
+
+
+
+
 
 function createQuestionsFromString(inputString: string): Question[] {
   const lines = inputString.trim().split('\n');
@@ -152,6 +152,3 @@ function createCategoriesFromString(inputString: string): Category[] {
   }
   return categories;
 }
-
-
-

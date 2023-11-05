@@ -1,8 +1,4 @@
-% Versao preparada para lidar com regras que contenham negacao (nao)
-% Metaconhecimento
-% Usar base de conhecimento veIculos2.txt
-% Explicacoes como?(how?) e porque nao?(whynot?)
-
+:- encoding(utf8).
 :-consult('aux_methods.pl').
 
 :-op(220,xfx,entao).
@@ -14,7 +10,7 @@
 :- dynamic ultimo_facto/1.
 
 carrega_bc:-
-		consult('C:/Users/mafs6/Documents/GitHub/Left4Health_1stProject/Prolog/initial/rules.txt').
+		consult('C:/Users/mariana/Documents/GitHub/Left4Health_1stProject/Prolog/initial/rules.txt').
 
 % Arranque do Motor de Infer�ncia
 
@@ -105,6 +101,8 @@ escreve_factos([I|R]):-facto(I,F),
 	write('O facto n� '),write(I),write(' -> '),write(F),nl,
 	escreve_factos(R).
 escreve_factos([]).
+
+%Funções feitas por nos
 
 adicionar_factos([]).
 adicionar_factos([[ID,Resposta]]) :-
