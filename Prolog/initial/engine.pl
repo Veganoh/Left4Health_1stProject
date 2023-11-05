@@ -9,18 +9,15 @@
 :- dynamic justifica/3.
 :- dynamic ultimo_facto/1.
 
-carrega_bc(NBC):-
-	concat(NBC, "initial/rules.txt", Result),
-	consult(Result).
+carrega_bc:-
+		consult('C:/Users/mariana/Documents/GitHub/Left4Health_1stProject/Prolog/initial/rules.txt').
 
 % Arranque do Motor de Infer�ncia
 
-arranca_motor:-
-	facto(N,Facto),
-	regra ID se LHS entao RHS,
-	facto_dispara_regra(N,Facto,ID,LHS,RHS),
-	ultimo_facto(N),
-	ultima_regra(ID).
+arranca_motor:-facto(N,Facto),
+		regra ID se LHS entao RHS,
+		facto_dispara_regra(N,Facto,ID,LHS,RHS),
+		ultimo_facto(N),ultima_regra(ID).
 
 % Verificar se o LHS da regra tem sucesso
 

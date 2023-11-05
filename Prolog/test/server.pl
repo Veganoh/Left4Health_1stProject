@@ -6,13 +6,13 @@
 :-consult('aux_methods.pl'). 
 :- consult('engine.pl').
 
-
-:- dynamic facto/2. % Definindo a estrutura de fato (Pergunta, Resposta).
 :- dynamic ultimo_facto/1. %Contador de factos inicias
+:- dynamic facto/2. % Definindo a estrutura de fato (Pergunta, Resposta).
 
 
 % Inicia o servidor
-servidor(Port) :-
+servidor(Initial_facts,Port) :-
+    assert(ultimo_facto(Initial_facts)),
     http_server(http_dispatch, [port(Port)]).
 
 %Pedidos HTTPS
@@ -22,6 +22,37 @@ servidor(Port) :-
 sayHello(Request):-
     format('Content-type: text/plain~n~n'),
     format('Hello World!').
+
+% Define a handler for the /quizInitial endpoint
+:- http_handler('/api/obtainInitialQuestions', get_perguntas_iniciais, [method(get)]).
+% Handler for the GET request to /api/quizInitial endpoint
+get_perguntas_iniciais(Request) :-
+    todas_perguntas_iniciais(Perguntas),
+    format_response(Perguntas, Response),
+    format('Access-Control-Allow-Origin: *~n'),
+    format('Content-type: text/plain~n~n'),
+    format('~s', [Response]).
+
+% HTTP POST para receber as respostas do quizInitial
+:- http_handler('/api/answerQuizInitial', quizInitial, [method(post)]).
+% HTTP POST para receber as respostas do quizInitial
+:- http_handler('/api/answerQuizInitial', quizInitial, [method(post)]).
+quizInitial(Request) :-
+    member(method(post), Request),
+    http_read_data(Request, Data, [to(string)]),
+    ContadorInicial = 1, % Inicialize ContadorInicial com o valor desejado
+    processar_corpo(Data, Resultado, ContadorInicial, ContadorFinal),
+    %update_last_facts(Initial_facts),
+    ValorUltimoFacto is ContadorFinal-1,
+    retractall(ultimo_facto(_)), % Remove the existing ultimo_facto
+    assert(ultimo_facto(ValorUltimoFacto)), % Assert the new value
+    arranca_motor(),
+    conclusion_inicial(ConclusaoGerada),
+    format('Content-type: text/plain; charset=UTF-8~n~n'),
+    conclusion_get_description(ConclusaoGerada, Descricao),
+    format('~w', [Descricao]).
+    
+     % Saída em texto simples
 
 
 
@@ -35,18 +66,28 @@ get_perguntas_40(Request) :-
     format('Content-type: text/plain~n~n'),
     format('~s', [Response]).
 
+process_lines([], _).
+process_lines([QuestionIdString, "5"|Rest], QuestionId) :-
+    atom_number(QuestionIdString, QuestionId),
+    assertz(facto(QuestionId, pergunta(QuestionId, 5))),
+    NextQuestionId is QuestionId + 1,
+    process_lines(Rest, NextQuestionId).
 
 % HTTP POST to receive answers for quiz40
 :- http_handler('/api/answerQuiz40', quiz40, [method(post)]).
 quiz40(Request) :-
     member(method(post), Request),
     http_read_data(Request, Data, [to(string)]),
-    reset_factos,
-    processar_corpo_numbers(Data, Resultado),
-    adicionar_factos(Resultado),
+    ultimo_facto(X),
+    X1 is X + 1,
+    processar_corpo_numbers(Data, Resultado, X1, ContadorFinal),
+    ValorUltimoFacto is ContadorFinal - 1,
+    retractall(ultimo_facto(_)), % Remove the existing ultimo_facto
+    assert(ultimo_facto(ValorUltimoFacto)), % Assert the new value
     format('Access-Control-Allow-Origin: *~n'),
-    format('Content-type: text/plain~n~n'),
-    format('').
+    format('Content-type: text/plain; charset=UTF-8~n~n'),
+    format('Numero de fatos criados: ~d~n', [ValorUltimoFacto]),
+    format('~w', [Resultado]). % Saída em texto simples
 
 % Define the route handler for the GET request
 :- http_handler('/api/resultados', resultados, [method(get)]).
@@ -116,14 +157,6 @@ calcular_valor_total_sindrome(Transtorno, QuestionIds, Total) :-
 %    format_response(Rest, RestFormatted),
 %    atom_concat(FormattedPergunta, RestFormatted, Formatted).
 
-%process_lines([], _).
-%process_lines([QuestionIdString, "5"|Rest], QuestionId) :-
- %   atom_number(QuestionIdString, QuestionId),
- %   assertz(facto(QuestionId, pergunta(QuestionId, 5))),
- %   NextQuestionId is QuestionId + 1,
- %   process_lines(Rest, NextQuestionId).
-
-
 format_response([], '').
 format_response([(ID, Pergunta) | Rest], Formatted) :-
     format(atom(FormattedPergunta), '~d~n~w~n', [ID, Pergunta]),
@@ -131,24 +164,22 @@ format_response([(ID, Pergunta) | Rest], Formatted) :-
     atom_concat(FormattedPergunta, RestFormatted, Formatted).
 
 
-
-processar_corpo_numbers(Dados, Pares) :-
+processar_corpo(Dados, Resultado, Contador, ContadorFinal) :-
     split_string(Dados, "\r\n", "\r\n", Linhas),
     split_into_pairs(Linhas, Pares),
-    assertz(resposta(Pares)).
-    %create_facts(Pares, FactosCriados, Contador, ContadorFinal),
-    %Resultado = FactosCriados.
+    create_facts(Pares, FactosCriados, Contador, ContadorFinal),
+    Resultado = FactosCriados.
+
+processar_corpo_numbers(Dados, Resultado, Contador, ContadorFinal) :-
+    split_string(Dados, "\r\n", "\r\n", Linhas),
+    split_into_pairs(Linhas, Pares),
+    create_facts(Pares, FactosCriados, Contador, ContadorFinal),
+    Resultado = FactosCriados.
 
 split_into_pairs([], []).
-split_into_pairs([Number, Answer | Rest], [[NumberInt, AnswerInt] | Pairs]) :-
-    atom_number(Number, NumberInt),
-    atom_number(Answer, AnswerInt),
+split_into_pairs([Number, Answer | Rest], [[Number, Answer] | Pairs]) :-
     split_into_pairs(Rest, Pairs).
 
-
-%string_to_number([],[]).
-%string_to_number([[Pergunta]],[]):-
-    string_to_number().
 
 create_facts([], [], Contador, Contador).
 create_facts([[Pergunta, Resposta] | RestoLinhas], [pergunta(Pergunta, Resposta) | RestoPares], Contador, ContadorFinal) :-

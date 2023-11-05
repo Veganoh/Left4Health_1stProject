@@ -4,6 +4,6 @@
 :-consult('aux_methods.pl').
 
 
-main_initial(NBC) :-   
-    carrega_bc(NBC),
+main_initial :-   
+    carrega_bc,
     servidor(7070).

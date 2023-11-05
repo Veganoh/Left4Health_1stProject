@@ -18,16 +18,10 @@ carrega_bc:-
 		consult(NBC).
 
 arranca_motor:-	
-	calcula_valores_totais,
 	facto(N,Facto),
 		facto_dispara_regras1(Facto, LRegras),
 		dispara_regras(N, Facto, LRegras),
 		ultimo_facto(N).
-
-verifica_condicoes([]).
-verifica_condicoes([Condicao | Resto]) :-
-    Condicao,
-    verifica_condicoes(Resto).
 
 facto_dispara_regras1(Facto, LRegras):-
 	facto_dispara_regras(Facto, LRegras),
@@ -104,8 +98,7 @@ cria_facto(F,ID,LFactos):-
 	asserta(ultimo_facto(N)),
 	assertz(justifica(N,ID,LFactos)),
 	assertz(facto(N,F)),
-	write(facto(N,F)).
-	%rite('Foi conclu�do o facto n� '),write(N),write(' -> '),write(F),get0(_),!.
+	write('Foi conclu�do o facto n� '),write(N),write(' -> '),write(F),get0(_),!.
 
 
 
@@ -246,39 +239,3 @@ explica_porque_nao([P|LPF],Nivel):-
 
 formata(Nivel):-
 	Esp is (Nivel-1)*5, tab(Esp).
-
-% Novos predicados
-
-calcula_valores_totais :-
-    calcular_valor_total_sindrome(ansiedade_Generalizada,[1,2,3,4,5], Total1),
-    calcular_valor_total_sindrome(transtorno_de_Panico,[6,7,8,9,10], Total2),
-    calcular_valor_total_sindrome(transtorno_de_Panico_com_Agorafobia,[11,12,13,14,15], Total3),
-    calcular_valor_total_sindrome(agorafobia,[16,17,18,19,20], Total4),
-    calcular_valor_total_sindrome(ansiedade_Social,[21,22,23,24,25], Total5),
-    calcular_valor_total_sindrome(fobia_especifica,[26,27,28,29,30], Total6),
-    calcular_valor_total_sindrome(mutismo_Seletivo,[31,32,33,34,35], Total7),
-    calcular_valor_total_sindrome(ansiedade_de_separacao,[36,37,38,39,40], Total8).
-	%write('Total para ansiedade_Generalizada: '), write(Total1), nl,
-    %write('Total para transtorno_de_Panico: '), write(Total2), nl,
-    %write('Total para transtorno_de_Panico_com_Agorafobia: '), write(Total3), nl,
-    %write('Total para agorafobia: '), write(Total4), nl,
-    %write('Total para ansiedade_Social: '), write(Total5), nl,
-    %write('Total para fobia_especifica: '), write(Total6), nl,
-    %write('Total para mutismo_Seletivo: '), write(Total7), nl,
-    %write('Total para ansiedade_de_separacao: '), write(Total8), nl.
-
-calcular_valor_total_sindrome(Transtorno, QuestionIds, Total) :-
-    findall(Valor, (
-        member(QuestionId, QuestionIds),
-        facto(QuestionId, pergunta(QuestionId, Valor))
-    ), Valores),
-    sum_list(Valores, Total),
-	%write(transtorno(Transtorno, Total)),
-	cria_facto(transtorno(Transtorno, Total), _, _).
-    %assertz(transtorno(Transtorno, Total)).
-
-conclusao_provavel(Lista) :-
-    findall(X, facto(_, conclusao(X, _, provavel)), Lista).
-
-conclusao_nao_provavel(Lista) :-
-    findall(X, facto(_, conclusao(X, _, nao_provavel)), Lista).
