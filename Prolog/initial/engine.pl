@@ -10,7 +10,7 @@
 :- dynamic ultimo_facto/1.
 
 carrega_bc:-
-		consult('C:/Users/mariana/Documents/GitHub/Left4Health_1stProject/Prolog/initial/rules.txt').
+		consult('C:/Users/mafs6/Documents/GitHub/Left4Health_1stProject/Prolog/initial/rules.txt').
 
 % Arranque do Motor de Infer�ncia
 

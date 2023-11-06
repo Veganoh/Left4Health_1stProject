@@ -15,7 +15,7 @@ facto_dispara_regras(transtorno(ansiedade_de_separacao, _), [15, 16]).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-ultimo_facto(1).
+ultimo_facto(0).
 ultima_regra(16).
 
 % QUiz40
@@ -83,3 +83,6 @@ regra 15
 regra 16
     se [transtorno(ansiedade_de_separacao,_) e avalia(transtorno(ansiedade_de_separacao,<,15))]
     entao [cria_facto(conclusao(ansiedade_de_separacao, Total, nao_provavel))] :- calcular_valor_total_sindrome(ansiedade_de_separacao,[36,37,38,39,40], Total).
+regra 17
+    se [facto(_,pergunta(1,5))]
+    entao [cria_facto(conlusao(entrei))].    

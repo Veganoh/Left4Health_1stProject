@@ -60,28 +60,6 @@ pergunta(ansiedade_separacao, 39, "Há pesadelos frequentes envolvendo a ideia d
 pergunta(ansiedade_separacao, 40, "Tem sintomas físicos de ansiedade, como palpitações, sudorese, tremores ou falta de ar, ao pensar na ideia de se separar da pessoa significativa?").
 
 
-%Conclusões 
-
-conclusao(general_anxiety, "Ansiedade Generalizada").
-conclusao(not_general_anxiety, "Não tem Ansiedade Generalizada").
-conclusao(panic_syndrome, "Síndrome de Pânico").
-conclusao(not_panic_syndrome, "Não tem Síndrome de Pânico").
-conclusao(panic_agoraphobia_syndrome, "Síndrome de Pânico com AgoraFobia").
-conclusao(not_panic_agoraphobia_syndrome, "Não tem Síndrome de Pânico com AgoraFobia").
-conclusao(agoraphobia_syndrome, "AgoraFobia").
-conclusao(not_agoraphobia_syndrome, "Não é AgoraFobia").
-conclusao(specific_phobia, "Fobia Especifica").
-conclusao(not_specific_phobia, "Não tem Fobia Especifica").
-conclusao(selective_mutism, "Mutismo Seletivo").
-conclusao(not_selective_mutism, "Não tem Mutismo Seletivo").
-conclusao(separation_anxiety, "Ansiedade de Separação").
-conclusao(not_separation_anxiety, "Não tem Ansiedade de Separação").
-conclusao(social_phobia, "Fobia Social").
-conclusao(not_social_phobia, "Não tem Fobia Social").
-
-%Manipulação de perguntas.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 % Método para receber todas as perguntas de todos os tipos de transtorno de maneira aleatória
 perguntas_misturadas(ListaPerguntasMisturadas) :-
     todas_perguntas(TodasPerguntas),
@@ -91,7 +69,76 @@ perguntas_misturadas(ListaPerguntasMisturadas) :-
     todas_perguntas(ListaPerguntas) :-
         findall((ID, Pergunta), pergunta(_, ID, Pergunta), ListaPerguntas).
 
-%Comum aos dois 
+% Format the totals as plain text
+format_totals([]).
+format_totals([[Sindrome, Total] | Rest]) :-
+    format('~w: ~w~n', [Sindrome, Total]),
+    format_totals(Rest).
+
+% Modified calcula_valores_totais/1 to return a list of syndrome names and totals
+calcula_valores_totais(Resultados) :-
+    calcular_valor_total_sindrome(ansiedade_Generalizada,[1,2,3,4,5], Total1),
+    calcular_valor_total_sindrome(transtorno_de_Panico,[6,7,8,9,10], Total2),
+    calcular_valor_total_sindrome(transtorno_de_Panico_com_Agorafobia,[11,12,13,14,15], Total3),
+    calcular_valor_total_sindrome(agorafobia,[16,17,18,19,20], Total4),
+    calcular_valor_total_sindrome(ansiedade_Social,[21,22,23,24,25], Total5),
+    calcular_valor_total_sindrome(fobia_especifica,[26,27,28,29,30], Total6),
+    calcular_valor_total_sindrome(mutismo_Seletivo,[31,32,33,34,35], Total7),
+    calcular_valor_total_sindrome(ansiedade_de_separacao,[36,37,38,39,40], Total8),
+    Resultados = [
+        ['ansiedade_Generalizada', Total1],
+        ['transtorno_de_Panico', Total2],
+        ['transtorno_de_Panico_com_Agorafobia', Total3],
+        ['agorafobia', Total4],
+        ['ansiedade_Social', Total5],
+        ['fobia_especifica', Total6],
+        ['mutismo_Seletivo', Total7],
+        ['ansiedade_de_separacao', Total8]
+    ].
+
+generate_resultados_text([], '').
+generate_resultados_text([[Sindrome, Valor] | Rest], Text) :-
+    generate_resultados_text(Rest, RestText),
+    format(atom(Text), 'Resultados foram: ~w: ~w~n~w', [Sindrome, Valor, RestText]).
+
+calcular_valor_total_sindrome(Transtorno, QuestionIds) :-
+    findall(Valor, (
+        member(QuestionId, QuestionIds),
+        facto(QuestionId, pergunta(QuestionId, Valor))
+    ), Valores),
+    sum_list(Valores, Total),
+    assertz(transtorno(Transtorno, total(Total))),
+    %write('Valor Total para '), write(Transtorno), write(': '), 
+    write(Total), nl.
+
+calcular_valor_total_sindrome(Transtorno, QuestionIds, Total) :-
+    findall(Valor, (
+        member(QuestionId, QuestionIds),
+        facto(QuestionId, pergunta(QuestionId, Valor))
+    ), Valores),
+    sum_list(Valores, Total),
+    assertz(transtorno(Transtorno, total(Total))).
+    %write(transtorno(Transtorno, total(Total))).
+
+
+format_response([], '').
+format_response([(ID, Pergunta) | Rest], Formatted) :-
+    format(atom(FormattedPergunta), '~d~n~w~n', [ID, Pergunta]),
+    format_response(Rest, RestFormatted),
+    atom_concat(FormattedPergunta, RestFormatted, Formatted).
+
+
+
+processar_corpo_numbers(Dados, Pares) :-
+    split_string(Dados, "\r\n", "\r\n", Linhas),
+    split_into_pairs(Linhas, Pares).
+
+split_into_pairs([], []).
+split_into_pairs([Number, Answer | Rest], [[NumberInt, AnswerInt] | Pairs]) :-
+    atom_number(Number, NumberInt),
+    atom_number(Answer, AnswerInt),
+    split_into_pairs(Rest, Pairs).
+
 reset_factos:-
     retractall(facto(_,_)),
     retract(ultimo_facto(N)),
