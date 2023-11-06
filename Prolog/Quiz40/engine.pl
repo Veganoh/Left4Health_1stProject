@@ -38,9 +38,10 @@ quiz40(Request) :-
     processar_corpo_numbers(Data, Resultado),
     adicionar_factos(Resultado),
     arranca_motor1,
+	como(57,Resposta),
     format('Access-Control-Allow-Origin: *~n'),
     format('Content-type: text/plain~n~n'),
-    format('').
+    format('~s', [Resposta]).
 
 
 :- http_handler('/api/resultados', resultados, [method(get)]).
@@ -171,21 +172,21 @@ mostra_factos:-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Geraçao de explicações do tipo "Como"
 
-como(N) :-
+
+como(N, Result) :-
     (facto(N, conclusao(Transtorno, Total, _)) ->
-        write(Transtorno), write(' = '), write(Total), 
         (Total >= 15 ->
-            write(' foi obtida com estas perguntas e é provável porque o resultado foi maior ou igual a 15:'), nl,
-            get_ids_by_transtorno(Transtorno, QuestionIds),
-            explain_questions(QuestionIds)
-        ; write(' foi obtida com estas perguntas e não é provável porque o resultado foi menor que 15:'), nl,
-            get_ids_by_transtorno(Transtorno, QuestionIds),
-            explain_questions(QuestionIds)
-        )
-    ; write('Conclusão não encontrada para o número: '), write(N), nl
+            Probable = 'é provável porque o resultado foi maior ou igual a 15'
+        ; 
+            Probable = 'não é provável porque o resultado foi menor que 15'
+        ),
+        get_ids_by_transtorno(Transtorno, QuestionIds),
+        explain_questions(QuestionIds, QuestionExplanation),
+        format(string(Result), '~w = ~w foi obtida com estas perguntas e ~w:~n~w', [Transtorno, Total, Probable, QuestionExplanation])
+    ; format(string(Result), 'Conclusão não encontrada para o número: ~w', [N])
     ).
+
 
 escreve_factos([I|R]):-facto(I,F), !,
 	write('O facto nº '),write(I),write(' -> '),write(F),write(' é verdadeiro'),nl,
@@ -195,13 +196,18 @@ escreve_factos([I|R]):-
 	escreve_factos(R).
 escreve_factos([]).
 
-explain_questions(QuestionIds) :-
-    member(ID, QuestionIds),
+explain_questions(QuestionIds, Explanation) :-
+    explain_questions(QuestionIds, Explanation, '').
+
+explain_questions([ID|Rest], Explanation, Accumulated) :-
     facto(ID, pergunta(_, Value)),
     pergunta(Transtorno, ID, Question),
-    format('[~w] = ~w~n', [Value, Question]),
-    fail.
-explain_questions(_, _).
+    format(string(ExplanationPart), '[~w] = ~w~n', [Value, Question]),
+    atom_concat(Accumulated, ExplanationPart, NewAccumulated),
+    explain_questions(Rest, Explanation, NewAccumulated).
+    
+explain_questions([], Explanation, Explanation).
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Gera��o de explica��es do tipo "Porque nao"
