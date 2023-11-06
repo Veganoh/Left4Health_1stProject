@@ -2,3 +2,5 @@
 
 main :-
     servidor(7071).
+
+:- main.

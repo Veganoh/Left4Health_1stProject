@@ -26,3 +26,23 @@ conclusao(start_quiz40, "Vai iniciar um questionário de 40 perguntas").
 todas_perguntas_iniciais(ListaPerguntasInicias) :-
     findall((ID, Pergunta), pergunta_inicial(_, ID, Pergunta), ListaPerguntasInicias).
 
+    format_response([], '').
+format_response([(ID, Pergunta) | Rest], Formatted) :-
+    format(atom(FormattedPergunta), '~d~n~w~n', [ID, Pergunta]),
+    format_response(Rest, RestFormatted),
+    atom_concat(FormattedPergunta, RestFormatted, Formatted).
+
+
+processar_corpo(Dados, Pares) :-
+    split_string(Dados, "\r\n", "\r\n", Linhas),
+    split_into_pairs(Linhas, Pares),
+    assertz(resposta(Pares)).
+
+split_into_pairs([], []).
+split_into_pairs([Number, Answer | Rest], [[Number, Answer] | Pairs]) :-
+    split_into_pairs(Rest, Pairs).
+
+reset_factos:-
+    retractall(facto(_,_)),
+    retract(ultimo_facto(N)),
+    assertz(ultimo_facto(1)).

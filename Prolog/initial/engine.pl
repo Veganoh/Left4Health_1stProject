@@ -1,5 +1,13 @@
-:- encoding(utf8).
+%% Servidor
+:- use_module(library(http/thread_httpd)).
+:- use_module(library(http/http_dispatch)).
+:- use_module(library(http/http_server)).
+:- use_module(library(http/http_client)).
+
+
 :-consult('aux_methods.pl').
+
+:- encoding(utf8).
 
 :-op(220,xfx,entao).
 :-op(35,xfy,se).
@@ -7,12 +15,42 @@
 :-op(600,xfy,e).
 
 :- dynamic justifica/3.
-:- dynamic ultimo_facto/1.
+
+
+%% Servidor
+
+servidor(Port) :-
+	carrega_bc,
+    http_server(http_dispatch, [port(Port)]).
+
+:- http_handler('/api/obtainInitialQuestions', get_perguntas_iniciais, [method(GET)]).
+get_perguntas_iniciais(Request) :-
+    todas_perguntas_iniciais(Perguntas),
+    format_response(Perguntas, Response),
+    format('Access-Control-Allow-Origin: *~n'),
+    format('Content-type: text/plain~n~n'),
+    format('~s', [Response]).
+
+:- http_handler('/api/answerQuizInitial', quizInitial, []).
+quizInitial(Request) :-
+    http_read_data(Request, Data, [to(string)]),
+    reset_factos,
+    processar_corpo(Data, Resultado),
+    adicionar_factos(Resultado),
+	arranca_motor1,
+	facto(8,conclusao(C)),
+    conclusao(C,Resposta),
+    format('Access-Control-Allow-Origin: *~n'),
+    format('Content-type: text/plain~n~n'),
+    format('~s', [Resposta]).
 
 carrega_bc:-
 		consult('C:/Users/mafs6/Documents/GitHub/Left4Health_1stProject/Prolog/initial/rules.txt').
 
 % Arranque do Motor de Infer�ncia
+
+arranca_motor1:-
+	findall(_,arranca_motor,_).
 
 arranca_motor:-facto(N,Facto),
 		regra ID se LHS entao RHS,
@@ -87,8 +125,8 @@ cria_facto(F,ID,LFactos):-
 	N is N1+1,
 	asserta(ultimo_facto(N)),
 	assertz(justifica(N,ID,LFactos)),
-	assertz(facto(N,F)),
-	write('Foi conclu�do o facto n� '),write(N),write(' -> '),write(F),get0(_),!.
+	assertz(facto(N,F)).
+	%write('Foi conclu�do o facto n� '),write(N),write(' -> '),write(F),get0(_),!.
 
 
 % Visualiza��o da base de factos

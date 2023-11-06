@@ -188,10 +188,10 @@ como(N) :-
     ).
 
 escreve_factos([I|R]):-facto(I,F), !,
-	write('O facto nº '),write(I),write(' -> '),write(F),write(' � verdadeiro'),nl,
+	write('O facto nº '),write(I),write(' -> '),write(F),write(' é verdadeiro'),nl,
 	escreve_factos(R).
 escreve_factos([I|R]):-
-	write('A condição '),write(I),write(' � verdadeira'),nl,
+	write('A condição '),write(I),write(' é verdadeira'),nl,
 	escreve_factos(R).
 escreve_factos([]).
 
