@@ -92,18 +92,12 @@ export class QuestionnairePrologComponent {
         else this.negativeDiagnosis.push(category)
     }  
     }
-  
-  
     onBotaoClicado() {
       this.currentPage = 3;
       this.active = true;
       this.currentPage = 4;
     }
 }
-
-
-
-
 
 function createQuestionsFromString(inputString: string): Question[] {
   const lines = inputString.trim().split('\n');
@@ -137,17 +131,16 @@ function createCategoriesFromString(inputString: string): Category[] {
   const lines = inputString.trim().split('\n');
   const categories: Category[] = [];
 
-  for(let i = 0; i < lines.length; i+= 8){
+  for(let i = 0; i < lines.length; i+= 7){
     const currentCategory = new Category();
 
     currentCategory.setRegra1(lines[i]);
     currentCategory.setScore(lines[i+1]);
-    currentCategory.setRegra2(lines[i+2])
+    currentCategory.addQuestion(lines[i+2])
     currentCategory.addQuestion(lines[i+3])
     currentCategory.addQuestion(lines[i+4])
     currentCategory.addQuestion(lines[i+5])
     currentCategory.addQuestion(lines[i+6])
-    currentCategory.addQuestion(lines[i+7])
     categories.push(currentCategory);
   }
   return categories;
