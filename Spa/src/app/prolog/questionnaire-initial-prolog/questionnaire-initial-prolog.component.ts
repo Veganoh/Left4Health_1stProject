@@ -45,7 +45,7 @@ export class QuestionnaireInitialPrologComponent {
           this.canProceed = true;
     
           // Execute a navegação para a próxima página aqui, pois a resposta da API foi recebida com sucesso
-          this.router.navigate(['/questionnaire']);
+          this.router.navigate(['/questionnaireProlog']);
         }
       } catch (error) {
         // Lógica para tratar erros na chamada da API, se necessário

@@ -38,17 +38,15 @@ quiz40(Request) :-
     processar_corpo_numbers(Data, Resultado),
     adicionar_factos(Resultado),
     arranca_motor1,
-	como(57,Resposta),
+    findall(Resposta, (facto(ID, _), como(ID, Resposta)), ListaResposta),
     format('Access-Control-Allow-Origin: *~n'),
     format('Content-type: text/plain~n~n'),
-    format('~s', [Resposta]).
+    remove_outer_square_brackets(ListaResposta, CleanedResponse),
+    format('~s', [CleanedResponse]).
 
-
-:- http_handler('/api/resultados', resultados, [method(get)]).
-resultados(Request) :-
-    calcula_valores_totais(Resultados),
-    format('Content-type: text/plain~n~n', []),
-    format_totals(Resultados).
+remove_outer_square_brackets(List, Cleaned) :-
+    atomic_list_concat(List, '\n', FullString),
+    sub_string(FullString, 0, _, 0, Cleaned).
 
 
 %% Motor de Inferência
@@ -175,17 +173,16 @@ mostra_factos:-
 
 
 como(N, Result) :-
-    (facto(N, conclusao(Transtorno, Total, _)) ->
-        (Total >= 15 ->
-            Probable = 'é provável porque o resultado foi maior ou igual a 15'
-        ; 
-            Probable = 'não é provável porque o resultado foi menor que 15'
-        ),
-        get_ids_by_transtorno(Transtorno, QuestionIds),
-        explain_questions(QuestionIds, QuestionExplanation),
-        format(string(Result), '~w = ~w foi obtida com estas perguntas e ~w:~n~w', [Transtorno, Total, Probable, QuestionExplanation])
-    ; format(string(Result), 'Conclusão não encontrada para o número: ~w', [N])
-    ).
+    facto(N, conclusao(Transtorno, Total, _)),
+	(Total >= 15 ->
+        Probable = 'é provável porque o resultado foi maior ou igual a 15'
+    ; 
+        Probable = 'não é provável porque o resultado foi menor que 15'
+	),
+    get_ids_by_transtorno(Transtorno, QuestionIds),
+    explain_questions(QuestionIds, QuestionExplanation),
+    format(string(Result), '~w = ~w foi obtida com estas perguntas e ~w:~n~w~n~w', [Transtorno, Total, Probable,Total, QuestionExplanation]).
+    
 
 
 escreve_factos([I|R]):-facto(I,F), !,

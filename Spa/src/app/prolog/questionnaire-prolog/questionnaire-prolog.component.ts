@@ -75,9 +75,8 @@ export class QuestionnairePrologComponent {
   
     submitForm() {
       this.obtainAnswer();
-      if(this.positiveDiagnosis.length == 0)     this.currentPage = 4;
+      this.currentPage = 3;
     }
-
     getDiagnosis() {
       this.diagnosisMaior = this.diagnosis?.filter(category => category.score > 14);
       this.diagnosisMenor = this.diagnosis?.filter(category => category.score < 15);
@@ -117,10 +116,13 @@ function createQuestionsFromString(inputString: string): Question[] {
 }
 
 function createStringFromAnswers(questions: Question[]): string {
+  questions.sort((a, b) => a.getId() - b.getId()); // Sort questions by ID in ascending order
+
   let resultString = '';
-  for (const question of questions) {
+  for (let i = 0; i < questions.length; i++) {
+    const question = questions[i];
     if (question.getAnswer()) {
-      resultString += question.getId() + '\n';
+      resultString += question.getId() + '\n'; // Use question ID
       resultString += question.getAnswer() + '\n';
     }
   }
@@ -130,8 +132,9 @@ function createStringFromAnswers(questions: Question[]): string {
 function createCategoriesFromString(inputString: string): Category[] {
   const lines = inputString.trim().split('\n');
   const categories: Category[] = [];
+  console.log(inputString);
 
-  for(let i = 0; i < lines.length; i+= 7){
+  for(let i = 0; i < lines.length; i+= 8){
     const currentCategory = new Category();
 
     currentCategory.setRegra1(lines[i]);
