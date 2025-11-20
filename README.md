@@ -18,5 +18,9 @@ The system implements a set of rules and logical reasoning on both platforms to 
 ## Purpose
 This project demonstrates the combination of **expert systems** and **logic programming** to address mental health diagnostics. It highlights my ability to implement cross-platform logic and reasoning systems.
 
+## Development Blog
+For a detailed overview of the development process, you can check out our team’s [blog](https://left-4-health.wordpress.com/category/artigos-do-blogue/anxietydetect-ai) on AnxietyDetect AI.
+
+
 ## Status
 Completed and functional as a prototype.
